@@ -1,11 +1,11 @@
-// SEO metadata — PROMPT.md §26
 export const seoConfig = {
-  title: "Umut Koç | IT Support ve Dijital Operasyon",
+  title: "Umut Koç | IT Support ve Teknik Operasyon",
   description:
-    "Bilgisayar donanımı, teknik destek, ağ sistemleri, dijital operasyon ve AI destekli projeler üzerine çalışan Umut Koç'un kişisel portfolyosu.",
+    "Bilgisayar donanımı, Windows kurulumu, temel ağ bağlantıları, kullanıcı desteği ve dijital operasyon alanlarında uygulamalı deneyime sahip Umut Koç'un kişisel portföyü.",
   locale: "tr-TR",
   siteName: "Umut Koç",
-  url: "https://umutkoc.com",
+  url: "https://umutkoccv.vercel.app",
+
   person: {
     name: "Umut Koç",
     jobTitle: "IT Support Adayı",
@@ -14,6 +14,8 @@ export const seoConfig = {
       country: "Türkiye",
     },
     email: "umutkoco@outlook.com",
-    sameAs: ["https://linkedin.com/in/umutkoco"],
+    sameAs: [
+      "https://linkedin.com/in/umutkoco",
+    ],
   },
 } as const;
