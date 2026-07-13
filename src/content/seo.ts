@@ -4,7 +4,7 @@ export const seoConfig = {
     "Bilgisayar donanımı, Windows kurulumu, temel ağ bağlantıları, kullanıcı desteği ve dijital operasyon alanlarında uygulamalı deneyime sahip Umut Koç'un kişisel portföyü.",
   locale: "tr-TR",
   siteName: "Umut Koç",
-  url: "https://umutkoccv.vercel.app",
+  url: "https://umutkoc.vercel.app",
 
   person: {
     name: "Umut Koç",
