@@ -1,55 +1,111 @@
-// Gelişim içeriği — PROMPT.md §13
+// Kariyer gelişimi içeriği
 
-export type StatusType = "Çalışıyorum" | "Geliştiriyorum" | "Araştırıyorum" | "Devam ediyor";
+export type ExperienceGroup = {
+  number: string;
+  title: string;
+  examples: string[];
+};
 
 export type DevelopmentItem = {
-  label: string;
-  status: StatusType;
-};
-
-export type RoadmapItem = {
   number: string;
-  text: string;
+  title: string;
+  description: string;
 };
 
-// Panel 01 — Uygulamalı deneyim
-export const experienceItems: string[] = [
-  "Bilgisayar montajı ve donanım yükseltme",
-  "Donanım arıza tespiti ve parça değişimi",
-  "Windows kurulumu ve sistem yapılandırma",
-  "BIOS ve UEFI ayarları",
-  "SSD, RAM ve depolama çözümleri",
-  "Termal bakım ve genel donanım temizliği",
-  "Modem, router ve access point kurulumu",
-  "Üç-dört access point içeren kablosuz ağ kurulumları",
-  "Kablosuz güvenlik kamerası kurulumu",
-  "Temel veri aktarımı ve yazılımsal veri kurtarma",
-  "Yerinde ve uzaktan teknik destek",
-  "AnyDesk, TeamViewer ve Microsoft Remote Desktop kullanımı",
+export type RoadmapStage = {
+  label: string;
+  title: string;
+  description: string;
+};
+
+export const experienceGroups: ExperienceGroup[] = [
+  {
+    number: "01",
+    title: "Donanım ve bakım",
+    examples: [
+      "Bilgisayar montajı, parça değişimi ve sistem yükseltme",
+      "Arıza tespiti, termal bakım ve genel donanım temizliği",
+      "SSD, RAM ve depolama bileşenlerinin kurulumu",
+    ],
+  },
+  {
+    number: "02",
+    title: "Windows ve sistem kurulumu",
+    examples: [
+      "Windows kurulumu, sürücü yükleme ve temel yapılandırma",
+      "BIOS ve UEFI ayarları ile disk bölümlendirme",
+      "Veri aktarımı ve yazılımsal temel veri kurtarma",
+    ],
+  },
+  {
+    number: "03",
+    title: "Ağ ve bağlantı",
+    examples: [
+      "Modem, router ve access point kurulumu",
+      "Birden fazla access point içeren kablosuz ağ yapılandırmaları",
+      "Kablosuz güvenlik kamerası kurulumu ve bağlantı desteği",
+    ],
+  },
+  {
+    number: "04",
+    title: "Kullanıcı desteği",
+    examples: [
+      "Yerinde teknik destek ve temel sorun giderme",
+      "AnyDesk, TeamViewer ve Microsoft Remote Desktop ile uzaktan destek",
+      "Kurulum sonrasında kullanıcıya sistem teslimi ve yönlendirme",
+    ],
+  },
 ];
 
 export const experienceNarrative =
-  "Yıllar içinde onlarca masaüstü bilgisayarda montaj, bakım, yükseltme, işletim sistemi kurulumu ve arıza tespiti gerçekleştirdim. Bu deneyimlerin büyük bölümü çevremdeki kullanıcıların gerçek ihtiyaçlarına çözüm üretirken oluştu.";
+  "Bu deneyimlerin büyük bölümü, çevremdeki kullanıcıların gerçek bilgisayar ve bağlantı sorunlarına çözüm üretirken oluştu.";
 
-// Panel 02 — Geliştirdiğim alanlar
 export const developmentItems: DevelopmentItem[] = [
-  { label: "Kurumsal IT Support süreçleri", status: "Çalışıyorum" },
-  { label: "Ağ temelleri ve sorun giderme", status: "Çalışıyorum" },
-  { label: "Kullanıcı ve yetki yönetimi", status: "Geliştiriyorum" },
-  { label: "Microsoft 365 ekosistemi", status: "Geliştiriyorum" },
-  { label: "Ticket ve envanter süreçleri", status: "Araştırıyorum" },
-  { label: "Teknik İngilizce", status: "Devam ediyor" },
-  { label: "Teknik dokümantasyon", status: "Geliştiriyorum" },
+  {
+    number: "01",
+    title: "Kurumsal IT süreçleri",
+    description:
+      "Help Desk iş akışı, ticket yönetimi, envanter takibi ve kullanıcı destek prosedürleri.",
+  },
+  {
+    number: "02",
+    title: "Microsoft 365 ve kullanıcı yönetimi",
+    description:
+      "Kullanıcı hesapları, erişim yetkileri, kurumsal e-posta ve temel yönetim süreçleri.",
+  },
+  {
+    number: "03",
+    title: "Ağ temelleri",
+    description:
+      "TCP/IP, DNS, DHCP, bağlantı teşhisi ve temel ağ sorun giderme yaklaşımı.",
+  },
+  {
+    number: "04",
+    title: "Teknik İngilizce",
+    description:
+      "Teknik dokümanları, hata mesajlarını ve ürün arayüzlerini daha rahat takip edebilmek.",
+  },
 ];
 
-// Panel 03 — Yol haritam
-export const roadmapItems: RoadmapItem[] = [
-  { number: "01", text: "İlk kurumsal IT Support deneyimimi kazanmak" },
-  { number: "02", text: "CompTIA A+ hazırlığını ilerletmek" },
-  { number: "03", text: "Teknik İngilizce seviyemi geliştirmek" },
-  { number: "04", text: "Ev laboratuvarı çalışmaları oluşturmak" },
-  { number: "05", text: "Microsoft ve ağ teknolojilerinde uygulamalı deneyim kazanmak" },
-  { number: "06", text: "Daha kurumsal ve kapsamlı bir BT ortamına geçmek" },
+export const roadmapStages: RoadmapStage[] = [
+  {
+    label: "Şimdi",
+    title: "İlk kurumsal IT Support deneyimi",
+    description:
+      "Gerçek kullanıcılar, cihazlar ve iş süreçleri içinde düzenli teknik destek deneyimi kazanmak.",
+  },
+  {
+    label: "Sonraki adım",
+    title: "CompTIA A+ ve ev laboratuvarı",
+    description:
+      "Temel bilgilerimi belgelendirmek ve kurumsal sistem senaryolarını uygulamalı olarak çalışmak.",
+  },
+  {
+    label: "Uzun vadede",
+    title: "Daha kapsamlı sistem ve ağ sorumluluğu",
+    description:
+      "Edindiğim saha deneyimini daha kurumsal bir BT ortamında derinleştirmek.",
+  },
 ];
 
 export const roadmapClosing =
