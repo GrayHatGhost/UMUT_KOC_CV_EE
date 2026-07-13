@@ -1,8 +1,17 @@
-// Kariyer gelişimi içeriği
+// Teknik deneyim ve gelişim içeriği
+
+export type ExperienceIcon =
+  | "hardware"
+  | "windows"
+  | "network"
+  | "support";
 
 export type ExperienceGroup = {
   number: string;
+  icon: ExperienceIcon;
+  eyebrow: string;
   title: string;
+  description: string;
   examples: string[];
 };
 
@@ -18,95 +27,122 @@ export type RoadmapStage = {
   description: string;
 };
 
+export const growthIntro =
+  "Gerçek kullanıcıların bilgisayar, bağlantı ve kurulum ihtiyaçlarına çözüm üretirken edindiğim pratik deneyimi; kurumsal IT süreçleriyle tamamlıyorum.";
+
 export const experienceGroups: ExperienceGroup[] = [
   {
     number: "01",
-    title: "Donanım ve bakım",
+    icon: "hardware",
+    eyebrow: "DONANIM VE BAKIM",
+    title: "Sistemi kurmak kadar sağlıklı çalışmasını da önemsiyorum.",
+    description:
+      "İhtiyaca ve bütçeye uygun bileşen seçimiyle başlayan süreci kurulum, yükseltme, bakım ve arıza teşhisine kadar takip ediyorum.",
     examples: [
-      "Bilgisayar montajı, parça değişimi ve sistem yükseltme",
-      "Arıza tespiti, termal bakım ve genel donanım temizliği",
-      "SSD, RAM ve depolama bileşenlerinin kurulumu",
+      "Masaüstü bilgisayar montajı ve parça değişimi",
+      "SSD, RAM ve depolama yükseltmeleri",
+      "Termal macun, fan temizliği ve genel bakım",
     ],
   },
   {
     number: "02",
-    title: "Windows ve sistem kurulumu",
+    icon: "windows",
+    eyebrow: "WINDOWS VE SİSTEM",
+    title: "Temiz, anlaşılır ve kullanıma hazır sistemler teslim ediyorum.",
+    description:
+      "İşletim sistemi kurulumunu yalnızca format işlemi olarak değil; sürücü, disk ve temel yapılandırma adımlarıyla birlikte ele alıyorum.",
     examples: [
-      "Windows kurulumu, sürücü yükleme ve temel yapılandırma",
-      "BIOS ve UEFI ayarları ile disk bölümlendirme",
-      "Veri aktarımı ve yazılımsal temel veri kurtarma",
+      "Windows kurulumu ve sürücü yapılandırması",
+      "BIOS/UEFI ayarları ve güncellemeleri",
+      "Disk bölümlendirme ve temel veri aktarımı",
     ],
   },
   {
     number: "03",
-    title: "Ağ ve bağlantı",
+    icon: "network",
+    eyebrow: "AĞ VE BAĞLANTI",
+    title: "Bağlantı sorunlarında önce yapıyı, sonra belirtileri inceliyorum.",
+    description:
+      "Ev ve küçük ofis ortamlarında modem, router, access point ve uç cihazlar arasındaki temel bağlantı sorunlarını gideriyorum.",
     examples: [
       "Modem, router ve access point kurulumu",
-      "Birden fazla access point içeren kablosuz ağ yapılandırmaları",
-      "Kablosuz güvenlik kamerası kurulumu ve bağlantı desteği",
+      "Wi-Fi kapsama ve bağlantı sorunlarının giderilmesi",
+      "Kablosuz kamera ve ağ cihazı bağlantı desteği",
     ],
   },
   {
     number: "04",
-    title: "Kullanıcı desteği",
+    icon: "support",
+    eyebrow: "KULLANICI DESTEĞİ",
+    title: "Teknik çözümün kullanıcı için anlaşılır olmasına dikkat ediyorum.",
+    description:
+      "Sorunu dinleyip doğru soruları sorarak ilerliyor; çözüm sonrasında kullanıcıyı sistemin kullanımı konusunda yönlendiriyorum.",
     examples: [
-      "Yerinde teknik destek ve temel sorun giderme",
-      "AnyDesk, TeamViewer ve Microsoft Remote Desktop ile uzaktan destek",
-      "Kurulum sonrasında kullanıcıya sistem teslimi ve yönlendirme",
+      "Yerinde temel teknik destek",
+      "AnyDesk, TeamViewer ve Remote Desktop ile uzaktan destek",
+      "Kurulum sonrası kullanıcı teslimi ve yönlendirme",
     ],
   },
 ];
 
 export const experienceNarrative =
-  "Bu deneyimlerin büyük bölümü, çevremdeki kullanıcıların gerçek bilgisayar ve bağlantı sorunlarına çözüm üretirken oluştu.";
+  "Bu çalışmaların büyük bölümü, çevremdeki kullanıcıların gerçek cihaz ve bağlantı sorunlarına çözüm üretirken oluştu. Kurumsal deneyim iddiası yerine, sahip olduğum uygulamalı temeli açık ve doğrulanabilir biçimde gösteriyorum.";
 
 export const developmentItems: DevelopmentItem[] = [
   {
     number: "01",
-    title: "Kurumsal IT süreçleri",
+    title: "Help Desk ve ticket süreçleri",
     description:
-      "Help Desk iş akışı, ticket yönetimi, envanter takibi ve kullanıcı destek prosedürleri.",
+      "Talep karşılama, önceliklendirme, kayıt tutma, çözüm takibi ve kullanıcıya geri bildirim düzeni.",
   },
   {
     number: "02",
     title: "Microsoft 365 ve kullanıcı yönetimi",
     description:
-      "Kullanıcı hesapları, erişim yetkileri, kurumsal e-posta ve temel yönetim süreçleri.",
+      "Kullanıcı hesapları, kurumsal e-posta, erişim yetkileri ve temel yönetim senaryoları.",
   },
   {
     number: "03",
-    title: "Ağ temelleri",
+    title: "Ağ temelleri ve teşhis yaklaşımı",
     description:
-      "TCP/IP, DNS, DHCP, bağlantı teşhisi ve temel ağ sorun giderme yaklaşımı.",
+      "TCP/IP, DNS, DHCP ve bağlantı problemlerini sistematik biçimde inceleme pratiği.",
   },
   {
     number: "04",
-    title: "Teknik İngilizce",
+    title: "Dokümantasyon ve teknik İngilizce",
     description:
-      "Teknik dokümanları, hata mesajlarını ve ürün arayüzlerini daha rahat takip edebilmek.",
+      "Çözümleri kayıt altına alma; teknik doküman, hata mesajı ve ürün arayüzlerini daha rahat takip etme.",
   },
 ];
 
+export const developmentNarrative =
+  "Öğrenmeyi başka bir yere geçmenin aracı olarak değil, çalıştığım ekipte daha güvenilir destek verebilmenin ve zamanla daha fazla sorumluluk alabilmenin yolu olarak görüyorum.";
+
+/*
+ * Bir sonraki aşamada hazırlanacak kuruma bağlılık kartı için
+ * güvenli ve yeniden kullanılabilir içerikler.
+ * Eski export adları korunarak mevcut importların kırılması önlenir.
+ */
 export const roadmapStages: RoadmapStage[] = [
   {
-    label: "Şimdi",
-    title: "İlk kurumsal IT Support deneyimi",
+    label: "İlk adım",
+    title: "İşleyişi öğrenmek",
     description:
-      "Gerçek kullanıcılar, cihazlar ve iş süreçleri içinde düzenli teknik destek deneyimi kazanmak.",
+      "Kurumun kullandığı cihazları, sistemleri, kullanıcı alışkanlıklarını ve günlük destek ihtiyaçlarını tanımak.",
   },
   {
-    label: "Sonraki adım",
-    title: "CompTIA A+ ve ev laboratuvarı",
+    label: "Güven",
+    title: "Takip edilebilir destek vermek",
     description:
-      "Temel bilgilerimi belgelendirmek ve kurumsal sistem senaryolarını uygulamalı olarak çalışmak.",
+      "Sorunları yalnızca kapatmak yerine kayıt altına almak, sonucunu kontrol etmek ve kullanıcıya geri dönüş yapmak.",
   },
   {
-    label: "Uzun vadede",
-    title: "Daha kapsamlı sistem ve ağ sorumluluğu",
+    label: "Sorumluluk",
+    title: "Kurumun ihtiyaçlarıyla birlikte gelişmek",
     description:
-      "Edindiğim saha deneyimini daha kurumsal bir BT ortamında derinleştirmek.",
+      "Teknik ihtiyaçlar genişledikçe yeni alanlar öğrenmek ve ekip içinde daha fazla sorumluluk üstlenmek.",
   },
 ];
 
 export const roadmapClosing =
-  "Hedefim kısa sürede büyük unvanlar edinmek değil; sağlam temeller üzerinde güvenilir bir BT kariyeri oluşturmak.";
+  "Hedefim kısa sürede unvan değiştirmek değil; çalıştığım kurumun işleyişini öğrenerek uzun vadede güvenilir bir teknik destek noktası hâline gelmek.";
