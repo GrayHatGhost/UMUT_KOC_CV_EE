@@ -1,310 +1,406 @@
 "use client";
 
+import dynamic from "next/dynamic";
+import Image from "next/image";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { designWorks, type DesignWork } from "@/src/content/design-works";
-import Dialog from "@/components/dialog/Dialog";
-import { X } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, ImageIcon } from "lucide-react";
+
+import { designWorks } from "@/src/content/design-works";
+
+const DesignCatalogModal = dynamic(
+  () => import("@/components/design/DesignCatalogModal"),
+  {
+    ssr: false,
+  },
+);
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function DesignArchiveScene() {
   const [catalogOpen, setCatalogOpen] = useState(false);
+  const [initialWorkId, setInitialWorkId] =
+    useState<string | null>(null);
+  const [failedImages, setFailedImages] = useState<Set<string>>(
+    () => new Set(),
+  );
+  const shouldReduceMotion = useReducedMotion();
+
+  const openCatalog = (workId?: string) => {
+    setInitialWorkId(workId ?? designWorks[0]?.id ?? null);
+    setCatalogOpen(true);
+  };
+
+  const markImageAsFailed = (workId: string) => {
+    setFailedImages((current) => {
+      const next = new Set(current);
+      next.add(workId);
+      return next;
+    });
+  };
 
   return (
     <>
       <section
-        aria-label="Tasarım arşivi"
-        className="section-shell design-shell"
-        style={{ background: "transparent" }}
+        aria-labelledby="design-title"
+        className="design-shell"
+        style={{
+          position: "relative",
+          paddingTop: "clamp(7rem, 13vw, 12rem)",
+          paddingBottom: "clamp(7rem, 13vw, 12rem)",
+        }}
       >
-        <div
-          className="site-wrap"
-          style={{ paddingTop: "clamp(6rem, 14vw, 12rem)", paddingBottom: "clamp(6rem, 14vw, 12rem)" }}
-        >
-          {/* Başlık */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
+        <div className="site-wrap">
+          <motion.header
+            initial={
+              shouldReduceMotion
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: 24 }
+            }
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.75, ease }}
-            style={{ marginBottom: "clamp(3rem, 8vw, 7rem)" }}
+            transition={
+              shouldReduceMotion
+                ? { duration: 0 }
+                : { duration: 0.72, ease }
+            }
             className="section-intro"
-          >
-            <p className="t-label" style={{ marginBottom: "1.5rem" }}>Tasarım Arşivi</p>
-            <div className="clip">
-              <motion.h2
-                className="t-section"
-                initial={{ y: "100%" }}
-                whileInView={{ y: "0%" }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.9, ease, delay: 0.08 }}
-                style={{ maxWidth: "16ch" }}
-              >
-                Görsel çalışmalar.
-              </motion.h2>
-            </div>
-            <p className="t-body" style={{ marginTop: "1.5rem", maxWidth: "44ch", color: "var(--ink-3)" }}>
-              Sosyal medya, duyuru ve kurumsal iletişim için hazırladığım seçili görsel çalışmalar.
-            </p>
-          </motion.div>
-
-          {/* Asimetrik önizleme grid */}
-          <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "1.25fr 0.92fr 1.08fr",
-              gridTemplateRows: "auto auto",
-              gap: "1.25rem",
+              marginBottom: "clamp(4rem, 9vw, 8rem)",
             }}
-            className="max-md:grid-cols-1!"
           >
-            {designWorks.slice(0, 3).map((work, i) => (
-              <motion.div
-                key={work.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.7, ease, delay: 0.08 * i }}
-                style={{ gridRow: i === 0 ? "span 2" : "span 1" }}
-                className="group design-card"
-              >
-                <div
-                  style={{
-                    aspectRatio: i === 0 ? "3/4" : "4/3",
-                    background: "var(--bg-alt)",
-                    overflow: "hidden",
-                    borderRadius: "18px",
-                    marginBottom: "1rem",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setCatalogOpen(true)}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`${work.title} — katalogda göster`}
-                  onKeyDown={(e) => e.key === "Enter" && setCatalogOpen(true)}
+            <p
+              className="t-label"
+              style={{
+                marginBottom: "1.4rem",
+              }}
+            >
+              TASARIM ARŞİVİ
+            </p>
+
+            <h2
+              id="design-title"
+              className="t-section"
+              style={{
+                maxWidth: "15ch",
+              }}
+            >
+              Görsel çalışmalar.
+            </h2>
+
+            <p
+              className="t-body"
+              style={{
+                maxWidth: "54ch",
+                marginTop: "1.6rem",
+                fontSize: "clamp(1.05rem, 1.5vw, 1.22rem)",
+              }}
+            >
+              Sosyal medya, duyuru ve kurumsal iletişim için
+              hazırladığım seçili görsel çalışmalar.
+            </p>
+          </motion.header>
+
+          <div className="design-preview-grid">
+            {designWorks.slice(0, 3).map((work, index) => {
+              const imageAvailable =
+                Boolean(work.thumbnail || work.image) &&
+                !failedImages.has(work.id);
+
+              return (
+                <motion.button
+                  key={work.id}
+                  type="button"
+                  className={[
+                    "design-preview",
+                    index === 0
+                      ? "design-preview--featured"
+                      : "",
+                  ].join(" ")}
+                  onClick={() => openCatalog(work.id)}
+                  aria-label={`${work.title} tasarımını katalogda incele`}
+                  initial={
+                    shouldReduceMotion
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 0, y: 22 }
+                  }
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={
+                    shouldReduceMotion
+                      ? { duration: 0 }
+                      : {
+                          duration: 0.66,
+                          delay: index * 0.07,
+                          ease,
+                        }
+                  }
                 >
-                  {work.image ? (
-                    <img
-                      src={work.image}
-                      alt={work.title}
-                      loading="lazy"
-                      className="img-grayscale"
-                      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                    />
-                  ) : (
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
+                  <span className="design-preview__visual">
+                    {imageAvailable ? (
+                      <Image
+                        src={work.thumbnail || work.image}
+                        alt={work.title}
+                        fill
+                        sizes={
+                          index === 0
+                            ? "(max-width: 767px) 100vw, 52vw"
+                            : "(max-width: 767px) 100vw, 30vw"
+                        }
+                        className="design-preview__image"
+                        onError={() =>
+                          markImageAsFailed(work.id)
+                        }
+                      />
+                    ) : (
+                      <span className="design-preview__placeholder">
+                        <ImageIcon size={24} aria-hidden="true" />
+                        <span>{work.number}</span>
+                      </span>
+                    )}
+
+                    <span
+                      className="design-preview__overlay"
+                      aria-hidden="true"
                     >
-                      <span className="t-label" style={{ color: "var(--ink-3)" }}>{work.number}</span>
-                    </div>
-                  )}
-                </div>
-                <p className="t-label" style={{ color: "var(--amber)", marginBottom: "0.25rem" }}>
-                  {work.category}
-                </p>
-                <p style={{ fontSize: "var(--f-small)", color: "var(--ink-2)" }}>{work.title}</p>
-              </motion.div>
-            ))}
+                      İncele
+                      <ArrowRight size={17} />
+                    </span>
+                  </span>
+
+                  <span className="design-preview__meta">
+                    <span>{work.category}</span>
+                    <strong>{work.title}</strong>
+                  </span>
+                </motion.button>
+              );
+            })}
           </div>
 
-          {/* Arşiv aç butonu */}
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={
+              shouldReduceMotion
+                ? { opacity: 1 }
+                : { opacity: 0 }
+            }
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            style={{ marginTop: "clamp(2.5rem, 5vw, 4rem)" }}
+            transition={
+              shouldReduceMotion
+                ? { duration: 0 }
+                : { duration: 0.55, delay: 0.2 }
+            }
+            style={{
+              marginTop: "clamp(2.5rem, 5vw, 4rem)",
+            }}
           >
             <button
-              onClick={() => setCatalogOpen(true)}
-              className="hover-line hover-amber t-label"
-              style={{ color: "var(--ink)", gap: "0.8em" }}
+              type="button"
+              className="design-archive-link"
+              onClick={() => openCatalog()}
             >
               Tasarım arşivini aç
-              <span style={{ fontSize: "1rem" }}>→</span>
+              <ArrowRight size={17} aria-hidden="true" />
             </button>
           </motion.div>
         </div>
+
+        <style jsx>{`
+          .design-preview-grid {
+            display: grid;
+            grid-template-columns:
+              minmax(0, 1.22fr)
+              minmax(0, 0.78fr);
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+          }
+
+          .design-preview {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            color: var(--ink);
+            text-align: left;
+          }
+
+          .design-preview--featured {
+            grid-row: 1 / span 2;
+          }
+
+          .design-preview__visual {
+            position: relative;
+            overflow: hidden;
+            min-height: 16rem;
+            flex: 1;
+            border: 1px solid var(--rule);
+            background: var(--surface);
+          }
+
+          .design-preview--featured
+            .design-preview__visual {
+            min-height: 38rem;
+          }
+
+          :global(.design-preview__image) {
+            object-fit: cover;
+            filter: grayscale(1) contrast(1.03) brightness(0.72);
+            transition:
+              filter 0.42s var(--ease),
+              transform 0.42s var(--ease);
+          }
+
+          .design-preview:hover
+            :global(.design-preview__image),
+          .design-preview:focus-visible
+            :global(.design-preview__image) {
+            filter: grayscale(0.15) contrast(1) brightness(0.92);
+            transform: scale(1.025);
+          }
+
+          .design-preview__placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            color: var(--ink-3);
+          }
+
+          .design-preview__placeholder > span {
+            font-size: 0.6875rem;
+            font-weight: 650;
+            letter-spacing: 0.14em;
+          }
+
+          .design-preview__overlay {
+            position: absolute;
+            right: 1rem;
+            bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.65rem 0.85rem;
+            border: 1px solid var(--rule-strong);
+            border-radius: 999px;
+            background: rgba(8, 8, 8, 0.9);
+            color: var(--ink-2);
+            font-size: 0.75rem;
+            font-weight: 560;
+            opacity: 0;
+            transform: translateY(6px);
+            transition:
+              opacity 0.25s var(--ease),
+              transform 0.25s var(--ease),
+              color 0.25s var(--ease);
+          }
+
+          .design-preview:hover .design-preview__overlay,
+          .design-preview:focus-visible
+            .design-preview__overlay {
+            color: var(--ink);
+            opacity: 1;
+            transform: translateY(0);
+          }
+
+          .design-preview__meta {
+            display: grid;
+            gap: 0.45rem;
+            padding-top: 1rem;
+          }
+
+          .design-preview__meta > span {
+            color: var(--ink-3);
+            font-size: 0.6875rem;
+            font-weight: 650;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+          }
+
+          .design-preview__meta strong {
+            color: var(--ink-2);
+            font-size: 0.9375rem;
+            font-weight: 560;
+            line-height: 1.45;
+          }
+
+          .design-archive-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding-bottom: 0.35rem;
+            border-bottom: 1px solid var(--rule-strong);
+            color: var(--ink);
+            font-size: 0.75rem;
+            font-weight: 650;
+            letter-spacing: 0.11em;
+            text-transform: uppercase;
+            transition:
+              color 0.22s var(--ease),
+              border-color 0.22s var(--ease),
+              gap 0.22s var(--ease);
+          }
+
+          .design-archive-link:hover,
+          .design-archive-link:focus-visible {
+            gap: 1rem;
+            border-color: rgba(255, 255, 255, 0.55);
+            color: var(--ink-2);
+          }
+
+          @media (max-width: 767px) {
+            .design-preview-grid {
+              grid-template-columns: 1fr;
+              grid-template-rows: auto;
+            }
+
+            .design-preview--featured {
+              grid-row: auto;
+            }
+
+            .design-preview__visual,
+            .design-preview--featured
+              .design-preview__visual {
+              min-height: 0;
+              aspect-ratio: 4 / 5;
+            }
+
+            .design-preview__overlay {
+              color: var(--ink);
+              opacity: 1;
+              transform: none;
+            }
+
+            :global(.design-preview__image) {
+              transition: none;
+            }
+
+            .design-preview:hover
+              :global(.design-preview__image),
+            .design-preview:focus-visible
+              :global(.design-preview__image) {
+              filter: grayscale(0.85) brightness(0.84);
+              transform: none;
+            }
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            :global(.design-preview__image),
+            .design-preview__overlay,
+            .design-archive-link {
+              transition: none;
+            }
+          }
+        `}</style>
       </section>
 
-      <AnimatePresence>
-        {catalogOpen && (
-          <DesignCatalog onClose={() => setCatalogOpen(false)} />
-        )}
-      </AnimatePresence>
+      <DesignCatalogModal
+        isOpen={catalogOpen}
+        initialWorkId={initialWorkId}
+        onClose={() => setCatalogOpen(false)}
+      />
     </>
-  );
-}
-
-function DesignCatalog({ onClose }: { onClose: () => void }) {
-  const [active, setActive] = useState<DesignWork>(designWorks[0]);
-  const [lightbox, setLightbox] = useState(false);
-
-  return (
-    <Dialog isOpen onClose={onClose} ariaLabel="Tasarım Kataloğu" size="wide">
-      <div style={{ minHeight: "75vh", display: "flex", flexDirection: "column" }}>
-        {/* Header */}
-        <div style={{ padding: "2rem clamp(1.5rem, 4vw, 3rem)", borderBottom: "1px solid var(--rule)" }}>
-          <p className="t-label" style={{ marginBottom: "0.25rem" }}>Tasarım Kataloğu</p>
-          <h2 style={{ fontSize: "1.5rem", fontWeight: 700, letterSpacing: "-0.02em" }}>Görsel çalışmalar</h2>
-        </div>
-
-        {/* Katalog içeriği */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "160px 1fr 260px",
-            flex: 1,
-            minHeight: 0,
-          }}
-          className="max-lg:grid-cols-1!"
-        >
-          {/* Sol: küçük önizlemeler */}
-          <div
-            style={{ borderRight: "1px solid var(--rule)", padding: "1.5rem 1rem", overflowY: "auto" }}
-            className="max-lg:hidden!"
-          >
-            {designWorks.map((w) => (
-              <button
-                key={w.id}
-                onClick={() => setActive(w)}
-                style={{
-                  width: "100%",
-                  marginBottom: "0.75rem",
-                  borderRadius: "6px",
-                  overflow: "hidden",
-                  outline: active.id === w.id ? "2px solid var(--amber)" : "2px solid transparent",
-                  transition: "outline-color 0.25s",
-                }}
-              >
-                <div style={{ aspectRatio: "4/3", background: "var(--bg-alt)" }}>
-                  {w.image && (
-                    <img
-                      src={w.image}
-                      alt={w.title}
-                      loading="lazy"
-                      style={{ width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(0.4)" }}
-                    />
-                  )}
-                </div>
-              </button>
-            ))}
-          </div>
-
-          {/* Orta: büyük görsel */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "2rem", background: "var(--bg-alt)" }}>
-            <div
-              style={{
-                width: "100%",
-                maxWidth: "500px",
-                aspectRatio: "4/5",
-                borderRadius: "8px",
-                overflow: "hidden",
-                background: "var(--bg)",
-                cursor: "zoom-in",
-              }}
-              onClick={() => setLightbox(true)}
-              role="button"
-              tabIndex={0}
-              aria-label="Görseli büyüt"
-              onKeyDown={(e) => e.key === "Enter" && setLightbox(true)}
-            >
-              {active.image && (
-                <img
-                  src={active.image}
-                  alt={active.title}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              )}
-            </div>
-          </div>
-
-          {/* Sağ: detaylar */}
-          <div style={{ borderLeft: "1px solid var(--rule)", padding: "2rem", overflowY: "auto" }} className="max-lg:border-l-0!">
-            <p className="t-label" style={{ color: "var(--amber)", marginBottom: "0.5rem" }}>{active.category}</p>
-            <h3 style={{ fontSize: "1.25rem", fontWeight: 700, letterSpacing: "-0.02em", marginBottom: "2rem" }}>
-              {active.title}
-            </h3>
-            {[
-              { label: "AMAÇ", val: active.purpose },
-              { label: "PLATFORM", val: active.platform },
-              { label: "ARAÇLAR", val: active.tools.join(", ") },
-            ].map(({ label, val }) => (
-              <div key={label} style={{ marginBottom: "1.25rem" }}>
-                <p className="t-label" style={{ marginBottom: "0.3rem" }}>{label}</p>
-                <p className="t-small" style={{ color: "var(--ink-2)" }}>{val}</p>
-              </div>
-            ))}
-
-            {/* Önceki / Sonraki */}
-            <div style={{ display: "flex", gap: "0.5rem", marginTop: "2rem" }}>
-              {designWorks.map((w, i) => {
-                const idx = designWorks.findIndex((d) => d.id === active.id);
-                if (i === idx - 1)
-                  return (
-                    <button key="prev" onClick={() => setActive(w)} className="btn-ghost" style={{ flex: 1, padding: "0.6em 0.8em", fontSize: "0.75rem" }}>
-                      ← Önceki
-                    </button>
-                  );
-                if (i === idx + 1)
-                  return (
-                    <button key="next" onClick={() => setActive(w)} className="btn-ghost" style={{ flex: 1, padding: "0.6em 0.8em", fontSize: "0.75rem" }}>
-                      Sonraki →
-                    </button>
-                  );
-                return null;
-              })}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Lightbox */}
-      <AnimatePresence>
-        {lightbox && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            style={{
-              position: "fixed",
-              inset: 0,
-              zIndex: 300,
-              background: "rgba(15,13,11,0.92)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "2rem",
-            }}
-            onClick={() => setLightbox(false)}
-          >
-            <button
-              style={{ position: "absolute", top: "1.5rem", right: "1.5rem", color: "var(--bg)", opacity: 0.7 }}
-              onClick={() => setLightbox(false)}
-              aria-label="Kapat"
-            >
-              <X size={24} />
-            </button>
-            {active.image && (
-              <motion.img
-                initial={{ scale: 0.92 }}
-                animate={{ scale: 1 }}
-                src={active.image}
-                alt={active.title}
-                style={{ maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain", borderRadius: "8px" }}
-                onClick={(e) => e.stopPropagation()}
-              />
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </Dialog>
   );
 }
