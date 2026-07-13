@@ -1,248 +1,593 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { MoonStar, SunMedium } from "lucide-react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent as ReactKeyboardEvent,
+} from "react";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+} from "framer-motion";
+import { FileText, Menu, X } from "lucide-react";
 
-const SECTIONS = ["giris","hikayem","gelisim","projeler","tasarim","iletisim"] as const;
-const LABELS: Record<string, string> = {
-  giris: "UMUT KOÇ",
-  hikayem: "HİKÂYEM",
-  gelisim: "GELİŞİM",
-  projeler: "PROJELER",
-  tasarim: "TASARIM",
-  iletisim: "İLETİŞİM",
+import {
+  navItems,
+  sectionIndicators,
+} from "@/src/content/navigation";
+
+type SiteHeaderProps = {
+  activeSection: string;
+  onOpenCV: () => void;
 };
-const NAV_ITEMS = [
-  { id: "hikayem", label: "Hikâyem" },
-  { id: "gelisim", label: "Yönüm" },
-  { id: "projeler", label: "Projeler" },
-  { id: "tasarim", label: "Tasarım" },
-];
 
-type Props = { activeSection: string; onOpenCV: () => void };
+const ease = [0.22, 1, 0.36, 1] as const;
 
-export default function SiteHeader({ activeSection, onOpenCV }: Props) {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+const focusableSelector = [
+  'a[href]',
+  'button:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(",");
+
+export default function SiteHeader({
+  activeSection,
+  onOpenCV,
+}: SiteHeaderProps) {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuPanelRef = useRef<HTMLDivElement>(null);
+  const previousBodyOverflowRef = useRef("");
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
+    let ticking = false;
+
+    const updateScrolledState = () => {
+      const nextValue = window.scrollY > 32;
+
+      setIsScrolled((currentValue) =>
+        currentValue === nextValue ? currentValue : nextValue,
+      );
+
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (ticking) return;
+
+      ticking = true;
+      window.requestAnimationFrame(updateScrolledState);
+    };
+
+    updateScrolledState();
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
-    const currentTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
-    setTheme(currentTheme);
-  }, []);
+    if (!isMenuOpen) return;
 
-  useEffect(() => {
-    document.body.classList.toggle("modal-open", menuOpen);
-    return () => document.body.classList.remove("modal-open");
-  }, [menuOpen]);
+    previousBodyOverflowRef.current =
+      document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
-  const go = (id: string) => {
-    setMenuOpen(false);
-    setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 150);
+    const focusTimer = window.setTimeout(() => {
+      const firstFocusable =
+        menuPanelRef.current?.querySelector<HTMLElement>(
+          focusableSelector,
+        );
+
+      firstFocusable?.focus();
+    }, shouldReduceMotion ? 0 : 80);
+
+    return () => {
+      window.clearTimeout(focusTimer);
+      document.body.style.overflow =
+        previousBodyOverflowRef.current;
+    };
+  }, [isMenuOpen, shouldReduceMotion]);
+
+  const scrollToSection = (sectionId: string) => {
+    setIsMenuOpen(false);
+
+    const scroll = () => {
+      const section = document.getElementById(sectionId);
+
+      section?.scrollIntoView({
+        behavior: shouldReduceMotion ? "auto" : "smooth",
+        block: "start",
+      });
+    };
+
+    window.setTimeout(scroll, isMenuOpen ? 120 : 0);
   };
 
-  const toggleTheme = () => {
-    setTheme((current) => {
-      const next = current === "dark" ? "light" : "dark";
-      document.documentElement.dataset.theme = next;
-      document.documentElement.style.colorScheme = next;
-      window.localStorage.setItem("theme", next);
-      return next;
+  const scrollToTop = () => {
+    setIsMenuOpen(false);
+
+    window.scrollTo({
+      top: 0,
+      behavior: shouldReduceMotion ? "auto" : "smooth",
     });
+  };
+
+  const openCV = () => {
+    setIsMenuOpen(false);
+
+    window.setTimeout(
+      onOpenCV,
+      isMenuOpen && !shouldReduceMotion ? 120 : 0,
+    );
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+
+    window.requestAnimationFrame(() => {
+      menuButtonRef.current?.focus();
+    });
+  };
+
+  const handleMenuKeyDown = (
+    event: ReactKeyboardEvent<HTMLDivElement>,
+  ) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeMenu();
+      return;
+    }
+
+    if (event.key !== "Tab" || !menuPanelRef.current) return;
+
+    const focusableElements = Array.from(
+      menuPanelRef.current.querySelectorAll<HTMLElement>(
+        focusableSelector,
+      ),
+    );
+
+    if (focusableElements.length === 0) return;
+
+    const firstElement = focusableElements[0];
+    const lastElement =
+      focusableElements[focusableElements.length - 1];
+    const activeElement = document.activeElement;
+
+    if (event.shiftKey && activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+      return;
+    }
+
+    if (!event.shiftKey && activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
   };
 
   return (
     <>
-      {/* Header */}
       <motion.header
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.3 }}
-        style={{
-          position: "fixed",
-          top: 0, left: 0, right: 0,
-          zIndex: 120,
-          height: "76px",
-          display: "flex",
-          alignItems: "center",
-          background: scrolled ? "var(--nav-bg)" : "transparent",
-          backdropFilter: scrolled ? "blur(22px) saturate(180%)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(17,15,12,0.05)" : "1px solid transparent",
-          transition: "background 0.5s, backdrop-filter 0.5s, border-color 0.5s, transform 0.4s",
-        }}
+        className={[
+          "site-header",
+          isScrolled ? "site-header--scrolled" : "",
+        ].join(" ")}
+        initial={
+          shouldReduceMotion
+            ? { opacity: 1 }
+            : { opacity: 0, y: -10 }
+        }
+        animate={{ opacity: 1, y: 0 }}
+        transition={
+          shouldReduceMotion
+            ? { duration: 0 }
+            : { duration: 0.55, delay: 0.12, ease }
+        }
       >
-        <div className="site-wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
-          {/* Logo */}
+        <div className="site-wrap site-header__inner">
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="t-label hover-line header-pill"
-            style={{ letterSpacing: "0.16em", paddingInline: "1rem" }}
+            type="button"
+            className="site-header__brand"
+            onClick={scrollToTop}
             aria-label="Sayfanın başına git"
           >
             UMUT KOÇ
           </button>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-3 header-pill" aria-label="Ana navigasyon">
-            {NAV_ITEMS.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => go(item.id)}
-                className="t-label hover-line hover-amber"
-                style={{
-                  color: activeSection === item.id ? "var(--ink)" : "var(--ink-3)",
-                  transition: "color 0.3s, background 0.3s",
-                  padding: "0.7rem 0.95rem",
-                  borderRadius: "999px",
-                  background: activeSection === item.id ? "rgba(17,15,12,0.05)" : "transparent",
-                }}
-              >
-                {item.label}
-              </button>
-            ))}
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="theme-toggle"
-              aria-label={theme === "dark" ? "Açık temaya geç" : "Koyu temaya geç"}
-              title={theme === "dark" ? "Açık temaya geç" : "Koyu temaya geç"}
-            >
-              <span className="theme-toggle__icon" aria-hidden="true">
-                {theme === "dark" ? <SunMedium size={16} /> : <MoonStar size={16} />}
-              </span>
-              <span className="t-label" style={{ color: "inherit", letterSpacing: "0.12em" }}>
-                {theme === "dark" ? "Light" : "Dark"}
-              </span>
-            </button>
-            <button
-              onClick={onOpenCV}
-              className="btn-dark"
-              style={{ padding: "0.55em 1.25em" }}
-            >
-              CV
-            </button>
-            <a
-              href="#iletisim"
-              onClick={(e) => { e.preventDefault(); go("iletisim"); }}
-              className="t-label hover-line"
-              style={{ color: "var(--ink-3)", paddingInline: "0.5rem" }}
-            >
-              İletişim
-            </a>
+          <nav
+            className="site-header__desktop-nav"
+            aria-label="Ana navigasyon"
+          >
+            {navItems.map((item) => {
+              const sectionId = item.href.replace("#", "");
+              const isCV = "isCV" in item && item.isCV;
+              const isActive =
+                !isCV && activeSection === sectionId;
+
+              if (isCV) {
+                return (
+                  <button
+                    key={item.label}
+                    type="button"
+                    className="site-header__cv-button"
+                    onClick={openCV}
+                  >
+                    CV
+                    <FileText
+                      size={14}
+                      strokeWidth={1.8}
+                      aria-hidden="true"
+                    />
+                  </button>
+                );
+              }
+
+              return (
+                <button
+                  key={item.label}
+                  type="button"
+                  className={[
+                    "site-header__nav-link",
+                    isActive
+                      ? "site-header__nav-link--active"
+                      : "",
+                  ].join(" ")}
+                  onClick={() => scrollToSection(sectionId)}
+                  aria-current={isActive ? "location" : undefined}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
           </nav>
 
-          {/* Mobil hamburger */}
           <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? "Menüyü kapat" : "Menüyü aç"}
-            className="md:hidden"
-            style={{ display: "flex", flexDirection: "column", gap: "5px", padding: "8px" }}
+            ref={menuButtonRef}
+            type="button"
+            className="site-header__menu-button"
+            onClick={() => setIsMenuOpen((current) => !current)}
+            aria-label={
+              isMenuOpen ? "Menüyü kapat" : "Menüyü aç"
+            }
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
           >
-            <motion.span
-              animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7 : 0 }}
-              transition={{ duration: 0.3 }}
-              style={{ display: "block", width: "22px", height: "1.5px", background: "var(--ink)" }}
-            />
-            <motion.span
-              animate={{ opacity: menuOpen ? 0 : 1 }}
-              transition={{ duration: 0.2 }}
-              style={{ display: "block", width: "22px", height: "1.5px", background: "var(--ink)" }}
-            />
-            <motion.span
-              animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -7 : 0 }}
-              transition={{ duration: 0.3 }}
-              style={{ display: "block", width: "22px", height: "1.5px", background: "var(--ink)" }}
-            />
+            {isMenuOpen ? (
+              <X size={21} strokeWidth={1.7} />
+            ) : (
+              <Menu size={21} strokeWidth={1.7} />
+            )}
           </button>
         </div>
       </motion.header>
 
-      {/* Mobil tam ekran menü */}
       <AnimatePresence>
-        {menuOpen && (
+        {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              position: "fixed",
-              inset: 0,
-              zIndex: 115,
-              background: "color-mix(in srgb, var(--nav-bg) 86%, transparent)",
-              backdropFilter: "blur(24px) saturate(170%)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              paddingTop: "76px",
-            }}
+            id="mobile-navigation"
+            ref={menuPanelRef}
             role="dialog"
-            aria-label="Navigasyon menüsü"
+            aria-modal="true"
+            aria-label="Mobil navigasyon"
+            className="mobile-navigation"
+            onKeyDown={handleMenuKeyDown}
+            initial={
+              shouldReduceMotion
+                ? { opacity: 1 }
+                : { opacity: 0 }
+            }
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={
+              shouldReduceMotion
+                ? { duration: 0 }
+                : { duration: 0.24, ease }
+            }
           >
-            <div className="site-wrap mobile-menu-shell scene-panel" style={{ padding: "1rem clamp(1rem, 3vw, 1.5rem)" }}>
-              {[...NAV_ITEMS, { id: "iletisim", label: "İletişim" }].map((item, i) => (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 * i, duration: 0.4 }}
-                  style={{ borderBottom: "1px solid var(--rule)" }}
-                >
-                  <button
-                    onClick={() => go(item.id)}
-                    className="t-large hover-line"
-                    style={{
-                      display: "block",
-                      width: "100%",
-                      textAlign: "left",
-                      padding: "1.5rem 0.5rem",
-                      color: "var(--ink-3)",
-                      transition: "color 0.2s",
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--ink)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-3)")}
-                  >
-                    {item.label}
-                  </button>
-                </motion.div>
-              ))}
+            <div className="site-wrap mobile-navigation__inner">
+              <nav
+                className="mobile-navigation__links"
+                aria-label="Mobil ana navigasyon"
+              >
+                {sectionIndicators
+                  .filter((item) => item.href !== "#giris")
+                  .map((item, index) => {
+                    const sectionId = item.href.replace("#", "");
+                    const isActive =
+                      activeSection === sectionId;
+
+                    return (
+                      <motion.button
+                        key={item.href}
+                        type="button"
+                        className={[
+                          "mobile-navigation__link",
+                          isActive
+                            ? "mobile-navigation__link--active"
+                            : "",
+                        ].join(" ")}
+                        onClick={() =>
+                          scrollToSection(sectionId)
+                        }
+                        aria-current={
+                          isActive ? "location" : undefined
+                        }
+                        initial={
+                          shouldReduceMotion
+                            ? { opacity: 1, y: 0 }
+                            : { opacity: 0, y: 16 }
+                        }
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={
+                          shouldReduceMotion
+                            ? { duration: 0 }
+                            : {
+                                duration: 0.4,
+                                delay: 0.04 + index * 0.045,
+                                ease,
+                              }
+                        }
+                      >
+                        <span>{item.number}</span>
+                        <strong>{item.label}</strong>
+                      </motion.button>
+                    );
+                  })}
+              </nav>
+
               <motion.div
-                initial={{ opacity: 0 }}
+                className="mobile-navigation__footer"
+                initial={
+                  shouldReduceMotion
+                    ? { opacity: 1 }
+                    : { opacity: 0 }
+                }
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                style={{ marginTop: "2rem", display: "flex", flexWrap: "wrap", gap: "0.75rem" }}
+                transition={
+                  shouldReduceMotion
+                    ? { duration: 0 }
+                    : { duration: 0.4, delay: 0.28 }
+                }
               >
                 <button
                   type="button"
-                  onClick={toggleTheme}
-                  className="theme-toggle"
-                  aria-label={theme === "dark" ? "Açık temaya geç" : "Koyu temaya geç"}
-                >
-                  <span className="theme-toggle__icon" aria-hidden="true">
-                    {theme === "dark" ? <SunMedium size={16} /> : <MoonStar size={16} />}
-                  </span>
-                  <span className="t-label" style={{ color: "inherit", letterSpacing: "0.12em" }}>
-                    {theme === "dark" ? "Light" : "Dark"}
-                  </span>
-                </button>
-                <button
-                  onClick={() => { setMenuOpen(false); onOpenCV(); }}
                   className="btn-dark"
+                  onClick={openCV}
                 >
                   CV&apos;yi görüntüle
+                  <FileText size={15} aria-hidden="true" />
                 </button>
+
+                <p>İstanbul — IT Support — Teknik Operasyon</p>
               </motion.div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <style jsx global>{`
+        .site-header {
+          position: fixed;
+          top: 0;
+          right: 0;
+          left: 0;
+          z-index: 120;
+          height: 72px;
+          display: flex;
+          align-items: center;
+          border-bottom: 1px solid transparent;
+          background: transparent;
+          transition:
+            background-color 0.28s var(--ease),
+            border-color 0.28s var(--ease);
+        }
+
+        .site-header--scrolled {
+          border-color: var(--rule);
+          background: rgba(8, 8, 8, 0.92);
+        }
+
+        @supports (
+          (-webkit-backdrop-filter: blur(10px)) or
+            (backdrop-filter: blur(10px))
+        ) {
+          .site-header--scrolled {
+            background: rgba(8, 8, 8, 0.82);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+          }
+        }
+
+        .site-header__inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 2rem;
+        }
+
+        .site-header__brand {
+          flex: 0 0 auto;
+          padding: 0.65rem 0;
+          color: var(--ink);
+          font-size: 0.6875rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          line-height: 1;
+        }
+
+        .site-header__desktop-nav {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+
+        .site-header__nav-link,
+        .site-header__cv-button {
+          position: relative;
+          min-height: 38px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.45rem;
+          padding: 0.65rem 0.8rem;
+          border-radius: 999px;
+          color: var(--ink-3);
+          font-size: 0.6875rem;
+          font-weight: 650;
+          letter-spacing: 0.1em;
+          line-height: 1;
+          text-transform: uppercase;
+          transition:
+            color 0.2s var(--ease),
+            background-color 0.2s var(--ease),
+            border-color 0.2s var(--ease);
+        }
+
+        .site-header__nav-link:hover,
+        .site-header__nav-link:focus-visible {
+          color: var(--ink);
+        }
+
+        .site-header__nav-link--active {
+          background: rgba(255, 255, 255, 0.075);
+          color: var(--ink);
+        }
+
+        .site-header__cv-button {
+          margin-left: 0.35rem;
+          border: 1px solid var(--rule-strong);
+          color: var(--ink);
+        }
+
+        .site-header__cv-button:hover,
+        .site-header__cv-button:focus-visible {
+          border-color: rgba(255, 255, 255, 0.5);
+          background: var(--surface);
+        }
+
+        .site-header__menu-button {
+          width: 44px;
+          height: 44px;
+          display: none;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid var(--rule);
+          border-radius: 999px;
+          background: #0d0d0d;
+          color: var(--ink);
+        }
+
+        .mobile-navigation {
+          position: fixed;
+          inset: 0;
+          z-index: 110;
+          overflow-y: auto;
+          background: #080808;
+          color: var(--ink);
+          overscroll-behavior: contain;
+        }
+
+        .mobile-navigation__inner {
+          min-height: 100dvh;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          gap: 3rem;
+          padding-top: max(7rem, env(safe-area-inset-top));
+          padding-bottom: max(
+            2rem,
+            env(safe-area-inset-bottom)
+          );
+        }
+
+        .mobile-navigation__links {
+          border-top: 1px solid var(--rule);
+        }
+
+        .mobile-navigation__link {
+          width: 100%;
+          display: grid;
+          grid-template-columns: 2.5rem minmax(0, 1fr);
+          gap: 1rem;
+          align-items: baseline;
+          padding-top: 1.4rem;
+          padding-bottom: 1.4rem;
+          border-bottom: 1px solid var(--rule);
+          color: var(--ink-3);
+          text-align: left;
+        }
+
+        .mobile-navigation__link span {
+          font-size: 0.625rem;
+          font-weight: 650;
+          letter-spacing: 0.12em;
+        }
+
+        .mobile-navigation__link strong {
+          color: inherit;
+          font-family:
+            var(--font-display), var(--font-geist), Georgia, serif;
+          font-size: clamp(2rem, 10vw, 3.25rem);
+          font-weight: 650;
+          letter-spacing: -0.04em;
+          line-height: 1;
+        }
+
+        .mobile-navigation__link--active {
+          color: var(--ink);
+        }
+
+        .mobile-navigation__footer {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1.25rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid var(--rule);
+        }
+
+        .mobile-navigation__footer p {
+          color: var(--ink-3);
+          font-size: 0.6875rem;
+          font-weight: 650;
+          letter-spacing: 0.1em;
+          line-height: 1.6;
+          text-transform: uppercase;
+        }
+
+        @media (max-width: 900px) {
+          .site-header__desktop-nav {
+            display: none;
+          }
+
+          .site-header__menu-button {
+            display: inline-flex;
+          }
+
+          .site-header--scrolled {
+            background: #080808;
+            -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .site-header,
+          .site-header__nav-link,
+          .site-header__cv-button {
+            transition: none;
+          }
+        }
+      `}</style>
     </>
   );
 }
