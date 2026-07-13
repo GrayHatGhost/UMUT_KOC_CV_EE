@@ -3,7 +3,6 @@
 import {
   Download,
   ExternalLink,
-  Linkedin,
   Mail,
   MapPin,
 } from "lucide-react";
@@ -214,7 +213,7 @@ export default function CvModal({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Linkedin
+                  <ExternalLink
                     size={16}
                     strokeWidth={1.8}
                     aria-hidden="true"
