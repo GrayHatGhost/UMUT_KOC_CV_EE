@@ -13,8 +13,6 @@ export const seoConfig = {
       country: "Türkiye",
     },
     email: "umutkoco@outlook.com",
-    sameAs: [
-      "https://linkedin.com/in/umutkoco",
-    ],
+    sameAs: [],
   },
 } as const;

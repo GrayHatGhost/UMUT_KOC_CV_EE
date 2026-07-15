@@ -38,12 +38,8 @@ export type ProfileData = {
   location: string;
   phone: string;
   email: string;
-  linkedin: string;
   portfolio: string;
   cvPath: string;
-  social: {
-    linkedin: string;
-  };
   militaryStatus: string;
   about: string;
   careerObjective: string;
@@ -61,12 +57,8 @@ export const profile: ProfileData = {
   location: "Esenyurt, İstanbul",
   phone: "+90 541 785 39 00",
   email: "umutkoco@outlook.com",
-  linkedin: "https://linkedin.com/in/umutkoco",
   portfolio: "https://umutkoccv.vercel.app",
   cvPath: "/cv/umut-koc-e-ticaret-cv.pdf",
-  social: {
-    linkedin: "https://linkedin.com/in/umutkoco",
-  },
   militaryStatus: "Tamamlandı (2026)",
   about:
     "Ekonometri lisans mezunuyum. Dijital el terminali ve stok takip sistemleri üzerinden sipariş, envanter ve ürün doğruluğu süreçlerinde yaklaşık dört yıllık operasyon deneyimine sahibim. Web yönetim panellerinde içerik, sayfa, duyuru, kullanıcı yetkisi ve yayın süreçlerini yürütüyorum.",
