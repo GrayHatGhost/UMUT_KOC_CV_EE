@@ -203,8 +203,6 @@ export default function StoryScene() {
               </Reveal>
             );
           })}
-        </div>
-
         <Reveal className="story-apple__certificate-wrap">
           <article className="apple-card story-apple__certificate">
             <div className="story-apple__certificate-media">
@@ -273,6 +271,9 @@ export default function StoryScene() {
             </div>
           </article>
         </Reveal>
+        </div>
+
+
       </div>
 
       <style jsx global>{`
@@ -282,27 +283,33 @@ export default function StoryScene() {
 
 
         .story-apple__certificate-wrap {
-          margin-top: var(--grid-gap);
+          min-width: 0;
+          height: 100%;
+          grid-column: 1 / -1;
         }
 
         .story-apple__certificate {
           width: 100%;
-          max-width: 1040px;
-          min-height: 230px;
+          max-width: none;
+          min-height: 340px;
+          height: 100%;
           display: grid;
           grid-template-columns:
-            minmax(300px, 0.72fr)
-            minmax(0, 1.28fr);
+            minmax(340px, 5fr)
+            minmax(0, 7fr);
           gap: 0;
-          margin-inline: auto;
-          padding: 0.7rem;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
         }
 
         .story-apple__certificate-media {
           position: relative;
           min-width: 0;
           aspect-ratio: 16 / 9;
+          align-self: center;
           overflow: hidden;
+          margin: 0.7rem 0 0.7rem 0.7rem;
           border-radius: calc(var(--radius-lg) - 9px);
           background: linear-gradient(
             145deg,
@@ -340,10 +347,16 @@ export default function StoryScene() {
           grid-template-columns:
             46px
             minmax(0, 1fr);
-          grid-template-rows: minmax(0, 1fr) auto;
-          gap: 1rem 1.15rem;
+          grid-template-rows:
+            minmax(0, 1fr)
+            auto;
+          gap: 1.15rem;
           align-items: start;
-          padding: clamp(1.25rem, 2.5vw, 2rem);
+          padding: clamp(1.8rem, 3vw, 2.7rem);
+        }
+
+        .story-apple__certificate-content > div {
+          align-self: center;
         }
 
         .story-apple__certificate-icon {
@@ -352,6 +365,7 @@ export default function StoryScene() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
+          align-self: center;
           border: 1px solid var(--rule);
           border-radius: 16px;
           background: var(--surface-2);
@@ -359,10 +373,14 @@ export default function StoryScene() {
         }
 
         .story-apple__certificate-title {
-          max-width: 18ch;
-          margin-top: 0.75rem;
+          max-width: 20ch;
+          margin-top: 0.8rem;
           color: var(--ink);
-          font-size: clamp(1.55rem, 2.8vw, 2.65rem);
+          font-size: clamp(
+            1.65rem,
+            2.7vw,
+            2.75rem
+          );
           font-weight: 820;
           letter-spacing: -0.05em;
           line-height: 1.04;
@@ -370,49 +388,62 @@ export default function StoryScene() {
         }
 
         .story-apple__certificate-copy {
-          max-width: 58ch;
-          margin-top: 0.85rem;
+          max-width: 60ch;
+          margin-top: 0.9rem;
           color: var(--ink-2);
-          font-size: 0.86rem;
-          line-height: 1.62;
+          font-size: 0.88rem;
+          line-height: 1.65;
         }
 
         .story-apple__certificate-link {
-          grid-column: 2;
-          width: fit-content;
-          display: inline-flex;
+          grid-column: 1 / -1;
+          width: 100%;
+          display: flex;
           align-items: center;
-          gap: 0.45rem;
+          justify-content: space-between;
+          gap: 0.75rem;
+          padding-top: 1.2rem;
+          border-top: 1px solid var(--rule);
           color: var(--ink);
           font-size: 0.72rem;
           font-weight: 740;
         }
 
+        @media (max-width: 980px) {
+          .story-apple__certificate {
+            min-height: auto;
+            grid-template-columns:
+              minmax(300px, 0.9fr)
+              minmax(0, 1.1fr);
+          }
+        }
+
         @media (max-width: 820px) {
           .story-apple__certificate {
-            max-width: none;
-            grid-template-columns: minmax(0, 1fr);
+            grid-template-columns:
+              minmax(0, 1fr);
           }
 
-          .story-apple__certificate-content {
-            grid-template-columns:
-              42px
-              minmax(0, 1fr);
+          .story-apple__certificate-media {
+            width: auto;
+            margin: 0.55rem 0.55rem 0;
           }
         }
 
         @media (max-width: 520px) {
-          .story-apple__certificate {
-            padding: 0.55rem;
-          }
-
           .story-apple__certificate-content {
-            grid-template-columns: minmax(0, 1fr);
-            padding: 1.2rem;
+            grid-template-columns:
+              minmax(0, 1fr);
+            gap: 1rem;
+            padding: 1.3rem;
           }
 
-          .story-apple__certificate-link {
-            grid-column: 1;
+          .story-apple__certificate-icon {
+            align-self: start;
+          }
+
+          .story-apple__certificate-title {
+            max-width: none;
           }
         }
 
