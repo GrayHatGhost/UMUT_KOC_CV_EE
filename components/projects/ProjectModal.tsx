@@ -10,20 +10,30 @@ import {
   ArrowUpRight,
   ChevronLeft,
   ChevronRight,
-  ExternalLink,
   ImageIcon,
 } from "lucide-react";
 
 import Dialog from "@/components/dialog/Dialog";
-import {
-  aiApproachText,
-  type Project,
-} from "@/src/content/projects";
+import type { Project } from "@/src/content/projects";
 
 type ProjectModalProps = {
   project: Project | null;
   isOpen: boolean;
   onClose: () => void;
+};
+
+const normalizeResponsibility = (
+  responsibility: string,
+) => {
+  if (
+    /(?:ai|yapay zek[aâ]) destekli geliştirme/i.test(
+      responsibility,
+    )
+  ) {
+    return "Geliştirme sürecinin planlanması, test edilmesi ve iyileştirilmesi";
+  }
+
+  return responsibility;
 };
 
 export default function ProjectModal({
@@ -48,6 +58,12 @@ export default function ProjectModal({
   const activeImage = useMemo(
     () => images[activeImageIndex],
     [activeImageIndex, images],
+  );
+
+  const responsibilities = useMemo(
+    () =>
+      project?.role.map(normalizeResponsibility) ?? [],
+    [project?.role],
   );
 
   useEffect(() => {
@@ -181,22 +197,28 @@ export default function ProjectModal({
                 />
 
                 <span>
-                  Proje ekran görüntüsü eklenecek
+                  Bu çalışma için görsel arşivlenmedi
                 </span>
 
                 <strong>{project.title}</strong>
               </div>
             )}
 
-            <div className="project-modal__gallery-top">
-              <span>
-                {String(activeImageIndex + 1).padStart(
-                  2,
-                  "0",
-                )}{" "}
-                / {String(images.length).padStart(2, "0")}
-              </span>
-            </div>
+            {images.length > 0 && (
+              <div className="project-modal__gallery-top">
+                <span>
+                  {String(activeImageIndex + 1).padStart(
+                    2,
+                    "0",
+                  )}{" "}
+                  /{" "}
+                  {String(images.length).padStart(
+                    2,
+                    "0",
+                  )}
+                </span>
+              </div>
+            )}
 
             {images.length > 1 && (
               <div className="project-modal__gallery-controls">
@@ -229,7 +251,7 @@ export default function ProjectModal({
             <p>
               {activeImage?.caption ??
                 activeImage?.alt ??
-                "Proje ekran görüntüsü"}
+                "Çalışmanın süreç ve sorumluluk detayları"}
             </p>
 
             {images.length > 1 && (
@@ -300,7 +322,7 @@ export default function ProjectModal({
           <MetaCard
             title="Üstlendiğim sorumluluklar"
             number="01"
-            items={project.role}
+            items={responsibilities}
             className="project-modal__role"
           />
 
@@ -326,84 +348,45 @@ export default function ProjectModal({
               ))}
             </ul>
           </section>
-
-          <section className="apple-card apple-card--soft project-modal__approach">
-            <div>
-              <p className="card-eyebrow">
-                NASIL GELİŞTİRDİM?
-              </p>
-
-              <h3>{aiApproachText.title}</h3>
-            </div>
-
-            <div className="project-modal__approach-copy">
-              {aiApproachText.paragraphs.map(
-                (paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ),
-              )}
-            </div>
-          </section>
         </div>
-
-        <footer className="project-modal__footer">
-          <p>
-            Proje detaylarını, ekran görüntülerini ve
-            sorumluluk alanlarını bu pencere içinde
-            inceleyebilirsin.
-          </p>
-
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="project-modal__footer-link"
-            >
-              <ExternalLink
-                size={15}
-                aria-hidden="true"
-              />
-              Yeni sekmede aç
-            </a>
-          )}
-        </footer>
       </article>
 
       <style jsx>{`
         .project-modal {
           min-height: 100%;
-          padding: clamp(0.8rem, 2vw, 1.4rem);
+          padding: clamp(1rem, 2.7vw, 2rem);
         }
 
         .project-modal__header {
           display: grid;
-          grid-template-columns: minmax(0, 1fr) auto;
-          gap: 1.25rem;
+          grid-template-columns:
+            minmax(0, 1fr)
+            auto;
+          gap: clamp(1.5rem, 3vw, 2.75rem);
           align-items: end;
           padding:
-            clamp(1.1rem, 2vw, 1.6rem)
-            clamp(0.25rem, 1vw, 0.55rem)
-            clamp(1rem, 2.2vw, 1.6rem);
+            clamp(3rem, 6vw, 5rem)
+            clamp(0.4rem, 2vw, 1rem)
+            clamp(2.25rem, 4vw, 3.25rem);
         }
 
         .project-modal__title {
           max-width: 16ch;
-          margin-top: 0.9rem;
+          margin-top: 1rem;
           color: var(--ink);
           font-size: clamp(2.4rem, 5.4vw, 5.4rem);
           font-weight: 850;
           letter-spacing: -0.065em;
-          line-height: 0.94;
+          line-height: 0.96;
           text-wrap: balance;
         }
 
         .project-modal__lead {
           max-width: 65ch;
-          margin-top: 1.2rem;
+          margin-top: 1.25rem;
           color: var(--ink-2);
           font-size: clamp(1rem, 1.3vw, 1.12rem);
-          line-height: 1.68;
+          line-height: 1.7;
         }
 
         .project-modal__live {
@@ -413,23 +396,22 @@ export default function ProjectModal({
         .project-modal__gallery {
           overflow: hidden;
           border: 1px solid rgba(255, 255, 255, 0.9);
-          border-radius: 24px;
+          border-radius: 30px;
           background: var(--surface);
           box-shadow: var(--shadow-sm);
         }
 
         .project-modal__media {
           position: relative;
-          min-height: clamp(320px, 42vw, 560px);
+          min-height: clamp(380px, 58vw, 690px);
           overflow: hidden;
-          margin: 0.5rem;
-          border-radius: 18px;
-          background:
-            linear-gradient(
-              145deg,
-              #e9e9ed,
-              #dedee3
-            );
+          margin: 0.62rem;
+          border-radius: 24px;
+          background: linear-gradient(
+            145deg,
+            #e9e9ed,
+            #dedee3
+          );
         }
 
         .project-modal__image {
@@ -516,10 +498,13 @@ export default function ProjectModal({
 
         .project-modal__gallery-footer {
           display: grid;
-          grid-template-columns: minmax(0, 1fr) auto;
+          grid-template-columns:
+            minmax(0, 1fr)
+            auto;
           gap: 1rem;
           align-items: center;
-          padding: 0.4rem 0.7rem 0.75rem 1rem;
+          min-height: 68px;
+          padding: 0.55rem 0.85rem 0.85rem 1.2rem;
         }
 
         .project-modal__gallery-footer > p {
@@ -581,7 +566,7 @@ export default function ProjectModal({
 
         .project-modal__summary {
           grid-column: span 7;
-          min-height: 380px;
+          min-height: 400px;
         }
 
         .project-modal__paragraphs {
@@ -594,36 +579,45 @@ export default function ProjectModal({
           max-width: 60ch;
           color: var(--ink-2);
           font-size: 1rem;
-          line-height: 1.74;
+          line-height: 1.72;
         }
 
-        :global(.project-modal__role) {
+        .project-modal__role {
           grid-column: span 5;
+          min-height: 400px;
         }
 
-        :global(.project-modal__features) {
+        .project-modal__features {
           grid-column: span 5;
+          min-height: 440px;
         }
 
         .project-modal__learnings {
           grid-column: span 7;
-          min-height: 430px;
+          min-height: 440px;
+          display: grid;
+          grid-template-rows: auto auto 1fr;
+          align-content: start;
         }
 
         .project-modal__learnings h3 {
-          max-width: 13ch;
+          max-width: 14ch;
           margin-top: 1rem;
           color: white;
           font-size: clamp(2rem, 3.7vw, 3.5rem);
           font-weight: 830;
           letter-spacing: -0.058em;
-          line-height: 0.98;
+          line-height: 1;
+          text-wrap: balance;
         }
 
         .project-modal__learnings ul {
+          align-self: end;
           display: grid;
           gap: 0.78rem;
-          margin-top: 2.5rem;
+          margin-top: 2rem;
+          padding-top: 1.3rem;
+          border-top: 1px solid var(--rule-inverse);
           list-style: none;
         }
 
@@ -647,61 +641,6 @@ export default function ProjectModal({
           opacity: 0.42;
         }
 
-        .project-modal__approach {
-          grid-column: 1 / -1;
-          display: grid;
-          grid-template-columns:
-            minmax(240px, 0.6fr)
-            minmax(0, 1.4fr);
-          gap: clamp(2rem, 5vw, 5rem);
-        }
-
-        .project-modal__approach h3 {
-          max-width: 12ch;
-          margin-top: 1rem;
-          color: var(--ink);
-          font-size: clamp(1.8rem, 3vw, 3rem);
-          font-weight: 820;
-          letter-spacing: -0.052em;
-          line-height: 1;
-        }
-
-        .project-modal__approach-copy {
-          display: grid;
-          gap: 1rem;
-        }
-
-        .project-modal__approach-copy p {
-          max-width: 65ch;
-          color: var(--ink-2);
-          font-size: 0.94rem;
-          line-height: 1.72;
-        }
-
-        .project-modal__footer {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 1.5rem;
-          padding: 1rem 0.35rem 0.1rem;
-        }
-
-        .project-modal__footer p {
-          color: var(--ink-3);
-          font-size: 0.72rem;
-          line-height: 1.55;
-        }
-
-        .project-modal__footer-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.45rem;
-          color: var(--ink);
-          font-size: 0.72rem;
-          font-weight: 720;
-          white-space: nowrap;
-        }
-
         @media (max-width: 900px) {
           .project-modal__header {
             grid-template-columns: 1fr;
@@ -713,14 +652,11 @@ export default function ProjectModal({
           }
 
           .project-modal__summary,
-          :global(.project-modal__role),
-          :global(.project-modal__features),
+          .project-modal__role,
+          .project-modal__features,
           .project-modal__learnings {
             grid-column: 1 / -1;
-          }
-
-          .project-modal__approach {
-            grid-template-columns: 1fr;
+            min-height: auto;
           }
         }
 
@@ -731,8 +667,8 @@ export default function ProjectModal({
 
           .project-modal__header {
             padding:
-              3.3rem 0.35rem
-              1.2rem;
+              4.6rem 0.55rem
+              2rem;
           }
 
           .project-modal__title {
@@ -765,20 +701,8 @@ export default function ProjectModal({
           .project-modal__summary,
           .project-modal__role,
           .project-modal__features,
-          .project-modal__learnings,
-          .project-modal__approach {
-            grid-column: 1;
-          }
-
-          .project-modal__summary,
           .project-modal__learnings {
-            min-height: auto;
-          }
-
-          .project-modal__footer {
-            align-items: flex-start;
-            flex-direction: column;
-            padding-bottom: 1rem;
+            grid-column: 1;
           }
         }
 
@@ -820,13 +744,18 @@ function MetaCard({
 
       <style jsx>{`
         .project-meta-card {
-          min-height: 380px;
+          display: grid;
+          grid-template-rows: auto 1fr;
+          align-content: start;
         }
 
         .project-meta-card ul {
+          align-self: end;
           display: grid;
-          gap: 0.78rem;
+          gap: 0.75rem;
           margin-top: 1.5rem;
+          padding-top: 1.3rem;
+          border-top: 1px solid var(--rule);
           list-style: none;
         }
 
@@ -848,12 +777,6 @@ function MetaCard({
           border-radius: 50%;
           background: var(--ink);
           opacity: 0.3;
-        }
-
-        @media (max-width: 900px) {
-          .project-meta-card {
-            min-height: auto;
-          }
         }
       `}</style>
     </section>
