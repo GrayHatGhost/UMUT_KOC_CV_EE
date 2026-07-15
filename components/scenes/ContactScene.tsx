@@ -8,7 +8,6 @@ import {
 import {
   Check,
   Copy,
-  ExternalLink,
   FileText,
   Mail,
 } from "lucide-react";
@@ -224,19 +223,6 @@ export default function ContactScene() {
                 />
               </a>
 
-              <a
-                href={profile.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-ghost"
-              >
-                LinkedIn
-                <ExternalLink
-                  size={15}
-                  strokeWidth={1.8}
-                  aria-hidden="true"
-                />
-              </a>
 
               <a
                 href={profile.cvPath}
@@ -254,8 +240,8 @@ export default function ContactScene() {
             </div>
 
             <p className="contact-apple__note">
-              İş ve görüşme talepleri için e-posta veya
-              LinkedIn üzerinden ulaşabilirsiniz.
+              İş ve görüşme talepleri için e-posta
+              üzerinden ulaşabilirsiniz.
             </p>
           </motion.aside>
         </div>
@@ -518,9 +504,6 @@ export default function ContactScene() {
           gap: 0.6rem;
         }
 
-        .contact-apple__actions > :first-child {
-          grid-column: 1 / -1;
-        }
 
         .contact-apple__actions > * {
           width: 100%;
@@ -547,9 +530,6 @@ export default function ContactScene() {
             grid-template-columns: 1fr;
           }
 
-          .contact-apple__actions > :first-child {
-            grid-column: auto;
-          }
         }
 
         /* Masaüstü yerleşim sistemi */
@@ -632,9 +612,6 @@ export default function ContactScene() {
             gap: 0.65rem;
           }
 
-          .contact-apple__actions > :first-child {
-            grid-column: 1 / -1;
-          }
 
           .contact-apple__actions > * {
             width: 100%;

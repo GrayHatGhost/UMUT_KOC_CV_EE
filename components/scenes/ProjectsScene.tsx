@@ -134,9 +134,10 @@ export default function ProjectsScene() {
                 </div>
 
                 <p className="projects-apple__stat-copy">
-                  İçerik girişinden yayın sonrası güncellemeye
-                  kadar süreci düzenli, takip edilebilir ve
-                  sürdürülebilir tutmaya odaklanıyorum.
+                  İçerik girişinden yayın sonrası
+                  güncellemeye kadar süreci düzenli, takip
+                  edilebilir ve sürdürülebilir tutmaya
+                  odaklanıyorum.
                 </p>
               </aside>
             </Reveal>
@@ -147,22 +148,10 @@ export default function ProjectsScene() {
               <Reveal
                 key={project.id}
                 delay={index * 0.07}
-                className={[
-                  "projects-apple__item",
-                  index === 0
-                    ? "projects-apple__item--featured"
-                    : "",
-                  index === projects.length - 1
-                    ? "projects-apple__item--wide"
-                    : "",
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
+                className="projects-apple__item"
               >
                 <ProjectCard
                   project={project}
-                  featured={index === 0}
-                  wide={index === projects.length - 1}
                   imageFailed={failedCovers.has(project.id)}
                   onImageError={() =>
                     markCoverAsFailed(project.id)
@@ -175,242 +164,6 @@ export default function ProjectsScene() {
             ))}
           </div>
         </div>
-
-        <style jsx>{`
-          .projects-apple {
-            overflow: clip;
-          }
-
-          .projects-apple__intro-grid {
-            display: grid;
-            grid-template-columns:
-              minmax(0, 1.4fr)
-              minmax(280px, 0.6fr);
-            gap: var(--grid-gap);
-            align-items: stretch;
-          }
-
-          .projects-apple__intro-main,
-          .projects-apple__intro-side {
-            min-width: 0;
-            height: 100%;
-          }
-
-          .projects-apple__intro-card,
-          .projects-apple__stat-card {
-            min-height: 440px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 3rem;
-          }
-
-          .projects-apple__title {
-            max-width: 12ch;
-            margin-top: 1rem;
-            color: var(--ink);
-            font-size: var(--f-section);
-            font-weight: 850;
-            letter-spacing: -0.062em;
-            line-height: 0.95;
-            text-wrap: balance;
-          }
-
-          .projects-apple__title span {
-            display: block;
-            color: var(--ink-3);
-          }
-
-          .projects-apple__intro-copy {
-            max-width: 55ch;
-            color: var(--ink-2);
-            font-size: var(--f-body);
-            line-height: 1.7;
-          }
-
-          .projects-apple__stat-heading {
-            max-width: 9ch;
-            margin-top: 1rem;
-            color: white;
-            font-size: clamp(2.6rem, 5vw, 5rem);
-            font-weight: 850;
-            letter-spacing: -0.065em;
-            line-height: 0.94;
-            text-wrap: balance;
-          }
-
-          .projects-apple__stat-copy {
-            max-width: 33ch;
-            color: var(--ink-inverse-2);
-            font-size: 0.95rem;
-            line-height: 1.68;
-          }
-
-          .projects-apple__grid {
-            display: grid;
-            grid-template-columns: repeat(
-              12,
-              minmax(0, 1fr)
-            );
-            gap: var(--grid-gap);
-            margin-top: var(--grid-gap);
-          }
-
-          .projects-apple__item {
-            min-width: 0;
-            grid-column: span 5;
-          }
-
-          .projects-apple__item--featured {
-            grid-column: span 7;
-          }
-
-          .projects-apple__item--wide {
-            grid-column: 1 / -1;
-          }
-
-          @media (max-width: 980px) {
-            .projects-apple__intro-grid {
-              grid-template-columns: 1fr;
-            }
-
-            .projects-apple__intro-card,
-            .projects-apple__stat-card {
-              min-height: 400px;
-            }
-
-            .projects-apple__item,
-            .projects-apple__item--featured {
-              grid-column: span 6;
-            }
-
-            .projects-apple__item--wide {
-              grid-column: 1 / -1;
-            }
-          }
-
-          @media (max-width: 720px) {
-            .projects-apple__intro-card,
-            .projects-apple__stat-card {
-              min-height: 390px;
-            }
-
-            .projects-apple__grid {
-              grid-template-columns: 1fr;
-            }
-
-            .projects-apple__item,
-            .projects-apple__item--featured,
-            .projects-apple__item--wide {
-              grid-column: 1;
-            }
-          }
-
-          /* Yerleşim dengesi */
-          .projects-apple__intro-card,
-          .projects-apple__stat-card {
-            min-height: 415px;
-            display: grid;
-            grid-template-rows: minmax(0, 1fr) auto;
-            gap: var(--content-gap-2xl);
-          }
-
-          .projects-apple__title {
-            max-width: 13ch;
-            line-height: 1;
-          }
-
-          .projects-apple__title span {
-            margin-top: 0.08em;
-          }
-
-          .projects-apple__intro-copy {
-            max-width: 60ch;
-            line-height: 1.74;
-          }
-
-          .projects-apple__stat-heading {
-            margin-top: 1rem;
-            line-height: 0.96;
-          }
-
-          .projects-apple__stat-copy {
-            max-width: 36ch;
-            line-height: 1.7;
-          }
-
-          .projects-apple__grid {
-            align-items: stretch;
-          }
-
-          .projects-apple__item {
-            height: 100%;
-          }
-
-          @media (max-width: 980px) {
-            .projects-apple__intro-card,
-            .projects-apple__stat-card {
-              min-height: 390px;
-            }
-          }
-
-          @media (max-width: 720px) {
-            .projects-apple__intro-card,
-            .projects-apple__stat-card {
-              min-height: auto;
-            }
-          }
-
-          /* Masaüstü yerleşim sistemi */
-          @media (min-width: 1025px) {
-            .projects-apple__intro-grid {
-              grid-template-columns:
-                minmax(0, 1.28fr)
-                minmax(340px, 0.72fr);
-            }
-
-            .projects-apple__intro-card,
-            .projects-apple__stat-card {
-              min-height: 430px;
-              grid-template-rows: minmax(0, 1fr) auto;
-              gap: var(--content-gap-2xl);
-            }
-
-            .projects-apple__title {
-              max-width: 14ch;
-              line-height: 1;
-            }
-
-            .projects-apple__intro-copy {
-              max-width: 62ch;
-              line-height: 1.72;
-            }
-
-            .projects-apple__stat-heading {
-              margin-top: 1rem;
-              line-height: 0.96;
-            }
-
-            .projects-apple__stat-copy {
-              max-width: 34ch;
-              line-height: 1.68;
-            }
-
-            .projects-apple__grid {
-              gap: var(--grid-gap);
-              align-items: stretch;
-            }
-
-            .projects-apple__item {
-              height: 100%;
-            }
-          }
-
-
-
-
-        `}</style>
       </section>
 
       {selectedProject && (
@@ -420,21 +173,119 @@ export default function ProjectsScene() {
           onClose={() => setSelectedProject(null)}
         />
       )}
+
+      <style jsx global>{`
+        .projects-apple {
+          overflow: clip;
+        }
+
+        .projects-apple__intro-grid {
+          display: grid;
+          grid-template-columns:
+            minmax(0, 1.28fr)
+            minmax(340px, 0.72fr);
+          gap: var(--grid-gap);
+          align-items: stretch;
+        }
+
+        .projects-apple__intro-main,
+        .projects-apple__intro-side {
+          min-width: 0;
+          height: 100%;
+        }
+
+        .projects-apple__intro-card,
+        .projects-apple__stat-card {
+          min-height: 430px;
+          height: 100%;
+          display: grid;
+          grid-template-rows: minmax(0, 1fr) auto;
+          gap: var(--content-gap-2xl);
+        }
+
+        .projects-apple__title {
+          max-width: 14ch;
+          margin-top: 1rem;
+          color: var(--ink);
+          font-size: var(--f-section);
+          font-weight: 850;
+          letter-spacing: -0.062em;
+          line-height: 1;
+          text-wrap: balance;
+        }
+
+        .projects-apple__title span {
+          display: block;
+          margin-top: 0.08em;
+          color: var(--ink-3);
+        }
+
+        .projects-apple__intro-copy {
+          max-width: 62ch;
+          color: var(--ink-2);
+          font-size: var(--f-body);
+          line-height: 1.72;
+        }
+
+        .projects-apple__stat-heading {
+          max-width: 9ch;
+          margin-top: 1rem;
+          color: white;
+          font-size: clamp(2.6rem, 5vw, 5rem);
+          font-weight: 850;
+          letter-spacing: -0.065em;
+          line-height: 0.96;
+          text-wrap: balance;
+        }
+
+        .projects-apple__stat-copy {
+          max-width: 34ch;
+          color: var(--ink-inverse-2);
+          font-size: 0.95rem;
+          line-height: 1.68;
+        }
+
+        .projects-apple__grid {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr);
+          gap: var(--grid-gap);
+          margin-top: var(--grid-gap);
+        }
+
+        .projects-apple__item {
+          width: 100%;
+          min-width: 0;
+        }
+
+        @media (max-width: 980px) {
+          .projects-apple__intro-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .projects-apple__intro-card,
+          .projects-apple__stat-card {
+            min-height: 390px;
+          }
+        }
+
+        @media (max-width: 720px) {
+          .projects-apple__intro-card,
+          .projects-apple__stat-card {
+            min-height: auto;
+          }
+        }
+      `}</style>
     </>
   );
 }
 
 function ProjectCard({
   project,
-  featured,
-  wide,
   imageFailed,
   onImageError,
   onOpen,
 }: {
   project: Project;
-  featured: boolean;
-  wide: boolean;
   imageFailed: boolean;
   onImageError: () => void;
   onOpen: () => void;
@@ -445,15 +296,7 @@ function ProjectCard({
   return (
     <button
       type="button"
-      className={[
-        "apple-card",
-        "apple-card--interactive",
-        "project-card",
-        featured ? "project-card--featured" : "",
-        wide ? "project-card--wide" : "",
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className="apple-card apple-card--interactive project-card"
       onClick={onOpen}
       aria-label={`${project.title} çalışmasını incele`}
     >
@@ -463,11 +306,7 @@ function ProjectCard({
             src={cover.src}
             alt={cover.alt}
             fill
-            sizes={
-              wide
-                ? "(max-width: 720px) 100vw, 88vw"
-                : "(max-width: 720px) 100vw, 52vw"
-            }
+            sizes="(max-width: 900px) 100vw, 58vw"
             className="project-card__image"
             onError={onImageError}
           />
@@ -479,7 +318,7 @@ function ProjectCard({
               aria-hidden="true"
             />
             <strong>{project.title}</strong>
-            <span>Uygulamalı vaka çalışması</span>
+            <span>Devam eden dijital operasyon</span>
           </div>
         )}
 
@@ -521,40 +360,31 @@ function ProjectCard({
       <style jsx>{`
         .project-card {
           width: 100%;
-          height: 100%;
-          min-height: 600px;
+          min-width: 0;
+          min-height: 510px;
           display: grid;
-          grid-template-rows: minmax(290px, 1.1fr) auto;
+          grid-template-columns:
+            minmax(0, 1.12fr)
+            minmax(360px, 0.88fr);
+          grid-template-rows: 1fr;
           padding: 0;
+          overflow: hidden;
           text-align: left;
           cursor: pointer;
         }
 
-        .project-card--featured {
-          min-height: 670px;
-        }
-
-        .project-card--wide {
-          min-height: 510px;
-          grid-template-columns: minmax(0, 1.15fr) minmax(
-              320px,
-              0.85fr
-            );
-          grid-template-rows: 1fr;
-        }
-
         .project-card__media {
           position: relative;
+          min-width: 0;
           min-height: 0;
           overflow: hidden;
-          margin: 0.62rem 0.62rem 0;
-          border-radius: calc(var(--radius-lg) - 8px);
-          background:
-            linear-gradient(
-              145deg,
-              #eeeeF1,
-              #e3e3e7
-            );
+          margin: 0.7rem 0 0.7rem 0.7rem;
+          border-radius: calc(var(--radius-lg) - 9px);
+          background: linear-gradient(
+            145deg,
+            #eeeef1,
+            #e3e3e7
+          );
         }
 
         .project-card__image {
@@ -575,19 +405,18 @@ function ProjectCard({
           align-items: center;
           justify-content: center;
           gap: 0.8rem;
+          padding: 2rem;
           color: var(--ink-3);
-          font-size: 0.75rem;
-          font-weight: 650;
+          text-align: center;
         }
 
         .project-card__fallback strong {
           max-width: 22ch;
           color: var(--ink);
-          font-size: clamp(1.35rem, 2.2vw, 2.2rem);
-          font-weight: 800;
-          letter-spacing: -0.045em;
-          line-height: 1.05;
-          text-align: center;
+          font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+          font-weight: 820;
+          letter-spacing: -0.05em;
+          line-height: 1.04;
           text-wrap: balance;
         }
 
@@ -611,8 +440,8 @@ function ProjectCard({
           border: 1px solid rgba(255, 255, 255, 0.72);
           border-radius: 50%;
           background: rgba(255, 255, 255, 0.9);
-          color: var(--ink);
           box-shadow: var(--shadow-xs);
+          color: var(--ink);
           font-size: 0.64rem;
           font-weight: 800;
           letter-spacing: 0.08em;
@@ -620,11 +449,10 @@ function ProjectCard({
 
         .project-card__content {
           min-width: 0;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          gap: 2rem;
-          padding: clamp(1.45rem, 2.6vw, 2.25rem);
+          display: grid;
+          grid-template-rows: minmax(0, 1fr) auto;
+          gap: 1.75rem;
+          padding: clamp(2rem, 3vw, 2.6rem);
         }
 
         .project-card__categories {
@@ -649,24 +477,26 @@ function ProjectCard({
           max-width: 18ch;
           margin-top: 1rem;
           color: var(--ink);
-          font-size: clamp(1.65rem, 2.8vw, 2.85rem);
-          font-weight: 820;
-          letter-spacing: -0.052em;
-          line-height: 1.02;
+          font-size: clamp(2.1rem, 4vw, 4rem);
+          font-weight: 830;
+          letter-spacing: -0.058em;
+          line-height: 1;
           text-wrap: balance;
         }
 
         .project-card__copy {
           max-width: 58ch;
-          margin-top: 0.9rem;
+          margin-top: 1rem;
           color: var(--ink-2);
-          font-size: 0.9rem;
-          line-height: 1.65;
+          font-size: 0.95rem;
+          line-height: 1.68;
         }
 
         .project-card__action {
+          min-height: 24px;
           display: inline-flex;
           align-items: center;
+          align-self: end;
           gap: 0.48rem;
           color: var(--ink);
           font-size: 0.75rem;
@@ -683,28 +513,49 @@ function ProjectCard({
           transform: translate(3px, -3px);
         }
 
-        @media (max-width: 980px) {
-          .project-card,
-          .project-card--featured {
-            min-height: 600px;
+        @media (max-width: 900px) {
+          .project-card {
+            min-height: auto;
+            grid-template-columns: minmax(0, 1fr);
+            grid-template-rows: minmax(300px, 58vw) auto;
           }
 
-          .project-card--wide {
-            min-height: 500px;
+          .project-card__media {
+            min-height: 300px;
+            margin: 0.55rem 0.55rem 0;
+          }
+
+          .project-card__content {
+            padding: 1.5rem;
+          }
+
+          .project-card__title {
+            max-width: 22ch;
           }
         }
 
         @media (max-width: 720px) {
-          .project-card,
-          .project-card--featured,
-          .project-card--wide {
-            min-height: 560px;
-            grid-template-columns: 1fr;
-            grid-template-rows: minmax(260px, 1fr) auto;
+          .project-card {
+            grid-template-rows: minmax(250px, 68vw) auto;
           }
 
           .project-card__media {
-            min-height: 270px;
+            min-height: 250px;
+          }
+
+          .project-card__content {
+            gap: 1.4rem;
+            padding: 1.3rem;
+          }
+
+          .project-card__categories span {
+            white-space: normal;
+          }
+
+          .project-card__title {
+            max-width: none;
+            font-size: clamp(1.7rem, 8vw, 2.4rem);
+            line-height: 1.07;
           }
         }
 
@@ -719,212 +570,6 @@ function ProjectCard({
             transform: none;
           }
         }
-
-        /* Proje kartı yerleşim dengesi */
-        .project-card {
-          min-height: 580px;
-          grid-template-rows: minmax(285px, 1fr) auto;
-        }
-
-        .project-card--featured {
-          min-height: 630px;
-        }
-
-        .project-card--wide {
-          min-height: 490px;
-          grid-template-columns:
-            minmax(0, 1.12fr)
-            minmax(320px, 0.88fr);
-        }
-
-        .project-card__content {
-          display: grid;
-          grid-template-rows: minmax(0, 1fr) auto;
-          gap: var(--content-gap-xl);
-          padding: clamp(1.5rem, 2.4vw, 2.1rem);
-        }
-
-        .project-card__title {
-          max-width: 20ch;
-          margin-top: 0.9rem;
-          line-height: 1.07;
-        }
-
-        .project-card__copy {
-          max-width: 62ch;
-          margin-top: 0.85rem;
-          line-height: 1.68;
-        }
-
-        .project-card__action {
-          min-height: 24px;
-          align-self: end;
-        }
-
-        @media (max-width: 980px) {
-          .project-card,
-          .project-card--featured {
-            min-height: 570px;
-          }
-
-          .project-card--wide {
-            min-height: 480px;
-          }
-        }
-
-        @media (max-width: 720px) {
-          .project-card,
-          .project-card--featured,
-          .project-card--wide {
-            min-height: auto;
-            grid-template-rows: minmax(260px, 54vw) auto;
-          }
-
-          .project-card__content {
-            gap: var(--content-gap-lg);
-          }
-        }
-
-        /* Mobil düzeltme:
-           Tam genişlikteki son proje kartı masaüstü iki kolon
-           tanımını mobilde taşımamalı. */
-        @media (max-width: 720px) {
-          .project-card,
-          .project-card--featured,
-          .project-card--wide {
-            width: 100%;
-            min-width: 0;
-            grid-template-columns: minmax(0, 1fr);
-            grid-template-rows: minmax(250px, 68vw) auto;
-            overflow: hidden;
-          }
-
-          .project-card--wide {
-            min-height: auto;
-          }
-
-          .project-card__media,
-          .project-card__content,
-          .project-card__content > div {
-            width: auto;
-            min-width: 0;
-          }
-
-          .project-card__media {
-            min-height: 250px;
-            margin: 0.5rem 0.5rem 0;
-          }
-
-          .project-card__content {
-            grid-template-rows: auto auto;
-            gap: 1.4rem;
-            padding: 1.3rem;
-          }
-
-          .project-card__categories {
-            width: 100%;
-            gap: 0.35rem;
-          }
-
-          .project-card__categories span {
-            max-width: 100%;
-            padding: 0.34rem 0.55rem;
-            overflow-wrap: anywhere;
-            white-space: normal;
-          }
-
-          .project-card__title {
-            max-width: none;
-            font-size: clamp(1.65rem, 8vw, 2.25rem);
-            line-height: 1.08;
-            overflow-wrap: anywhere;
-          }
-
-          .project-card__copy {
-            max-width: none;
-            line-height: 1.66;
-            overflow-wrap: anywhere;
-          }
-
-          .project-card__action {
-            width: fit-content;
-            align-self: start;
-          }
-        }
-
-        /* Masaüstü proje kartı sistemi */
-        @media (min-width: 1025px) {
-          .project-card {
-            min-height: 610px;
-            grid-template-rows: minmax(300px, 1fr) auto;
-          }
-
-          .project-card--featured {
-            min-height: 650px;
-          }
-
-          .project-card--wide {
-            min-height: 510px;
-            grid-template-columns:
-              minmax(0, 1.12fr)
-              minmax(360px, 0.88fr);
-            grid-template-rows: 1fr;
-          }
-
-          .project-card__media {
-            margin: 0.7rem 0.7rem 0;
-            border-radius: calc(var(--radius-lg) - 9px);
-          }
-
-          .project-card--wide .project-card__media {
-            margin: 0.7rem 0 0.7rem 0.7rem;
-          }
-
-          .project-card__content {
-            grid-template-rows: minmax(0, 1fr) auto;
-            gap: 1.75rem;
-            padding: 2rem;
-          }
-
-          .project-card--wide .project-card__content {
-            padding: 2.4rem 2.5rem;
-          }
-
-          .project-card__categories {
-            gap: 0.4rem;
-          }
-
-          .project-card__title {
-            max-width: 20ch;
-            margin-top: 0.9rem;
-            line-height: 1.06;
-          }
-
-          .project-card--featured .project-card__title {
-            max-width: 22ch;
-          }
-
-          .project-card--wide .project-card__title {
-            max-width: 18ch;
-          }
-
-          .project-card__copy {
-            max-width: 60ch;
-            margin-top: 0.85rem;
-            line-height: 1.66;
-          }
-
-          .project-card__action {
-            align-self: end;
-            min-height: 24px;
-          }
-        }
-
-
-
-
-
-
       `}</style>
     </button>
   );

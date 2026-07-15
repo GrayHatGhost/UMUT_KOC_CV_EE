@@ -1,9 +1,14 @@
 "use client";
 
+import Image from "next/image";
+import { useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
+  ArrowUpRight,
+  Award,
   BookOpen,
   Briefcase,
+  ImageIcon,
   Store,
   Target,
 } from "lucide-react";
@@ -12,6 +17,7 @@ import {
   useReducedMotion,
 } from "framer-motion";
 
+import { featuredCertificate } from "@/src/content/certificates";
 import {
   storyChapters,
   storyIntro,
@@ -67,6 +73,11 @@ function Reveal({
 }
 
 export default function StoryScene() {
+  const [
+    certificateImageFailed,
+    setCertificateImageFailed,
+  ] = useState(false);
+
   return (
     <section
       className="story-apple page-section"
@@ -193,12 +204,218 @@ export default function StoryScene() {
             );
           })}
         </div>
+
+        <Reveal className="story-apple__certificate-wrap">
+          <article className="apple-card story-apple__certificate">
+            <div className="story-apple__certificate-media">
+              {certificateImageFailed ? (
+                <div className="story-apple__certificate-fallback">
+                  <ImageIcon
+                    size={28}
+                    strokeWidth={1.6}
+                    aria-hidden="true"
+                  />
+                  <span>Udemy sertifikası</span>
+                </div>
+              ) : (
+                <Image
+                  src={featuredCertificate.image}
+                  alt={featuredCertificate.alt}
+                  fill
+                  sizes="(max-width: 720px) 100vw, 420px"
+                  className="story-apple__certificate-image"
+                  onError={() =>
+                    setCertificateImageFailed(true)
+                  }
+                />
+              )}
+            </div>
+
+            <div className="story-apple__certificate-content">
+              <span className="story-apple__certificate-icon">
+                <Award
+                  size={20}
+                  strokeWidth={1.8}
+                  aria-hidden="true"
+                />
+              </span>
+
+              <div>
+                <p className="card-eyebrow">
+                  {featuredCertificate.issuer} ·{" "}
+                  {featuredCertificate.period}
+                </p>
+
+                <h3 className="story-apple__certificate-title">
+                  {featuredCertificate.title}
+                </h3>
+
+                <p className="story-apple__certificate-copy">
+                  {featuredCertificate.description}
+                </p>
+              </div>
+
+              {!certificateImageFailed && (
+                <a
+                  href={featuredCertificate.image}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="story-apple__certificate-link"
+                >
+                  Sertifikayı görüntüle
+                  <ArrowUpRight
+                    size={16}
+                    strokeWidth={1.8}
+                    aria-hidden="true"
+                  />
+                </a>
+              )}
+            </div>
+          </article>
+        </Reveal>
       </div>
 
       <style jsx global>{`
         .story-apple {
           overflow: clip;
         }
+
+
+        .story-apple__certificate-wrap {
+          margin-top: var(--grid-gap);
+        }
+
+        .story-apple__certificate {
+          width: 100%;
+          max-width: 1040px;
+          min-height: 230px;
+          display: grid;
+          grid-template-columns:
+            minmax(300px, 0.72fr)
+            minmax(0, 1.28fr);
+          gap: 0;
+          margin-inline: auto;
+          padding: 0.7rem;
+        }
+
+        .story-apple__certificate-media {
+          position: relative;
+          min-width: 0;
+          aspect-ratio: 16 / 9;
+          overflow: hidden;
+          border-radius: calc(var(--radius-lg) - 9px);
+          background: linear-gradient(
+            145deg,
+            #eeeef1,
+            #e2e2e6
+          );
+        }
+
+        .story-apple__certificate-image {
+          object-fit: cover;
+          object-position: center;
+        }
+
+        .story-apple__certificate-fallback {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 0.65rem;
+          color: var(--ink-3);
+        }
+
+        .story-apple__certificate-fallback span {
+          font-size: 0.66rem;
+          font-weight: 740;
+          letter-spacing: 0.09em;
+          text-transform: uppercase;
+        }
+
+        .story-apple__certificate-content {
+          min-width: 0;
+          display: grid;
+          grid-template-columns:
+            46px
+            minmax(0, 1fr);
+          grid-template-rows: minmax(0, 1fr) auto;
+          gap: 1rem 1.15rem;
+          align-items: start;
+          padding: clamp(1.25rem, 2.5vw, 2rem);
+        }
+
+        .story-apple__certificate-icon {
+          width: 46px;
+          height: 46px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid var(--rule);
+          border-radius: 16px;
+          background: var(--surface-2);
+          color: var(--ink);
+        }
+
+        .story-apple__certificate-title {
+          max-width: 18ch;
+          margin-top: 0.75rem;
+          color: var(--ink);
+          font-size: clamp(1.55rem, 2.8vw, 2.65rem);
+          font-weight: 820;
+          letter-spacing: -0.05em;
+          line-height: 1.04;
+          text-wrap: balance;
+        }
+
+        .story-apple__certificate-copy {
+          max-width: 58ch;
+          margin-top: 0.85rem;
+          color: var(--ink-2);
+          font-size: 0.86rem;
+          line-height: 1.62;
+        }
+
+        .story-apple__certificate-link {
+          grid-column: 2;
+          width: fit-content;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          color: var(--ink);
+          font-size: 0.72rem;
+          font-weight: 740;
+        }
+
+        @media (max-width: 820px) {
+          .story-apple__certificate {
+            max-width: none;
+            grid-template-columns: minmax(0, 1fr);
+          }
+
+          .story-apple__certificate-content {
+            grid-template-columns:
+              42px
+              minmax(0, 1fr);
+          }
+        }
+
+        @media (max-width: 520px) {
+          .story-apple__certificate {
+            padding: 0.55rem;
+          }
+
+          .story-apple__certificate-content {
+            grid-template-columns: minmax(0, 1fr);
+            padding: 1.2rem;
+          }
+
+          .story-apple__certificate-link {
+            grid-column: 1;
+          }
+        }
+
 
         .story-apple__intro-grid {
           display: grid;
