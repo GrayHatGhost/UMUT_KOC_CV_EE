@@ -97,23 +97,23 @@ export default function ProjectsScene() {
               <article className="apple-card projects-apple__intro-card">
                 <div>
                   <p className="card-eyebrow">
-                    OPERASYON VE DİJİTAL ÇALIŞMALAR
+                    DİJİTAL OPERASYON ÇALIŞMASI
                   </p>
 
                   <h2
                     id="projects-title"
                     className="projects-apple__title"
                   >
-                    İş akışını görmek,
-                    <span>dijital süreci yönetmek.</span>
+                    İçerik, panel ve yayın akışını
+                    <span>birlikte yönetmek.</span>
                   </h2>
                 </div>
 
                 <p className="projects-apple__intro-copy">
-                  Shopify mağaza deneyiminden web yönetim
-                  panellerine; ürün, içerik, yayın ve
-                  operasyon süreçlerinde sorumluluk aldığım
-                  seçili çalışmalar.
+                  Yönetim paneli kullanımı, içerik doğruluğu,
+                  görsel hazırlama, yayın kontrolü ve
+                  güncelleme takibini gerçek bir çalışma
+                  içinde yürüttüğüm devam eden deneyim.
                 </p>
               </article>
             </Reveal>
@@ -125,18 +125,18 @@ export default function ProjectsScene() {
               <aside className="apple-card apple-card--dark projects-apple__stat-card">
                 <div>
                   <p className="card-eyebrow">
-                    SEÇİLİ ÇALIŞMALAR
+                    DEVAM EDEN OPERASYON
                   </p>
 
-                  <p className="projects-apple__stat-number">
-                    {String(projects.length).padStart(2, "0")}
+                  <p className="projects-apple__stat-heading">
+                    Genç Savunma
                   </p>
                 </div>
 
                 <p className="projects-apple__stat-copy">
-                  Shopify mağaza kurulumu, içerik yönetimi ve
-                  kurumsal web operasyonu. Her çalışmada
-                  kayıt, kontrol, yayın ve süreklilik odağı.
+                  İçerik girişinden yayın sonrası güncellemeye
+                  kadar süreci düzenli, takip edilebilir ve
+                  sürdürülebilir tutmaya odaklanıyorum.
                 </p>
               </aside>
             </Reveal>
@@ -229,13 +229,15 @@ export default function ProjectsScene() {
             line-height: 1.7;
           }
 
-          .projects-apple__stat-number {
-            margin-top: 0.7rem;
+          .projects-apple__stat-heading {
+            max-width: 9ch;
+            margin-top: 1rem;
             color: white;
-            font-size: clamp(5rem, 9vw, 8.5rem);
+            font-size: clamp(2.6rem, 5vw, 5rem);
             font-weight: 850;
-            letter-spacing: -0.08em;
-            line-height: 0.82;
+            letter-spacing: -0.065em;
+            line-height: 0.94;
+            text-wrap: balance;
           }
 
           .projects-apple__stat-copy {
@@ -328,9 +330,9 @@ export default function ProjectsScene() {
             line-height: 1.74;
           }
 
-          .projects-apple__stat-number {
-            margin-top: 0.8rem;
-            line-height: 0.86;
+          .projects-apple__stat-heading {
+            margin-top: 1rem;
+            line-height: 0.96;
           }
 
           .projects-apple__stat-copy {
@@ -385,9 +387,9 @@ export default function ProjectsScene() {
               line-height: 1.72;
             }
 
-            .projects-apple__stat-number {
-              margin-top: 0.75rem;
-              line-height: 0.86;
+            .projects-apple__stat-heading {
+              margin-top: 1rem;
+              line-height: 0.96;
             }
 
             .projects-apple__stat-copy {
@@ -453,7 +455,7 @@ function ProjectCard({
         .filter(Boolean)
         .join(" ")}
       onClick={onOpen}
-      aria-label={`${project.title} projesini incele`}
+      aria-label={`${project.title} çalışmasını incele`}
     >
       <div className="project-card__media">
         {hasCover ? (
@@ -507,7 +509,7 @@ function ProjectCard({
         </div>
 
         <span className="project-card__action">
-          Projeyi incele
+          Çalışmayı incele
           <ArrowUpRight
             size={18}
             strokeWidth={1.8}
