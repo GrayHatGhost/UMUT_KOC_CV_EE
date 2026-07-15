@@ -1,16 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
-  ArrowUpRight,
   Award,
   BookOpen,
   Briefcase,
   ImageIcon,
+  Maximize2,
   Store,
   Target,
+  X,
 } from "lucide-react";
 import {
   motion,
@@ -77,6 +78,42 @@ export default function StoryScene() {
     certificateImageFailed,
     setCertificateImageFailed,
   ] = useState(false);
+
+  const [
+    certificateViewerOpen,
+    setCertificateViewerOpen,
+  ] = useState(false);
+
+  useEffect(() => {
+    if (!certificateViewerOpen) return;
+
+    const previousOverflow =
+      document.body.style.overflow;
+
+    const handleKeyDown = (
+      event: KeyboardEvent,
+    ) => {
+      if (event.key === "Escape") {
+        setCertificateViewerOpen(false);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener(
+      "keydown",
+      handleKeyDown,
+    );
+
+    return () => {
+      document.body.style.overflow =
+        previousOverflow;
+
+      document.removeEventListener(
+        "keydown",
+        handleKeyDown,
+      );
+    };
+  }, [certificateViewerOpen]);
 
   return (
     <section
@@ -254,19 +291,20 @@ export default function StoryScene() {
               </div>
 
               {!certificateImageFailed && (
-                <a
-                  href={featuredCertificate.image}
-                  target="_blank"
-                  rel="noreferrer"
+                <button
+                  type="button"
                   className="story-apple__certificate-link"
+                  onClick={() =>
+                    setCertificateViewerOpen(true)
+                  }
                 >
-                  Sertifikayı görüntüle
-                  <ArrowUpRight
+                  Tam ekranda görüntüle
+                  <Maximize2
                     size={16}
                     strokeWidth={1.8}
                     aria-hidden="true"
                   />
-                </a>
+                </button>
               )}
             </div>
           </article>
@@ -275,6 +313,49 @@ export default function StoryScene() {
 
 
       </div>
+
+
+      {certificateViewerOpen &&
+        !certificateImageFailed && (
+          <div
+            className="story-apple__certificate-viewer"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${featuredCertificate.title} sertifikası`}
+            onMouseDown={(event) => {
+              if (event.currentTarget === event.target) {
+                setCertificateViewerOpen(false);
+              }
+            }}
+          >
+            <button
+              type="button"
+              className="story-apple__certificate-viewer-close"
+              onClick={() =>
+                setCertificateViewerOpen(false)
+              }
+              aria-label="Sertifika görüntüsünü kapat"
+              autoFocus
+            >
+              <X
+                size={21}
+                strokeWidth={1.8}
+                aria-hidden="true"
+              />
+            </button>
+
+            <div className="story-apple__certificate-viewer-media">
+              <Image
+                src={featuredCertificate.image}
+                alt={featuredCertificate.alt}
+                fill
+                priority
+                sizes="100vw"
+                className="story-apple__certificate-viewer-image"
+              />
+            </div>
+          </div>
+        )}
 
       <style jsx global>{`
         .story-apple {
@@ -447,6 +528,154 @@ export default function StoryScene() {
           }
         }
 
+
+
+        .story-apple__certificate-link {
+          border: 0;
+          background: transparent;
+          text-align: left;
+          cursor: pointer;
+        }
+
+        .story-apple__certificate-viewer {
+          position: fixed;
+          inset: 0;
+          z-index: 180;
+          display: grid;
+          place-items: center;
+          padding: clamp(1rem, 3vw, 2.5rem);
+          background: rgba(12, 12, 15, 0.88);
+          backdrop-filter: blur(18px);
+        }
+
+        .story-apple__certificate-viewer-media {
+          position: relative;
+          width: min(
+            94vw,
+            calc(88vh * 16 / 9)
+          );
+          max-height: 88vh;
+          aspect-ratio: 16 / 9;
+          overflow: hidden;
+          border: 1px solid
+            rgba(255, 255, 255, 0.18);
+          border-radius: 22px;
+          background: #111114;
+          box-shadow:
+            0 30px 90px
+              rgba(0, 0, 0, 0.48);
+        }
+
+        .story-apple__certificate-viewer-image {
+          object-fit: contain;
+          object-position: center;
+        }
+
+        .story-apple__certificate-viewer-close {
+          position: fixed;
+          top: max(1.25rem, env(safe-area-inset-top));
+          right: max(
+            1.25rem,
+            env(safe-area-inset-right)
+          );
+          z-index: 2;
+          width: 46px;
+          height: 46px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid
+            rgba(255, 255, 255, 0.2);
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.12);
+          color: white;
+          backdrop-filter: blur(12px);
+          cursor: pointer;
+          transition:
+            transform 0.22s var(--ease),
+            background-color 0.22s var(--ease);
+        }
+
+        .story-apple__certificate-viewer-close:hover {
+          transform: translateY(-2px);
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 720px) {
+          .story-apple__certificate-viewer {
+            padding: 0.75rem;
+          }
+
+          .story-apple__certificate-viewer-media {
+            width: 100%;
+            border-radius: 16px;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .story-apple__certificate-viewer-close {
+            transition: none;
+          }
+        }
+
+
+        @media (min-width: 981px) {
+          .story-apple__certificate-wrap {
+            grid-column: 8 / -1;
+            grid-row: 2;
+          }
+
+          .story-apple__certificate {
+            min-height: 580px;
+            grid-template-columns:
+              minmax(0, 1fr);
+            grid-template-rows:
+              auto
+              minmax(0, 1fr);
+          }
+
+          .story-apple__certificate-media {
+            width: auto;
+            align-self: auto;
+            margin: 0.7rem 0.7rem 0;
+          }
+
+          .story-apple__certificate-content {
+            grid-template-columns:
+              46px
+              minmax(0, 1fr);
+            grid-template-rows:
+              minmax(0, 1fr)
+              auto;
+            align-content: stretch;
+            padding: 1.7rem;
+          }
+
+          .story-apple__certificate-content > div {
+            align-self: start;
+          }
+
+          .story-apple__certificate-icon {
+            align-self: start;
+          }
+
+          .story-apple__certificate-title {
+            max-width: 15ch;
+            font-size: clamp(
+              1.55rem,
+              2.2vw,
+              2.2rem
+            );
+          }
+
+          .story-apple__certificate-copy {
+            max-width: 40ch;
+          }
+
+          .story-apple__certificate-link {
+            align-self: end;
+          }
+        }
 
         .story-apple__intro-grid {
           display: grid;
