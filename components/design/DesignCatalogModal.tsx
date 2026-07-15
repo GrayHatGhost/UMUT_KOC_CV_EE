@@ -16,10 +16,7 @@ import {
 } from "lucide-react";
 
 import Dialog from "@/components/dialog/Dialog";
-import {
-  designWorks,
-  type DesignWork,
-} from "@/src/content/design-works";
+import { designWorks } from "@/src/content/design-works";
 
 type DesignCatalogModalProps = {
   isOpen: boolean;
@@ -134,7 +131,8 @@ export default function DesignCatalogModal({
 
     const targetLeft =
       activeThumbnail.offsetLeft -
-      (strip.clientWidth - activeThumbnail.offsetWidth) /
+      (strip.clientWidth -
+        activeThumbnail.offsetWidth) /
         2;
 
     const prefersReducedMotion =
@@ -205,41 +203,18 @@ export default function DesignCatalogModal({
     >
       <article className="design-catalog">
         <header className="design-catalog__header">
-          <div>
-            <p className="card-eyebrow">
-              TASARIM ARŞİVİ
-            </p>
+          <p className="card-eyebrow">
+            TASARIM ARŞİVİ
+          </p>
 
-            <h2 className="design-catalog__heading">
-              {String(designWorks.length).padStart(
-                2,
-                "0",
-              )}{" "}
-              seçili çalışma.
-            </h2>
+          <h2 className="design-catalog__heading">
+            Görsel tasarım portfolyosu.
+          </h2>
 
-            <p className="design-catalog__header-copy">
-              Sosyal medya, kurumsal duyuru ve
-              bilgilendirme amaçlı hazırladığım tasarımları
-              tek bir katalog içinde inceleyebilirsin.
-            </p>
-          </div>
-
-          <div
-            className="design-catalog__counter"
-            aria-live="polite"
-          >
-            <strong>
-              {String(activeIndex + 1).padStart(2, "0")}
-            </strong>
-            <span>/</span>
-            <span>
-              {String(designWorks.length).padStart(
-                2,
-                "0",
-              )}
-            </span>
-          </div>
+          <p className="design-catalog__header-copy">
+            Sosyal medya, kurumsal duyuru ve
+            bilgilendirme çalışmalarından oluşan seçki.
+          </p>
         </header>
 
         <div className="design-catalog__viewer-grid">
@@ -275,17 +250,8 @@ export default function DesignCatalogModal({
                   </span>
 
                   <strong>{activeWork.title}</strong>
-
-                  <small>
-                    public/images/designs/
-                    {activeWork.id}.webp
-                  </small>
                 </div>
               )}
-
-              <span className="design-catalog__media-number">
-                {activeWork.number}
-              </span>
 
               {designWorks.length > 1 && (
                 <div className="design-catalog__nav">
@@ -323,7 +289,7 @@ export default function DesignCatalogModal({
                     strokeWidth={1.9}
                   />
                   <span>
-                    Açıklama ve tüm çalışmalar aşağıda
+                    Açıklama ve diğer çalışmalar aşağıda
                   </span>
                 </div>
               )}
@@ -340,7 +306,7 @@ export default function DesignCatalogModal({
                       : undefined
                   }
                   onClick={() => setActiveIndex(index)}
-                  aria-label={`${work.number}. tasarıma git`}
+                  aria-label={`${work.title} tasarımına git`}
                   aria-current={
                     index === activeIndex
                       ? "true"
@@ -357,7 +323,7 @@ export default function DesignCatalogModal({
           >
             <div>
               <p className="card-eyebrow">
-                TASARIM {activeWork.number}
+                SEÇİLİ ÇALIŞMA
               </p>
 
               <span className="design-catalog__category">
@@ -385,13 +351,6 @@ export default function DesignCatalogModal({
                   {activeWork.tools.join(" · ")}
                 </dd>
               </div>
-
-              {activeWork.year && (
-                <div>
-                  <dt>Yıl</dt>
-                  <dd>{activeWork.year}</dd>
-                </div>
-              )}
             </dl>
 
             {activeImageAvailable ? (
@@ -410,9 +369,8 @@ export default function DesignCatalogModal({
               </a>
             ) : (
               <p className="design-catalog__missing-note">
-                Bu alan hazır. İlgili WebP dosyası
-                eklendiğinde görsel otomatik olarak
-                gösterilecek.
+                İlgili görsel dosyası eklendiğinde çalışma
+                burada görüntülenecek.
               </p>
             )}
           </aside>
@@ -429,13 +387,14 @@ export default function DesignCatalogModal({
               </p>
 
               <h3 id="design-library-title">
-                Katalogdan bir tasarım seç.
+                Portfolyo seçkisi
               </h3>
             </div>
 
             <p>
-              Yön tuşlarını veya mobilde sağa-sola
-              kaydırmayı da kullanabilirsin.
+              Yön tuşlarıyla veya mobilde sağa-sola
+              kaydırarak çalışmalar arasında geçiş
+              yapılabilir.
             </p>
           </div>
 
@@ -487,8 +446,6 @@ export default function DesignCatalogModal({
                         aria-hidden="true"
                       />
                     )}
-
-                    <i>{work.number}</i>
                   </span>
 
                   <span className="design-catalog__thumbnail-copy">
@@ -505,57 +462,34 @@ export default function DesignCatalogModal({
       <style jsx global>{`
         .design-catalog {
           min-height: 100%;
-          padding: clamp(0.8rem, 2vw, 1.35rem);
+          padding: clamp(1rem, 2.7vw, 2rem);
         }
 
         .design-catalog__header {
-          display: grid;
-          grid-template-columns: minmax(0, 1fr) auto;
-          gap: 1.1rem;
-          align-items: end;
+          max-width: 900px;
           padding:
-            clamp(1.05rem, 2vw, 1.55rem)
-            clamp(0.25rem, 1vw, 0.55rem)
-            clamp(0.95rem, 2vw, 1.45rem);
+            clamp(3rem, 6vw, 5rem)
+            clamp(0.35rem, 2vw, 1rem)
+            clamp(2.25rem, 4vw, 3.25rem);
         }
 
         .design-catalog__heading {
-          max-width: 11ch;
-          margin-top: 0.9rem;
+          max-width: 12ch;
+          margin-top: 1rem;
           color: var(--ink);
           font-size: clamp(2.5rem, 5.6vw, 5.7rem);
           font-weight: 850;
           letter-spacing: -0.066em;
-          line-height: 0.92;
+          line-height: 0.94;
           text-wrap: balance;
         }
 
         .design-catalog__header-copy {
           max-width: 62ch;
-          margin-top: 1.2rem;
+          margin-top: 1.25rem;
           color: var(--ink-2);
           font-size: 0.98rem;
           line-height: 1.7;
-        }
-
-        .design-catalog__counter {
-          min-width: 108px;
-          display: flex;
-          align-items: baseline;
-          justify-content: flex-end;
-          gap: 0.42rem;
-          color: var(--ink-3);
-          font-size: 0.74rem;
-          font-weight: 740;
-          letter-spacing: 0.08em;
-        }
-
-        .design-catalog__counter strong {
-          color: var(--ink);
-          font-size: 2.2rem;
-          font-weight: 830;
-          letter-spacing: -0.05em;
-          line-height: 1;
         }
 
         .design-catalog__viewer-grid {
@@ -570,9 +504,9 @@ export default function DesignCatalogModal({
         .design-catalog__viewer {
           min-width: 0;
           overflow: hidden;
-          padding: 0.5rem;
+          padding: 0.62rem;
           border: 1px solid rgba(255, 255, 255, 0.92);
-          border-radius: 24px;
+          border-radius: 30px;
           background: var(--surface);
           box-shadow: var(--shadow-sm);
           touch-action: pan-y;
@@ -580,9 +514,9 @@ export default function DesignCatalogModal({
 
         .design-catalog__media {
           position: relative;
-          min-height: clamp(420px, 48vw, 640px);
+          min-height: clamp(540px, 60vw, 780px);
           overflow: hidden;
-          border-radius: 18px;
+          border-radius: 24px;
           background:
             radial-gradient(
               circle at 50% 20%,
@@ -626,33 +560,6 @@ export default function DesignCatalogModal({
           max-width: 24ch;
           color: var(--ink);
           font-size: 1.05rem;
-        }
-
-        .design-catalog__fallback small {
-          max-width: 32ch;
-          color: var(--ink-3);
-          font-size: 0.68rem;
-          overflow-wrap: anywhere;
-        }
-
-        .design-catalog__media-number {
-          position: absolute;
-          top: 1rem;
-          left: 1rem;
-          z-index: 3;
-          min-width: 42px;
-          height: 42px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          border: 1px solid rgba(255, 255, 255, 0.74);
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.92);
-          box-shadow: var(--shadow-xs);
-          color: var(--ink);
-          font-size: 0.64rem;
-          font-weight: 800;
-          letter-spacing: 0.08em;
         }
 
         .design-catalog__nav {
@@ -713,17 +620,14 @@ export default function DesignCatalogModal({
         }
 
         .design-catalog__progress {
-          display: grid;
-          grid-template-columns: repeat(
-            10,
-            minmax(0, 1fr)
-          );
+          display: flex;
           gap: 0.35rem;
           padding: 0.65rem 0.2rem 0.05rem;
         }
 
         .design-catalog__progress button {
           height: 3px;
+          flex: 1 1 0;
           overflow: hidden;
           border-radius: 999px;
           background: var(--surface-muted);
@@ -736,10 +640,12 @@ export default function DesignCatalogModal({
 
         .design-catalog__details {
           min-height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          gap: 2.5rem;
+          display: grid;
+          grid-template-rows:
+            minmax(0, 1fr)
+            auto
+            auto;
+          gap: 2rem;
         }
 
         .design-catalog__category {
@@ -763,7 +669,7 @@ export default function DesignCatalogModal({
           font-size: clamp(2rem, 3.7vw, 3.75rem);
           font-weight: 830;
           letter-spacing: -0.058em;
-          line-height: 0.98;
+          line-height: 1;
           text-wrap: balance;
         }
 
@@ -819,9 +725,9 @@ export default function DesignCatalogModal({
 
         .design-catalog__library {
           margin-top: var(--grid-gap);
-          padding: clamp(1rem, 2vw, 1.45rem);
+          padding: clamp(1.25rem, 2.8vw, 2rem);
           border: 1px solid rgba(255, 255, 255, 0.9);
-          border-radius: 24px;
+          border-radius: 30px;
           background: var(--surface);
           box-shadow: var(--shadow-sm);
         }
@@ -844,7 +750,7 @@ export default function DesignCatalogModal({
         }
 
         .design-catalog__library-heading > p {
-          max-width: 36ch;
+          max-width: 40ch;
           color: var(--ink-3);
           font-size: 0.72rem;
           line-height: 1.55;
@@ -863,7 +769,9 @@ export default function DesignCatalogModal({
         .design-catalog__thumbnail {
           min-width: 0;
           display: grid;
-          grid-template-columns: 62px minmax(0, 1fr);
+          grid-template-columns:
+            62px
+            minmax(0, 1fr);
           gap: 0.72rem;
           align-items: center;
           padding: 0.48rem;
@@ -906,25 +814,6 @@ export default function DesignCatalogModal({
 
         .design-catalog__thumbnail-image {
           object-fit: cover;
-        }
-
-        .design-catalog__thumbnail-media i {
-          position: absolute;
-          right: 0.32rem;
-          bottom: 0.32rem;
-          z-index: 2;
-          min-width: 22px;
-          height: 22px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.9);
-          color: var(--ink);
-          font-size: 0.48rem;
-          font-style: normal;
-          font-weight: 800;
-          letter-spacing: 0.05em;
         }
 
         .design-catalog__thumbnail-copy {
@@ -1002,19 +891,13 @@ export default function DesignCatalogModal({
           }
 
           .design-catalog__header {
-            grid-template-columns: 1fr;
-            gap: 1rem;
             padding:
-              3.25rem 0.35rem
-              1.2rem;
+              4.5rem 0.55rem
+              2rem;
           }
 
           .design-catalog__heading {
             font-size: clamp(2.35rem, 12vw, 4rem);
-          }
-
-          .design-catalog__counter {
-            justify-content: flex-start;
           }
 
           .design-catalog__viewer {
