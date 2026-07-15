@@ -714,6 +714,7 @@ export default function CvModal({
         .cv-apple__small-heading > span {
           width: 44px;
           height: 44px;
+          flex: 0 0 44px;
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -721,6 +722,13 @@ export default function CvModal({
           border-radius: 15px;
           background: rgba(255, 255, 255, 0.68);
           color: var(--ink);
+        }
+
+        .cv-apple__small-heading > span :global(svg) {
+          width: 20px;
+          height: 20px;
+          flex: 0 0 20px;
+          transform: none;
         }
 
         .cv-apple__skill-card h4 {
@@ -754,9 +762,14 @@ export default function CvModal({
         }
 
         .cv-apple__small-heading {
+          min-width: 0;
           display: flex;
           gap: 1rem;
           align-items: flex-start;
+        }
+
+        .cv-apple__small-heading > div {
+          min-width: 0;
         }
 
         .cv-apple__small-heading h3 {
