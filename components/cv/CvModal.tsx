@@ -136,13 +136,6 @@ export default function CvModal({
                 value={profile.email}
               />
 
-              <ContactRow
-                icon={ExternalLink}
-                label="LinkedIn"
-                href={profile.linkedin}
-                value="linkedin.com/in/umutkoco"
-                external
-              />
 
               <ContactRow
                 icon={Globe2}
