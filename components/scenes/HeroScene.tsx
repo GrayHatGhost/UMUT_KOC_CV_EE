@@ -4,10 +4,10 @@ import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowDownRight,
   FileText,
-  Headphones,
+  ImageIcon,
   MonitorCog,
-  Network,
-  Wrench,
+  Package,
+  ShoppingCart,
 } from "lucide-react";
 
 type HeroSceneProps = {
@@ -17,10 +17,10 @@ type HeroSceneProps = {
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const focusItems = [
-  { label: "Donanım", icon: Wrench },
-  { label: "Kullanıcı desteği", icon: Headphones },
-  { label: "Ağ ve bağlantı", icon: Network },
-  { label: "Teknik operasyon", icon: MonitorCog },
+  { label: "Sipariş ve stok", icon: ShoppingCart },
+  { label: "Ürün ve içerik", icon: Package },
+  { label: "Panel ve yayın", icon: MonitorCog },
+  { label: "Görsel ve veri", icon: ImageIcon },
 ] as const;
 
 export default function HeroScene({
@@ -51,31 +51,32 @@ export default function HeroScene({
           >
             <div className="hero-apple__intro">
               <p className="card-eyebrow">
-                IT SUPPORT · İSTANBUL
+                E-TİCARET · DİJİTAL OPERASYON · İSTANBUL
               </p>
 
               <h1
                 id="hero-title"
                 className="hero-apple__title"
               >
-                Teknik sorunları çözen,
+                Siparişten yayına,
                 <span>
-                  süreçleri öğrenen ve sorumluluk alan
-                  biriyim.
+                  dijital operasyonun her adımını düzenli
+                  tutuyorum.
                 </span>
               </h1>
             </div>
 
             <div className="hero-apple__bottom">
               <p className="hero-apple__description">
-                Donanım, Windows, kullanıcı desteği ve
-                dijital operasyonlarda uygulamalı deneyime
-                sahip bir IT Support adayıyım.
+                Sipariş ve stok süreçlerinde yaklaşık dört
+                yıllık operasyon deneyimine; ürün içeriği,
+                web yönetim paneli ve dijital yayın
+                süreçlerinde uygulamalı deneyime sahibim.
               </p>
 
               <div className="hero-apple__actions">
                 <a href="#gelisim" className="btn-dark">
-                  Çalışmalarımı incele
+                  Deneyimimi incele
                   <ArrowDownRight
                     size={16}
                     aria-hidden="true"
@@ -107,15 +108,16 @@ export default function HeroScene({
               </p>
 
               <h2 className="hero-apple__side-title">
-                Bir ekibin içinde güvenilir teknik destek
-                noktası olmak.
+                Ürün, stok, içerik ve sipariş akışını
+                birlikte takip edebileceğim bir ekip.
               </h2>
 
               <p className="card-copy">
-                Kullanıcılara yakın olduğum, işleyişi
-                öğrenebildiğim ve kurumun ihtiyaçlarıyla
+                İşleyişi öğrenebildiğim, kayıt doğruluğunu
+                koruyabildiğim ve kurumun ihtiyaçlarıyla
                 birlikte daha fazla sorumluluk alabildiğim
-                bir IT Support rolü arıyorum.
+                bir e-ticaret ve dijital operasyon rolü
+                arıyorum.
               </p>
             </div>
 
@@ -396,12 +398,6 @@ export default function HeroScene({
             min-height: 0;
             padding: 0.78rem 0.85rem;
             border-radius: 17px;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .hero-apple__focus {
-            transition: none;
           }
         }
       `}</style>

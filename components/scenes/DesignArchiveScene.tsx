@@ -132,14 +132,16 @@ export default function DesignArchiveScene() {
                   id="design-title"
                   className="design-apple__title"
                 >
-                  Görsel iletişimi
-                  <span>daha anlaşılır hâle getirmek.</span>
+                  İçeriği yalnızca yayınlamak değil,
+                  <span>görsel olarak da hazırlamak.</span>
                 </h2>
 
                 <p className="design-apple__copy">
-                  Sosyal medya, kurumsal duyuru ve
-                  bilgilendirme amaçlı hazırladığım seçili
-                  tasarımlar.
+                  Sosyal medya, duyuru ve bilgilendirme
+                  çalışmalarında içeriğin amacına uygun
+                  görsel hiyerarşi kuruyor, Photoshop ve
+                  Canva ile yayına hazır tasarımlar
+                  hazırlıyorum.
                 </p>
               </div>
 
@@ -147,11 +149,11 @@ export default function DesignArchiveScene() {
                 <div className="design-apple__facts">
                   <span>
                     <strong>Sosyal medya</strong>
-                    yayın alanı
+                    dijital kanal
                   </span>
 
                   <span>
-                    <strong>Kurumsal duyuru</strong>
+                    <strong>Duyuru ve bilgi</strong>
                     içerik türü
                   </span>
 

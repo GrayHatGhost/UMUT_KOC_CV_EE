@@ -97,23 +97,23 @@ export default function ProjectsScene() {
               <article className="apple-card projects-apple__intro-card">
                 <div>
                   <p className="card-eyebrow">
-                    DİJİTAL PROJELER
+                    OPERASYON VE DİJİTAL ÇALIŞMALAR
                   </p>
 
                   <h2
                     id="projects-title"
                     className="projects-apple__title"
                   >
-                    İhtiyacı anlamak,
-                    <span>çalışan ürün çıkarmak.</span>
+                    İş akışını görmek,
+                    <span>dijital süreci yönetmek.</span>
                   </h2>
                 </div>
 
                 <p className="projects-apple__intro-copy">
-                  Bir talebi kullanılabilir sayfalara,
-                  yönetilebilir içerik yapılarına ve çalışan
-                  otomasyon akışlarına dönüştürdüğüm seçili
-                  projeler.
+                  Shopify mağaza deneyiminden web yönetim
+                  panellerine; ürün, içerik, yayın ve
+                  operasyon süreçlerinde sorumluluk aldığım
+                  seçili çalışmalar.
                 </p>
               </article>
             </Reveal>
@@ -134,9 +134,9 @@ export default function ProjectsScene() {
                 </div>
 
                 <p className="projects-apple__stat-copy">
-                  Web siteleri, yönetim panelleri ve veri
-                  otomasyonu. Her projede ihtiyaç analizi,
-                  test, yayın ve bakım sorumluluğu.
+                  Shopify mağaza kurulumu, içerik yönetimi ve
+                  kurumsal web operasyonu. Her çalışmada
+                  kayıt, kontrol, yayın ve süreklilik odağı.
                 </p>
               </aside>
             </Reveal>
@@ -190,8 +190,8 @@ export default function ProjectsScene() {
             align-items: stretch;
           }
 
-          :global(.projects-apple__intro-main),
-          :global(.projects-apple__intro-side) {
+          .projects-apple__intro-main,
+          .projects-apple__intro-side {
             min-width: 0;
             height: 100%;
           }
@@ -255,16 +255,16 @@ export default function ProjectsScene() {
             margin-top: var(--grid-gap);
           }
 
-          :global(.projects-apple__item) {
+          .projects-apple__item {
             min-width: 0;
             grid-column: span 5;
           }
 
-          :global(.projects-apple__item--featured) {
+          .projects-apple__item--featured {
             grid-column: span 7;
           }
 
-          :global(.projects-apple__item--wide) {
+          .projects-apple__item--wide {
             grid-column: 1 / -1;
           }
 
@@ -278,12 +278,12 @@ export default function ProjectsScene() {
               min-height: 400px;
             }
 
-            :global(.projects-apple__item),
-            :global(.projects-apple__item--featured) {
+            .projects-apple__item,
+            .projects-apple__item--featured {
               grid-column: span 6;
             }
 
-            :global(.projects-apple__item--wide) {
+            .projects-apple__item--wide {
               grid-column: 1 / -1;
             }
           }
@@ -298,9 +298,9 @@ export default function ProjectsScene() {
               grid-template-columns: 1fr;
             }
 
-            :global(.projects-apple__item),
-            :global(.projects-apple__item--featured),
-            :global(.projects-apple__item--wide) {
+            .projects-apple__item,
+            .projects-apple__item--featured,
+            .projects-apple__item--wide {
               grid-column: 1;
             }
           }
@@ -308,11 +308,10 @@ export default function ProjectsScene() {
           /* Yerleşim dengesi */
           .projects-apple__intro-card,
           .projects-apple__stat-card {
-            min-height: 360px;
+            min-height: 415px;
             display: grid;
-            grid-template-rows: auto auto;
-            align-content: space-between;
-            gap: var(--content-gap-xl);
+            grid-template-rows: minmax(0, 1fr) auto;
+            gap: var(--content-gap-2xl);
           }
 
           .projects-apple__title {
@@ -326,8 +325,7 @@ export default function ProjectsScene() {
 
           .projects-apple__intro-copy {
             max-width: 60ch;
-            font-size: var(--f-body);
-            line-height: 1.68;
+            line-height: 1.74;
           }
 
           .projects-apple__stat-number {
@@ -337,15 +335,14 @@ export default function ProjectsScene() {
 
           .projects-apple__stat-copy {
             max-width: 36ch;
-            font-size: var(--f-body);
-            line-height: 1.68;
+            line-height: 1.7;
           }
 
           .projects-apple__grid {
             align-items: stretch;
           }
 
-          :global(.projects-apple__item) {
+          .projects-apple__item {
             height: 100%;
           }
 
@@ -373,10 +370,9 @@ export default function ProjectsScene() {
 
             .projects-apple__intro-card,
             .projects-apple__stat-card {
-              min-height: 380px;
-              grid-template-rows: auto auto;
-              align-content: space-between;
-              gap: 1.9rem;
+              min-height: 430px;
+              grid-template-rows: minmax(0, 1fr) auto;
+              gap: var(--content-gap-2xl);
             }
 
             .projects-apple__title {
@@ -386,8 +382,7 @@ export default function ProjectsScene() {
 
             .projects-apple__intro-copy {
               max-width: 62ch;
-              font-size: var(--f-body);
-              line-height: 1.68;
+              line-height: 1.72;
             }
 
             .projects-apple__stat-number {
@@ -397,7 +392,6 @@ export default function ProjectsScene() {
 
             .projects-apple__stat-copy {
               max-width: 34ch;
-              font-size: var(--f-body);
               line-height: 1.68;
             }
 
@@ -406,7 +400,7 @@ export default function ProjectsScene() {
               align-items: stretch;
             }
 
-            :global(.projects-apple__item) {
+            .projects-apple__item {
               height: 100%;
             }
           }
@@ -482,7 +476,8 @@ function ProjectCard({
               strokeWidth={1.6}
               aria-hidden="true"
             />
-            <span>Proje görseli eklenecek</span>
+            <strong>{project.title}</strong>
+            <span>Uygulamalı vaka çalışması</span>
           </div>
         )}
 
@@ -581,6 +576,24 @@ function ProjectCard({
           color: var(--ink-3);
           font-size: 0.75rem;
           font-weight: 650;
+        }
+
+        .project-card__fallback strong {
+          max-width: 22ch;
+          color: var(--ink);
+          font-size: clamp(1.35rem, 2.2vw, 2.2rem);
+          font-weight: 800;
+          letter-spacing: -0.045em;
+          line-height: 1.05;
+          text-align: center;
+          text-wrap: balance;
+        }
+
+        .project-card__fallback span {
+          font-size: 0.64rem;
+          font-weight: 740;
+          letter-spacing: 0.09em;
+          text-transform: uppercase;
         }
 
         .project-card__number {
@@ -707,16 +720,16 @@ function ProjectCard({
 
         /* Proje kartı yerleşim dengesi */
         .project-card {
-          min-height: 520px;
+          min-height: 580px;
           grid-template-rows: minmax(285px, 1fr) auto;
         }
 
         .project-card--featured {
-          min-height: 560px;
+          min-height: 630px;
         }
 
         .project-card--wide {
-          min-height: 430px;
+          min-height: 490px;
           grid-template-columns:
             minmax(0, 1.12fr)
             minmax(320px, 0.88fr);
@@ -724,23 +737,21 @@ function ProjectCard({
 
         .project-card__content {
           display: grid;
-          grid-template-rows: auto auto;
-          align-content: space-between;
-          gap: var(--content-gap-lg);
-          padding: clamp(1.35rem, 2vw, 1.9rem);
+          grid-template-rows: minmax(0, 1fr) auto;
+          gap: var(--content-gap-xl);
+          padding: clamp(1.5rem, 2.4vw, 2.1rem);
         }
 
         .project-card__title {
           max-width: 20ch;
-          margin-top: 0.8rem;
-          line-height: 1.05;
+          margin-top: 0.9rem;
+          line-height: 1.07;
         }
 
         .project-card__copy {
           max-width: 62ch;
           margin-top: 0.85rem;
-          font-size: var(--f-body);
-          line-height: 1.66;
+          line-height: 1.68;
         }
 
         .project-card__action {
@@ -751,11 +762,11 @@ function ProjectCard({
         @media (max-width: 980px) {
           .project-card,
           .project-card--featured {
-            min-height: 500px;
+            min-height: 570px;
           }
 
           .project-card--wide {
-            min-height: 420px;
+            min-height: 480px;
           }
         }
 
@@ -842,16 +853,16 @@ function ProjectCard({
         /* Masaüstü proje kartı sistemi */
         @media (min-width: 1025px) {
           .project-card {
-            min-height: 540px;
+            min-height: 610px;
             grid-template-rows: minmax(300px, 1fr) auto;
           }
 
           .project-card--featured {
-            min-height: 580px;
+            min-height: 650px;
           }
 
           .project-card--wide {
-            min-height: 450px;
+            min-height: 510px;
             grid-template-columns:
               minmax(0, 1.12fr)
               minmax(360px, 0.88fr);
@@ -868,14 +879,13 @@ function ProjectCard({
           }
 
           .project-card__content {
-            grid-template-rows: auto auto;
-            align-content: space-between;
-            gap: 1.45rem;
-            padding: 1.75rem;
+            grid-template-rows: minmax(0, 1fr) auto;
+            gap: 1.75rem;
+            padding: 2rem;
           }
 
           .project-card--wide .project-card__content {
-            padding: 1.95rem 2.1rem;
+            padding: 2.4rem 2.5rem;
           }
 
           .project-card__categories {
@@ -899,7 +909,6 @@ function ProjectCard({
           .project-card__copy {
             max-width: 60ch;
             margin-top: 0.85rem;
-            font-size: var(--f-body);
             line-height: 1.66;
           }
 

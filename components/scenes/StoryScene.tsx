@@ -4,8 +4,8 @@ import type { LucideIcon } from "lucide-react";
 import {
   BookOpen,
   Briefcase,
+  Store,
   Target,
-  Wrench,
 } from "lucide-react";
 import {
   motion,
@@ -21,9 +21,9 @@ import {
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const chapterIcons: LucideIcon[] = [
-  Wrench,
   BookOpen,
   Briefcase,
+  Store,
   Target,
 ];
 
@@ -85,9 +85,9 @@ export default function StoryScene() {
                   id="story-title"
                   className="story-apple__title"
                 >
-                  Yolum doğrusal ilerlemedi.
+                  Operasyonun içinden
                   <span>
-                    Teknik merakım ise hiç kaybolmadı.
+                    dijital ticarete ilerliyorum.
                   </span>
                 </h2>
               </div>
@@ -468,11 +468,10 @@ export default function StoryScene() {
         /* Yerleşim dengesi */
         .story-apple__intro-card,
         .story-apple__today-card {
-          min-height: 360px;
+          min-height: 430px;
           display: grid;
-          grid-template-rows: auto auto;
-          align-content: space-between;
-          gap: var(--content-gap-xl);
+          grid-template-rows: minmax(0, 1fr) auto;
+          gap: var(--content-gap-2xl);
         }
 
         .story-apple__title {
@@ -492,7 +491,7 @@ export default function StoryScene() {
 
         .story-apple__today-card > p {
           max-width: 25ch;
-          line-height: 1.08;
+          line-height: 1.1;
         }
 
         .story-apple__chapters {
@@ -504,7 +503,7 @@ export default function StoryScene() {
         }
 
         .story-apple__chapter {
-          min-height: 500px;
+          min-height: 550px;
           display: grid;
           grid-template-rows: auto auto minmax(0, 1fr) auto;
           align-content: start;
@@ -541,11 +540,11 @@ export default function StoryScene() {
         @media (max-width: 980px) {
           .story-apple__intro-card,
           .story-apple__today-card {
-            min-height: 340px;
+            min-height: 390px;
           }
 
           .story-apple__chapter {
-            min-height: 470px;
+            min-height: 530px;
           }
         }
 
@@ -579,10 +578,9 @@ export default function StoryScene() {
 
           .story-apple__intro-card,
           .story-apple__today-card {
-            min-height: 380px;
-            grid-template-rows: auto auto;
-            align-content: space-between;
-            gap: 1.8rem;
+            min-height: 440px;
+            grid-template-rows: minmax(0, 1fr) auto;
+            gap: var(--content-gap-2xl);
           }
 
           .story-apple__title {
@@ -610,7 +608,7 @@ export default function StoryScene() {
           }
 
           .story-apple__chapter {
-            min-height: 505px;
+            min-height: 560px;
             grid-template-rows:
               auto
               auto

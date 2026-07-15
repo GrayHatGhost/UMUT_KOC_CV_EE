@@ -3,10 +3,10 @@
 import type { LucideIcon } from "lucide-react";
 import {
   BookOpen,
-  Headphones,
+  ImageIcon,
   MonitorCog,
-  Network,
-  Wrench,
+  Package,
+  ShoppingCart,
 } from "lucide-react";
 import {
   motion,
@@ -28,10 +28,10 @@ const experienceIcons: Record<
   ExperienceIcon,
   LucideIcon
 > = {
-  hardware: Wrench,
-  windows: MonitorCog,
-  network: Network,
-  support: Headphones,
+  order: ShoppingCart,
+  stock: Package,
+  content: ImageIcon,
+  panel: MonitorCog,
 };
 
 function Reveal({
@@ -82,15 +82,15 @@ export default function GrowthScene() {
       <div className="site-wrap">
         <Reveal className="growth-apple__heading">
           <p className="card-eyebrow">
-            UYGULAMALI IT SUPPORT DENEYİMİ
+            UYGULAMALI E-TİCARET VE DİJİTAL OPERASYON
           </p>
 
           <h2
             id="growth-title"
             className="growth-apple__title"
           >
-            Sorunu yalnızca çözmek değil,
-            <span>nedenini anlamak.</span>
+            Doğru ürünün, doğru kayıtla,
+            <span>doğru zamanda ilerlemesi.</span>
           </h2>
 
           <p className="growth-apple__intro">
@@ -154,7 +154,7 @@ export default function GrowthScene() {
         >
           <aside className="apple-card apple-card--soft growth-apple__experience-note">
             <span className="growth-apple__note-mark">
-              <Wrench
+              <Package
                 size={18}
                 strokeWidth={1.8}
                 aria-hidden="true"
@@ -181,7 +181,7 @@ export default function GrowthScene() {
 
               <div>
                 <p className="card-eyebrow">
-                  ŞU ANDA GELİŞTİRDİĞİM ALANLAR
+                  ŞU ANDA GELİŞTİRDİĞİM OPERASYON ALANLARI
                 </p>
 
                 <h3 className="growth-apple__development-title">
@@ -190,10 +190,10 @@ export default function GrowthScene() {
                 </h3>
 
                 <p className="growth-apple__development-copy">
-                  Teknik bilgi kadar kayıt tutma, iletişim,
-                  önceliklendirme ve süreç takibinin de iyi
-                  bir IT Support hizmetinin parçası olduğunu
-                  biliyorum.
+                  Ürün ve sipariş yönetimi kadar kayıt tutma,
+                  önceliklendirme, kontrol ve ekipler arası
+                  iletişimin de sağlıklı bir e-ticaret
+                  operasyonunun parçası olduğunu biliyorum.
                 </p>
               </div>
             </div>

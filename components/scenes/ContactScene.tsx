@@ -24,18 +24,18 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const commitmentItems = [
   {
     number: "01",
-    title: "İşleyişi öğrenmek",
-    text: "Kurumun kullandığı sistemleri, cihazları ve günlük destek ihtiyaçlarını tanımak.",
+    title: "İş akışını öğrenmek",
+    text: "Kurumun ürün, sipariş, stok ve içerik süreçlerini kullanılan panel ve kontrol adımlarıyla birlikte tanımak.",
   },
   {
     number: "02",
-    title: "Kullanıcı güveni kazanmak",
-    text: "Sorunları takip etmek, sonucu kontrol etmek ve anlaşılır geri bildirim vermek.",
+    title: "Kayıt doğruluğunu korumak",
+    text: "Ürün ve sipariş verilerini düzenli kontrol ederek operasyonel hataları görünür ve takip edilebilir hâle getirmek.",
   },
   {
     number: "03",
-    title: "Sorumluluk almak",
-    text: "Teknik ihtiyaçlar geliştikçe yeni alanlar öğrenmek ve ekip içinde daha fazla katkı sunmak.",
+    title: "Süreci sonuca kadar takip etmek",
+    text: "Bir görevi yalnızca başlatmak değil; kontrol, koordinasyon ve geri bildirim adımlarıyla tamamlamak.",
   },
 ] as const;
 
@@ -121,14 +121,15 @@ export default function ContactScene() {
                 id="contact-title"
                 className="contact-apple__title"
               >
-                Bir ekibin içinde büyümek istiyorum.
+                E-ticaret operasyonunun günlük akışında sorumluluk almak istiyorum.
               </h2>
 
               <p className="contact-apple__lead">
-                Amacım kısa sürede unvan değiştirmek değil;
-                çalıştığım kurumun sistemlerini ve işleyişini
-                öğrenerek kullanıcıların güvenebileceği
-                teknik destek noktası hâline gelmek.
+                Sipariş, stok, ürün içeriği ve web paneli
+                süreçlerini birlikte takip edebileceğim;
+                işleyişi öğrenerek zamanla daha fazla
+                sorumluluk üstlenebileceğim bir ekipte yer
+                almayı hedefliyorum.
               </p>
             </div>
 
@@ -149,10 +150,10 @@ export default function ContactScene() {
             </div>
 
             <blockquote className="contact-apple__quote">
-              Teknik gelişimimi yalnızca kişisel bir hedef
-              olarak değil, çalıştığım kuruma zamanla daha
-              fazla katkı sağlayabilmenin aracı olarak
-              görüyorum.
+              Operasyon deneyimimi yalnızca görevleri
+              tamamlamak için değil; daha düzenli kayıt,
+              daha az hata ve daha takip edilebilir bir iş
+              akışı oluşturmak için kullanmak istiyorum.
             </blockquote>
           </motion.article>
 
@@ -166,8 +167,9 @@ export default function ContactScene() {
               </p>
 
               <h3 className="contact-apple__contact-title">
-                Ekibiniz için güvenilir bir teknik destek
-                noktası arıyorsanız görüşebiliriz.
+                E-ticaret ve dijital operasyon ekibiniz için
+                düzenli, takipçi ve öğrenmeye açık bir aday
+                arıyorsanız görüşebiliriz.
               </h3>
 
               <p className="contact-apple__location">
@@ -445,20 +447,24 @@ export default function ContactScene() {
         /* Yerleşim dengesi */
         .contact-apple__commitment,
         .contact-apple__contact {
-          min-height: 590px;
+          min-height: 650px;
           gap: var(--content-gap-xl);
         }
 
         .contact-apple__commitment {
           display: grid;
-          grid-template-rows: auto minmax(0, 1fr) auto;
-          align-content: stretch;
+          grid-template-rows: auto auto auto;
+          align-content: space-between;
         }
 
         .contact-apple__contact {
           display: grid;
-          grid-template-rows: auto auto auto auto;
-          align-content: space-between;
+          grid-template-rows:
+            minmax(0, 1fr)
+            auto
+            auto
+            auto;
+          align-content: stretch;
         }
 
         .contact-apple__title {
@@ -468,12 +474,12 @@ export default function ContactScene() {
 
         .contact-apple__lead {
           max-width: 62ch;
-          margin-top: 1rem;
-          line-height: 1.68;
+          margin-top: 1.25rem;
+          line-height: 1.74;
         }
 
         .contact-apple__commitment-item {
-          padding-block: 1.05rem;
+          padding-block: 1.2rem;
         }
 
         .contact-apple__commitment-item h3 {
@@ -482,14 +488,14 @@ export default function ContactScene() {
 
         .contact-apple__commitment-item p {
           max-width: 62ch;
-          margin-top: 0.34rem;
-          line-height: 1.6;
+          margin-top: 0.42rem;
+          line-height: 1.65;
         }
 
         .contact-apple__quote {
           max-width: 72ch;
-          padding-top: 1.15rem;
-          line-height: 1.62;
+          padding-top: 1.35rem;
+          line-height: 1.68;
         }
 
         .contact-apple__contact-title {
@@ -498,8 +504,8 @@ export default function ContactScene() {
         }
 
         .contact-apple__email {
-          gap: 0.62rem;
-          padding-block: 1rem;
+          gap: 0.7rem;
+          padding-block: 1.2rem;
         }
 
         .contact-apple__email > a {
@@ -521,7 +527,7 @@ export default function ContactScene() {
         }
 
         .contact-apple__note {
-          line-height: 1.56;
+          line-height: 1.62;
         }
 
         @media (max-width: 980px) {
@@ -556,8 +562,8 @@ export default function ContactScene() {
 
           .contact-apple__commitment,
           .contact-apple__contact {
-            min-height: 610px;
-            gap: 1.75rem;
+            min-height: 660px;
+            gap: 2rem;
           }
 
           .contact-apple__commitment {
@@ -584,8 +590,8 @@ export default function ContactScene() {
 
           .contact-apple__lead {
             max-width: 62ch;
-            margin-top: 1rem;
-            line-height: 1.66;
+            margin-top: 1.2rem;
+            line-height: 1.7;
           }
 
           .contact-apple__commitment-list {
@@ -595,8 +601,8 @@ export default function ContactScene() {
 
           .contact-apple__commitment-item {
             grid-template-columns: 2.25rem minmax(0, 1fr);
-            gap: 0.85rem;
-            padding-block: 1rem;
+            gap: 0.9rem;
+            padding-block: 1.15rem;
           }
 
           .contact-apple__commitment-item p {
@@ -606,8 +612,8 @@ export default function ContactScene() {
 
           .contact-apple__quote {
             max-width: 70ch;
-            padding-top: 1.1rem;
-            line-height: 1.6;
+            padding-top: 1.35rem;
+            line-height: 1.65;
           }
 
           .contact-apple__contact-title {
@@ -616,8 +622,8 @@ export default function ContactScene() {
           }
 
           .contact-apple__email {
-            gap: 0.58rem;
-            padding-block: 0.95rem;
+            gap: 0.65rem;
+            padding-block: 1.15rem;
           }
 
           .contact-apple__actions {
