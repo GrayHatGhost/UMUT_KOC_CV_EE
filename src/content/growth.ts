@@ -66,7 +66,7 @@ export const experienceGroups: ExperienceGroup[] = [
     title:
       "İçeriğin doğru, anlaşılır ve yayına hazır olmasına dikkat ediyorum.",
     description:
-      "Shopify mağazamda ürün içerikleri ve stok girişleri yaptım; web operasyonlarında sayfa, duyuru ve görsel içerik süreçlerini yürüttüm.",
+      "Kişisel e-ticaret deneyimimde ürün içerikleri ve stok girişleri yaptım; web operasyonlarında sayfa, duyuru ve görsel içerik süreçlerini yürüttüm.",
     examples: [
       "Ürün başlığı, açıklaması ve stok girişi",
       "Sayfa, duyuru ve etkinlik içeriği yönetimi",
@@ -82,7 +82,7 @@ export const experienceGroups: ExperienceGroup[] = [
     description:
       "Web tabanlı yönetim panellerinde içerik, kullanıcı, rol-yetki, yayın ve temel bakım süreçlerinde uygulamalı sorumluluk üstleniyorum.",
     examples: [
-      "Shopify ve web yönetim paneli kullanımı",
+      "E-ticaret ve web yönetim paneli kullanımı",
       "Kullanıcı, rol ve yetki yapıları",
       "Yayın, güncelleme ve süreklilik takibi",
     ],

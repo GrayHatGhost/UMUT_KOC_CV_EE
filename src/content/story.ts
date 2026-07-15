@@ -1,4 +1,4 @@
-// Kariyer hikâyesi — kısa, taranabilir ve IT Support odaklı
+// E-ticaret ve dijital operasyon odağındaki kariyer hikâyesi
 
 export type StoryChapter = {
   number: string;
@@ -10,66 +10,66 @@ export type StoryChapter = {
 };
 
 export const storyIntro =
-  "Kariyer yolum tek bir çizgi üzerinde ilerlemedi. Buna rağmen bilgisayar donanımı, sorun giderme ve kullanıcılara yardımcı olma isteğim hiçbir zaman kaybolmadı.";
+  "Operasyon, e-ticaret denemesi ve web yönetim paneli deneyimlerim birbirinden kopuk adımlar değil. Her biri ürünün, verinin ve içeriğin doğru biçimde ilerlemesini takip etmeyi öğretti.";
 
 export const storyToday =
-  "Bugün operasyon disiplinimi, yıllardır geliştirdiğim teknik merak ve uygulamalı deneyimle birleştirerek bilinçli bir IT Support kariyeri kuruyorum.";
+  "Bugün saha operasyonunda kazandığım sipariş ve stok disiplinini, Shopify mağaza deneyimimi ve web yayın süreçlerini e-ticaret odağında birleştiriyorum.";
 
 export const storyChapters: StoryChapter[] = [
   {
     number: "01",
-    period: "2013–2017",
-    title: "Merakla başlayan teknik temel",
+    period: "Üniversite yılları",
+    title: "Veri ve kayıt düzeniyle şekillenen temel",
     summary:
-      "Bilgisayar donanımına olan ilgim lise yıllarında, kendi sistemimde yaşadığım sorunlara çözüm ararken başladı.",
+      "Trakya Üniversitesi Ekonometri bölümünde aldığım eğitim, sayısal veriyi yorumlama ve kayıt düzenine dikkat etme yaklaşımımı güçlendirdi.",
     details: [
-      "Donanım Haber forumunda farklı kullanıcıların sorunlarını ve çözüm yollarını takip ettim.",
-      "Bilgisayar sökme, parça değiştirme ve arıza kaynağını araştırma pratiği kazandım.",
-      "Öğrendiklerimi zamanla çevremdeki kullanıcıların sorunlarını çözerken kullanmaya başladım.",
+      "Veri, oran ve sonuçlar arasındaki ilişkiyi sorgulama alışkanlığı kazandım.",
+      "Eğitim ve çalışma hayatını birlikte yürüterek planlama ve sorumluluk becerilerimi geliştirdim.",
+      "Yönetim Bilişim Sistemleri eğitimimle dijital sistemler ve iş süreçleri arasındaki bağı güçlendirmeye devam ediyorum.",
     ],
     closing:
-      "Teknik sorun çözmek benim için ezberlenen bir işlemden çok, doğal bir öğrenme biçimine dönüştü.",
+      "Akademik geçmişim, operasyonel kararları yalnızca hızla değil; veri ve doğruluk açısından da değerlendirmemi sağlıyor.",
   },
   {
     number: "02",
-    period: "Üniversite yılları",
-    title: "Farklı bir akademik yol",
+    period: "2022–2026",
+    title: "Operasyonun öğrettiği sipariş ve stok disiplini",
     summary:
-      "Bilgisayar mühendisliği hedefiyle başlayan planım farklı ilerledi ve Trakya Üniversitesi Ekonometri bölümünde eğitim aldım.",
+      "Akçay Kırtasiye’de yoğun işlem hacmi içinde sipariş hazırlama, ürün kontrolü, stok doğruluğu ve ekip koordinasyonu sorumlulukları üstlendim.",
     details: [
-      "Eğitim ve çalışma hayatını aynı anda yürütmek zorunda kaldım.",
-      "Teknik alandan uzak görünsem de bilgisayar kurulumları ve sorun giderme çalışmaları devam etti.",
-      "Analitik düşünme, araştırma ve veri odaklı yaklaşımımı güçlendirdim.",
+      "Dijital el terminali ve stok takip sistemlerini günlük iş akışında kullandım.",
+      "Siparişleri doğru ürün, miktar ve teslimat kriterlerine göre kontrol ettim.",
+      "Stok ve ürün kayıtlarındaki hataların operasyonu nasıl etkilediğini doğrudan gözlemledim.",
     ],
     closing:
-      "Akademik yolum değişti; teknik merakım ve bu alanda çalışma isteğim değişmedi.",
+      "Bu dönem, bir siparişin arkasındaki kayıt, kontrol ve koordinasyon zincirini gerçek çalışma ortamında öğrenmemi sağladı.",
   },
   {
     number: "03",
-    period: "İş hayatı",
-    title: "Operasyonun öğrettiği disiplin",
+    period: "2024–2025",
+    title: "Bir Shopify mağazasını sıfırdan kurmak",
     summary:
-      "Yoğun saha ve operasyon ortamı; sorumluluk, zaman yönetimi, hata kontrolü ve süreç takibi alışkanlığı kazandırdı.",
+      "Dropshipping modeliyle çalışan kişisel Shopify mağazamı kurarak ürün, stok ve mağaza içeriği süreçlerini yaklaşık bir yıl boyunca yönettim.",
     details: [
-      "Dijital el terminalleri ve stok takip sistemleriyle çalıştım.",
-      "Siparişlerin doğru, eksiksiz ve zamanında hazırlanması süreçlerinde görev aldım.",
-      "Farklı ekiplerle koordinasyon kurmayı ve yoğun tempoda düzenli çalışmayı öğrendim.",
+      "Mağaza yapısını, temel sayfaları ve ürün kataloğunu sıfırdan oluşturdum.",
+      "Ürün başlıklarını, açıklamalarını, görsellerini ve stok bilgilerini kendim girdim.",
+      "Udemy üzerinden eğitim alarak mağaza kurulumu ve temel e-ticaret süreçlerini uygulamalı biçimde öğrendim.",
     ],
     closing:
-      "Bugün IT Support alanına taşıdığım en önemli kazanımlardan biri, sorunları sonuca kadar takip etme disiplinidir.",
+      "Pazarlama maliyeti, operasyon yükü ve kâr marjı arasındaki dengeyi değerlendirerek sürdürülebilirliğin yalnızca satış yapmaktan ibaret olmadığını gördüm.",
   },
   {
     number: "04",
-    period: "Bugün",
-    title: "Bilinçli bir IT Support geçişi",
+    period: "2025–Bugün",
+    title: "İçerik, panel ve e-ticaret odağını birleştirmek",
     summary:
-      "Uygulamalı teknik deneyimimi kurumsal destek süreçleri, kullanıcı iletişimi ve düzenli dokümantasyon yaklaşımıyla tamamlıyorum.",
+      "Genç Savunma’da web yönetim paneli, içerik, yayın, kullanıcı yetkisi ve görsel üretim süreçlerini aynı operasyon akışı içinde yürütüyorum.",
     details: [
-      "Donanım, Windows, temel ağ ve uzaktan destek becerilerimi geliştiriyorum.",
-      "Microsoft 365, help desk ve kullanıcı yönetimi süreçlerine odaklanıyorum.",
-      "Çalıştığım kurumun işleyişini öğrenerek zamanla daha fazla sorumluluk almayı hedefliyorum.",
+      "Sayfa, duyuru ve etkinlik içeriklerinin veri girişi, kontrol ve yayın aşamalarını takip ediyorum.",
+      "Photoshop ve Canva ile dijital kanallar için görsel içerikler hazırlıyorum.",
+      "Saha operasyonu, Shopify ve web paneli deneyimlerimi e-ticaret ve dijital operasyon kariyerine taşıyorum.",
     ],
     closing:
-      "Hedefim bir kuruma yalnızca katılmak değil; kullanıcıların güvenebileceği kalıcı bir teknik destek noktası hâline gelmek.",
+      "Hedefim ürün, stok, içerik ve sipariş akışını birlikte görebilen; düzenli, takipçi ve güvenilir bir operasyon çalışanı olmak.",
   },
 ];

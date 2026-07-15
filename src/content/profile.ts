@@ -8,12 +8,6 @@ export type Experience = {
   bullets: string[];
 };
 
-export type AppliedExperience = {
-  title: string;
-  context: string;
-  summary: string;
-  bullets: string[];
-};
 
 export type Education = {
   degree: string;
@@ -53,7 +47,6 @@ export type ProfileData = {
   militaryStatus: string;
   about: string;
   careerObjective: string;
-  appliedExperience: AppliedExperience;
   experience: Experience[];
   education: Education[];
   skills: SkillGroup[];
@@ -79,19 +72,6 @@ export const profile: ProfileData = {
     "Ekonometri lisans mezunuyum. Dijital el terminali ve stok takip sistemleri üzerinden sipariş, envanter ve ürün doğruluğu süreçlerinde yaklaşık dört yıllık operasyon deneyimine sahibim. Web yönetim panellerinde içerik, sayfa, duyuru, kullanıcı yetkisi ve yayın süreçlerini yürütüyorum.",
   careerObjective:
     "Stok, sipariş, ürün içeriği ve web tabanlı sistemlerdeki deneyimimi; iş akışını öğrenebileceğim, kayıt doğruluğunu koruyabileceğim ve zamanla daha fazla sorumluluk alabileceğim bir e-ticaret ve dijital operasyon ekibinde değerlendirmeyi hedefliyorum.",
-  appliedExperience: {
-    title: "Shopify Mağaza Kurulumu ve Ürün Operasyonu",
-    context: "2024–2025 · Kişisel e-ticaret deneyimi",
-    summary:
-      "2024 yılında Shopify üzerinde dropshipping modeliyle çalışan bir mağazayı sıfırdan kurdum ve yaklaşık bir yıl boyunca mağaza, ürün içeriği ve stok süreçlerini kendim yönettim.",
-    bullets: [
-      "Shopify mağaza yapısını, temel sayfaları ve ürün kataloğunu oluşturdum.",
-      "Ürün başlıklarını, açıklamalarını, görsellerini ve stok kayıtlarını sisteme girdim.",
-      "Mağaza kurulumu ve e-ticaret operasyonu konusunda Udemy üzerinden eğitim aldım.",
-      "Ürün içeriği, stok düzeni ve mağaza güncellemelerini tek operasyon akışı içinde takip ettim.",
-      "Yüksek pazarlama giderleri ile düşük kâr marjı arasındaki dengeyi değerlendirerek faaliyeti sürdürmeme kararı aldım.",
-    ],
-  },
   experience: [
     {
       role: "Web ve Dijital Operasyon",
@@ -104,7 +84,7 @@ export const profile: ProfileData = {
         "Sayfa, duyuru, etkinlik ve diğer içeriklerin düzenleme, veri girişi, kontrol ve yayın süreçlerini yürütüyorum.",
         "Panel içerisindeki içerik, kullanıcı, rol-yetki ve modül süreçlerinin düzenlenmesine katkı sağlıyorum.",
         "Photoshop ve Canva ile dijital kanallarda kullanılacak görsel içerikler hazırlıyorum.",
-        "İçerik, tasarım, yayın ve teknik güncelleme ihtiyaçlarını aynı operasyon akışı içinde takip ediyorum.",
+        "İçerik, tasarım, yayın ve web güncelleme ihtiyaçlarını aynı operasyon akışı içinde takip ediyorum.",
         "Web sitesinin bakım, güncelleme ve yayın sürekliliğini destekliyorum.",
       ],
     },
@@ -174,10 +154,10 @@ export const profile: ProfileData = {
       category: "Web ve Dijital Operasyon",
       items: [
         "Web sitesi yayın süreçleri",
-        "Shopify ve İkas aşinalığı",
+        "İkas ve web paneli aşinalığı",
         "Kullanıcı, rol ve yetki yapıları",
         "Domain ve hosting takibi",
-        "Temel teknik bakım",
+        "Yayın ve güncelleme takibi",
         "Dijital içerik ve görsel hazırlama",
       ],
     },
