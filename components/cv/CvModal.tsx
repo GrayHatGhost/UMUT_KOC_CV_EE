@@ -167,37 +167,6 @@ export default function CvModal({
           </aside>
         </div>
 
-        <section className="apple-card cv-apple__applied">
-          <div className="cv-apple__section-intro">
-            <div>
-              <p className="card-eyebrow">
-                UYGULAMALI DENEYİM
-              </p>
-
-              <h3>
-                {profile.appliedExperience.title}
-              </h3>
-            </div>
-
-            <p>
-              {profile.appliedExperience.context}
-            </p>
-          </div>
-
-          <div className="cv-apple__applied-grid">
-            <p className="cv-apple__applied-summary">
-              {profile.appliedExperience.summary}
-            </p>
-
-            <ul className="cv-apple__list">
-              {profile.appliedExperience.bullets.map(
-                (bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ),
-              )}
-            </ul>
-          </div>
-        </section>
 
         <section className="cv-apple__section">
           <div className="cv-apple__section-heading">
