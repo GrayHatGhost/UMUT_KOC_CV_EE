@@ -63,53 +63,49 @@ export type ProfileData = {
 
 export const profile: ProfileData = {
   name: "Umut Koç",
-  role: "IT Support Adayı",
-  headline: "Teknik Destek ve Dijital Operasyon",
+  role: "E-Ticaret ve Dijital Operasyon Adayı",
+  headline: "Sipariş · Stok · Ürün İçeriği · Web Operasyonu",
   location: "Esenyurt, İstanbul",
   phone: "+90 541 785 39 00",
   email: "umutkoco@outlook.com",
   linkedin: "https://linkedin.com/in/umutkoco",
-  portfolio: "https://umutkoc.vercel.app",
-  cvPath: "/cv/umut-koc-cv.pdf",
-
+  portfolio: "https://umutkoccv.vercel.app",
+  cvPath: "/cv/umut-koc-e-ticaret-cv.pdf",
   social: {
     linkedin: "https://linkedin.com/in/umutkoco",
   },
-
   militaryStatus: "Tamamlandı (2026)",
-
   about:
-    "Bilgisayar donanımı, Windows kurulumu, temel ağ bağlantıları ve yerinde/uzaktan kullanıcı desteğinde uygulamalı deneyime sahip bir IT Support adayıyım. Yaklaşık 10 masaüstü bilgisayarın kurulum, yükseltme, bakım ve arıza giderme süreçlerini yürüttüm; ayrıca web sitesi, hosting ve dijital içerik operasyonlarında teknik sorumluluk üstlendim.",
-
+    "Ekonometri lisans mezunuyum. Dijital el terminali ve stok takip sistemleri üzerinden sipariş, envanter ve ürün doğruluğu süreçlerinde yaklaşık dört yıllık operasyon deneyimine sahibim. Web yönetim panellerinde içerik, sayfa, duyuru, kullanıcı yetkisi ve yayın süreçlerini yürütüyorum.",
   careerObjective:
-    "Çalıştığım kurumun sistemlerini ve işleyişini öğrenen, kullanıcı ihtiyaçlarını sonuca kadar takip eden ve kurumun teknik ihtiyaçları geliştikçe daha fazla sorumluluk alan uzun vadeli bir ekip üyesi olmayı hedefliyorum.",
-
+    "Stok, sipariş, ürün içeriği ve web tabanlı sistemlerdeki deneyimimi; iş akışını öğrenebileceğim, kayıt doğruluğunu koruyabileceğim ve zamanla daha fazla sorumluluk alabileceğim bir e-ticaret ve dijital operasyon ekibinde değerlendirmeyi hedefliyorum.",
   appliedExperience: {
-    title: "Uygulamalı IT Support Deneyimi",
-    context: "Bireysel kullanıcılar için teknik destek çalışmaları",
+    title: "Shopify Mağaza Kurulumu ve Ürün Operasyonu",
+    context: "2024–2025 · Kişisel e-ticaret deneyimi",
     summary:
-      "Yaklaşık 10 farklı masaüstü bilgisayarda ihtiyaç analizi, donanım planlama, kurulum, yükseltme, bakım ve temel sorun giderme süreçlerini yürüttüm.",
+      "2024 yılında Shopify üzerinde dropshipping modeliyle çalışan bir mağazayı sıfırdan kurdum ve yaklaşık bir yıl boyunca mağaza, ürün içeriği ve stok süreçlerini kendim yönettim.",
     bullets: [
-      "Windows kurulumu, sürücü yükleme, disk bölümlendirme ve temel sistem yapılandırmalarını tamamladım.",
-      "SSD ve RAM yükseltmeleri, BIOS/UEFI ayarları ve BIOS güncellemeleri gerçekleştirdim.",
-      "Termal macun yenileme, fan temizliği ve genel donanım bakımı uyguladım.",
-      "Donanım kaynaklı arızaları teşhis ederek uygun çözüm ve parça değişimlerini gerçekleştirdim.",
-      "Kullanıcılara yerinde ve AnyDesk, TeamViewer ile Microsoft Remote Desktop üzerinden uzaktan destek sağladım.",
+      "Shopify mağaza yapısını, temel sayfaları ve ürün kataloğunu oluşturdum.",
+      "Ürün başlıklarını, açıklamalarını, görsellerini ve stok kayıtlarını sisteme girdim.",
+      "Mağaza kurulumu ve e-ticaret operasyonu konusunda Udemy üzerinden eğitim aldım.",
+      "Ürün içeriği, stok düzeni ve mağaza güncellemelerini tek operasyon akışı içinde takip ettim.",
+      "Yüksek pazarlama giderleri ile düşük kâr marjı arasındaki dengeyi değerlendirerek faaliyeti sürdürmeme kararı aldım.",
     ],
   },
-
   experience: [
     {
-      role: "Web ve Dijital Operasyon Sorumlusu",
+      role: "Web ve Dijital Operasyon",
       company: "Genç Savunma Avukat Topluluğu",
       period: "Ekim 2025 – Devam ediyor",
       type: "volunteer",
       description:
-        "Topluluğun web sitesi, yönetim paneli ve dijital iletişim süreçlerinde gönüllü teknik sorumluluk üstleniyorum.",
+        "Web sitesi, yönetim paneli, içerik ve dijital yayın süreçlerinde gönüllü operasyon sorumluluğu üstleniyorum.",
       bullets: [
-        "Web sitesi ve yönetim panelinin içerik, yayın, güncelleme ve teknik bakım süreçlerini yürütüyorum.",
-        "Kullanıcı ihtiyaçlarına göre içerik, rol-yetki, duyuru ve etkinlik modüllerinin oluşturulma süreçlerini yönetiyorum.",
-        "Kurumsal iletişim için gerekli dijital içerik ve sosyal medya görsellerini hazırlıyorum.",
+        "Sayfa, duyuru, etkinlik ve diğer içeriklerin düzenleme, veri girişi, kontrol ve yayın süreçlerini yürütüyorum.",
+        "Panel içerisindeki içerik, kullanıcı, rol-yetki ve modül süreçlerinin düzenlenmesine katkı sağlıyorum.",
+        "Photoshop ve Canva ile dijital kanallarda kullanılacak görsel içerikler hazırlıyorum.",
+        "İçerik, tasarım, yayın ve teknik güncelleme ihtiyaçlarını aynı operasyon akışı içinde takip ediyorum.",
+        "Web sitesinin bakım, güncelleme ve yayın sürekliliğini destekliyorum.",
       ],
     },
     {
@@ -119,15 +115,15 @@ export const profile: ProfileData = {
       location: "Esenyurt, İstanbul",
       type: "professional",
       description:
-        "Yoğun saha ve operasyon ortamında envanter, sipariş hazırlama ve süreç takibi sorumluluğu üstlendim.",
+        "Yoğun işlem hacmi içinde sipariş, stok, envanter ve ürün doğruluğu süreçlerinde görev aldım.",
       bullets: [
-        "Dijital el terminali ve stok takip sistemleri kullanarak envanter yönetimi ve sipariş süreçlerini yürüttüm.",
-        "Siparişlerin doğru, eksiksiz ve zamanında hazırlanması süreçlerinde görev aldım.",
-        "Sistemli takip, hata kontrolü ve farklı ekiplerle koordinasyon becerisi kazandım.",
+        "Dijital el terminali ve stok takip sistemleri üzerinden ürün, envanter ve sipariş süreçlerini yürüttüm.",
+        "Siparişlerin doğru ürün, miktar ve teslimat kriterlerine göre hazırlanmasını ve kontrolünü sağladım.",
+        "Ürün ve stok kayıtlarının doğruluğunu kontrol ederek operasyonel hataların önlenmesine katkı sağladım.",
+        "Siparişlerin zamanında tamamlanmasını ve ilgili ekiplerle koordinasyonu takip ettim.",
       ],
     },
   ],
-
   education: [
     {
       degree: "Ekonometri (Lisans)",
@@ -140,48 +136,52 @@ export const profile: ProfileData = {
       status: "Devam ediyor",
     },
   ],
-
   skills: [
     {
-      category: "Bilgisayar ve Donanım",
+      category: "E-Ticaret ve Sipariş Operasyonu",
       items: [
-        "Donanım kurulumu, montaj ve yükseltme",
-        "Arıza tespiti ve temel sorun giderme",
-        "BIOS/UEFI ayarları ve yapılandırma",
-        "Windows, sürücü ve yazıcı kurulumları",
-        "Termal bakım ve genel donanım temizliği",
+        "Sipariş ve stok takibi",
+        "Ürün, miktar ve teslimat kontrolü",
+        "Envanter ve stok doğruluğu",
+        "İş akışı ve görev takibi",
+        "Operasyonel hata kontrolü",
+        "Ekipler arası koordinasyon",
       ],
     },
     {
-      category: "Ağ ve Bağlantı",
-      items: [
-        "Modem ve router kurulumu",
-        "İnternet ve Wi-Fi bağlantı sorunlarının giderilmesi",
-        "Temel LAN kurulumu ve bağlantı desteği",
-        "Kablosuz kamera ve ağ cihazı bağlantıları",
-      ],
-    },
-    {
-      category: "Uzak Destek",
-      items: [
-        "AnyDesk",
-        "TeamViewer",
-        "Microsoft Remote Desktop",
-        "Kurulum sonrası kullanıcı yönlendirmesi",
-      ],
-    },
-    {
-      category: "Ek Dijital Yetkinlikler",
+      category: "Ürün ve İçerik Yönetimi",
       items: [
         "Web sitesi ve içerik yönetimi",
-        "Domain ve hosting yönetimi",
-        "Yönetim paneli ve yayın süreçleri",
-        "Web tabanlı temel otomasyon akışları",
+        "Yönetim paneli kullanımı",
+        "Sayfa ve içerik girişi",
+        "Dijital yayın ve güncelleme",
+        "Ürün görseli hazırlama",
         "Adobe Photoshop ve Canva",
       ],
     },
+    {
+      category: "Dijital Sistemler ve Veri",
+      items: [
+        "Excel, Word ve PowerPoint",
+        "Web tabanlı yönetim panelleri",
+        "Dijital el terminali",
+        "Stok takip sistemleri",
+        "Veri ve kayıt düzeni",
+        "Yeni sistemlere hızlı adaptasyon",
+      ],
+    },
+    {
+      category: "Web ve Dijital Operasyon",
+      items: [
+        "Web sitesi yayın süreçleri",
+        "Shopify ve İkas aşinalığı",
+        "Kullanıcı, rol ve yetki yapıları",
+        "Domain ve hosting takibi",
+        "Temel teknik bakım",
+        "Dijital içerik ve görsel hazırlama",
+      ],
+    },
   ],
-
   languages: [
     {
       language: "Türkçe",
@@ -192,6 +192,5 @@ export const profile: ProfileData = {
       level: "A2 – Temel seviye",
     },
   ],
-
   certificates: [],
 };

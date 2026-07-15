@@ -1,10 +1,10 @@
-// Teknik deneyim ve gelişim içeriği
+// E-ticaret ve dijital operasyon deneyim içeriği
 
 export type ExperienceIcon =
-  | "hardware"
-  | "windows"
-  | "network"
-  | "support";
+  | "order"
+  | "stock"
+  | "content"
+  | "panel";
 
 export type ExperienceGroup = {
   number: string;
@@ -28,121 +28,120 @@ export type RoadmapStage = {
 };
 
 export const growthIntro =
-  "Gerçek kullanıcıların bilgisayar, bağlantı ve kurulum ihtiyaçlarına çözüm üretirken edindiğim pratik deneyimi; kurumsal IT süreçleriyle tamamlıyorum.";
+  "Sipariş hazırlama ve stok doğruluğundan ürün içeriği ile web yayın süreçlerine uzanan deneyimimi, e-ticaret operasyonunun birbirine bağlı parçaları olarak görüyorum.";
 
 export const experienceGroups: ExperienceGroup[] = [
   {
     number: "01",
-    icon: "hardware",
-    eyebrow: "DONANIM VE BAKIM",
-    title: "Sistemi kurmak kadar sağlıklı çalışmasını da önemsiyorum.",
+    icon: "order",
+    eyebrow: "SİPARİŞ OPERASYONU",
+    title:
+      "Doğru ürünün, doğru miktarla ve zamanında ilerlemesini önemsiyorum.",
     description:
-      "İhtiyaca ve bütçeye uygun bileşen seçimiyle başlayan süreci kurulum, yükseltme, bakım ve arıza teşhisine kadar takip ediyorum.",
+      "Sipariş sürecini yalnızca hazırlama adımı olarak değil; ürün, miktar, teslimat ve zaman kontrolünün birlikte yürüdüğü bir iş akışı olarak ele alıyorum.",
     examples: [
-      "Masaüstü bilgisayar montajı ve parça değişimi",
-      "SSD, RAM ve depolama yükseltmeleri",
-      "Termal macun, fan temizliği ve genel bakım",
+      "Sipariş hazırlama ve görev takibi",
+      "Ürün, miktar ve teslimat kriteri kontrolü",
+      "Yoğun işlem hacminde zamanında tamamlama",
     ],
   },
   {
     number: "02",
-    icon: "windows",
-    eyebrow: "WINDOWS VE SİSTEM",
-    title: "Temiz, anlaşılır ve kullanıma hazır sistemler teslim ediyorum.",
+    icon: "stock",
+    eyebrow: "STOK VE ENVANTER",
+    title:
+      "Kayıt doğruluğunun operasyonun devamlılığı için temel olduğunu biliyorum.",
     description:
-      "İşletim sistemi kurulumunu yalnızca format işlemi olarak değil; sürücü, disk ve temel yapılandırma adımlarıyla birlikte ele alıyorum.",
+      "Dijital el terminali ve stok takip sistemleriyle çalışırken ürün ve envanter kayıtlarının fiziksel süreçle uyumunu kontrol ettim.",
     examples: [
-      "Windows kurulumu ve sürücü yapılandırması",
-      "BIOS/UEFI ayarları ve güncellemeleri",
-      "Disk bölümlendirme ve temel veri aktarımı",
+      "Dijital el terminali kullanımı",
+      "Stok ve envanter kayıtlarının kontrolü",
+      "Operasyonel hata tespiti ve önleme",
     ],
   },
   {
     number: "03",
-    icon: "network",
-    eyebrow: "AĞ VE BAĞLANTI",
-    title: "Bağlantı sorunlarında önce yapıyı, sonra belirtileri inceliyorum.",
+    icon: "content",
+    eyebrow: "ÜRÜN VE İÇERİK",
+    title:
+      "İçeriğin doğru, anlaşılır ve yayına hazır olmasına dikkat ediyorum.",
     description:
-      "Ev ve küçük ofis ortamlarında modem, router, access point ve uç cihazlar arasındaki temel bağlantı sorunlarını gideriyorum.",
+      "Shopify mağazamda ürün içerikleri ve stok girişleri yaptım; web operasyonlarında sayfa, duyuru ve görsel içerik süreçlerini yürüttüm.",
     examples: [
-      "Modem, router ve access point kurulumu",
-      "Wi-Fi kapsama ve bağlantı sorunlarının giderilmesi",
-      "Kablosuz kamera ve ağ cihazı bağlantı desteği",
+      "Ürün başlığı, açıklaması ve stok girişi",
+      "Sayfa, duyuru ve etkinlik içeriği yönetimi",
+      "Photoshop ve Canva ile görsel hazırlama",
     ],
   },
   {
     number: "04",
-    icon: "support",
-    eyebrow: "KULLANICI DESTEĞİ",
-    title: "Teknik çözümün kullanıcı için anlaşılır olmasına dikkat ediyorum.",
+    icon: "panel",
+    eyebrow: "WEB VE YÖNETİM PANELLERİ",
+    title:
+      "Panel üzerindeki bir güncellemenin yayın sürecindeki etkisini takip ediyorum.",
     description:
-      "Sorunu dinleyip doğru soruları sorarak ilerliyor; çözüm sonrasında kullanıcıyı sistemin kullanımı konusunda yönlendiriyorum.",
+      "Web tabanlı yönetim panellerinde içerik, kullanıcı, rol-yetki, yayın ve temel bakım süreçlerinde uygulamalı sorumluluk üstleniyorum.",
     examples: [
-      "Yerinde temel teknik destek",
-      "AnyDesk, TeamViewer ve Remote Desktop ile uzaktan destek",
-      "Kurulum sonrası kullanıcı teslimi ve yönlendirme",
+      "Shopify ve web yönetim paneli kullanımı",
+      "Kullanıcı, rol ve yetki yapıları",
+      "Yayın, güncelleme ve süreklilik takibi",
     ],
   },
 ];
 
 export const experienceNarrative =
-  "Bu çalışmaların büyük bölümü, çevremdeki kullanıcıların gerçek cihaz ve bağlantı sorunlarına çözüm üretirken oluştu. Kurumsal deneyim iddiası yerine, sahip olduğum uygulamalı temeli açık ve doğrulanabilir biçimde gösteriyorum.";
+  "Bu deneyimler farklı ortamlarda oluştu; ancak ortak noktaları aynı: ürünü, kaydı, içeriği ve iş akışını kontrol ederek sürecin sonuca ulaşmasını sağlamak.";
 
 export const developmentItems: DevelopmentItem[] = [
   {
     number: "01",
-    title: "Help Desk ve ticket süreçleri",
+    title: "E-ticaret panel operasyonları",
     description:
-      "Talep karşılama, önceliklendirme, kayıt tutma, çözüm takibi ve kullanıcıya geri bildirim düzeni.",
+      "Ürün, sipariş, stok, kampanya ve içerik güncellemelerini daha kapsamlı mağaza senaryolarında yönetme pratiği.",
   },
   {
     number: "02",
-    title: "Microsoft 365 ve kullanıcı yönetimi",
+    title: "Excel ve operasyon raporlaması",
     description:
-      "Kullanıcı hesapları, kurumsal e-posta, erişim yetkileri ve temel yönetim senaryoları.",
+      "Veri temizleme, kontrol listeleri, temel raporlama ve günlük operasyon takibini daha verimli hâle getirme.",
   },
   {
     number: "03",
-    title: "Ağ temelleri ve teşhis yaklaşımı",
+    title: "Ürün veri standardizasyonu",
     description:
-      "TCP/IP, DNS, DHCP ve bağlantı problemlerini sistematik biçimde inceleme pratiği.",
+      "Başlık, açıklama, görsel, kategori ve stok alanlarında tutarlı ürün kayıtları oluşturma yaklaşımı.",
   },
   {
     number: "04",
-    title: "Dokümantasyon ve teknik İngilizce",
+    title: "Pazaryeri ve sipariş sonrası süreçler",
     description:
-      "Çözümleri kayıt altına alma; teknik doküman, hata mesajı ve ürün arayüzlerini daha rahat takip etme.",
+      "Pazaryeri panel akışları, müşteri talepleri, iade ve sipariş sonrası operasyon adımlarını öğrenme.",
   },
 ];
 
 export const developmentNarrative =
-  "Öğrenmeyi başka bir yere geçmenin aracı olarak değil, çalıştığım ekipte daha güvenilir destek verebilmenin ve zamanla daha fazla sorumluluk alabilmenin yolu olarak görüyorum.";
+  "Öğrenmeyi yalnızca yeni bir araç kullanmak olarak değil; daha az hata, daha düzenli kayıt ve daha takip edilebilir bir operasyon oluşturmanın yolu olarak görüyorum.";
 
-/*
- * Bir sonraki aşamada hazırlanacak kuruma bağlılık kartı için
- * güvenli ve yeniden kullanılabilir içerikler.
- * Eski export adları korunarak mevcut importların kırılması önlenir.
- */
 export const roadmapStages: RoadmapStage[] = [
   {
     label: "İlk adım",
-    title: "İşleyişi öğrenmek",
+    title: "İş akışını öğrenmek",
     description:
-      "Kurumun kullandığı cihazları, sistemleri, kullanıcı alışkanlıklarını ve günlük destek ihtiyaçlarını tanımak.",
+      "Kurumun ürün, sipariş, stok ve içerik süreçlerini; kullanılan panel ve kontrol adımlarıyla birlikte tanımak.",
   },
   {
     label: "Güven",
-    title: "Takip edilebilir destek vermek",
+    title: "Kayıt doğruluğunu korumak",
     description:
-      "Sorunları yalnızca kapatmak yerine kayıt altına almak, sonucunu kontrol etmek ve kullanıcıya geri dönüş yapmak.",
+      "Ürün ve sipariş verilerini kontrol etmek, hataları görünür hâle getirmek ve süreci düzenli biçimde takip etmek.",
   },
   {
     label: "Sorumluluk",
-    title: "Kurumun ihtiyaçlarıyla birlikte gelişmek",
+    title: "Operasyonla birlikte gelişmek",
     description:
-      "Teknik ihtiyaçlar genişledikçe yeni alanlar öğrenmek ve ekip içinde daha fazla sorumluluk üstlenmek.",
+      "İş hacmi ve ihtiyaçlar genişledikçe yeni panel ve süreçleri öğrenerek ekip içinde daha fazla sorumluluk üstlenmek.",
   },
 ];
 
 export const roadmapClosing =
-  "Hedefim kısa sürede unvan değiştirmek değil; çalıştığım kurumun işleyişini öğrenerek uzun vadede güvenilir bir teknik destek noktası hâline gelmek.";
+  "Hedefim ürün, stok, içerik ve sipariş akışının günlük işleyişinde güvenilir bir operasyon noktası hâline gelmek.";

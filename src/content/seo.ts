@@ -1,14 +1,13 @@
 export const seoConfig = {
-  title: "Umut Koç | IT Support ve Teknik Operasyon",
+  title: "Umut Koç | E-Ticaret ve Dijital Operasyon",
   description:
-    "Bilgisayar donanımı, Windows kurulumu, temel ağ bağlantıları, kullanıcı desteği ve dijital operasyon alanlarında uygulamalı deneyime sahip Umut Koç'un kişisel portföyü.",
+    "Sipariş ve stok takibi, ürün ve içerik yönetimi, Shopify mağaza kurulumu, web yönetim panelleri ve dijital yayın süreçlerinde uygulamalı deneyime sahip Umut Koç'un kişisel portfolyosu.",
   locale: "tr-TR",
   siteName: "Umut Koç",
-  url: "https://umutkoc.vercel.app",
-
+  url: "https://umutkoccv.vercel.app",
   person: {
     name: "Umut Koç",
-    jobTitle: "IT Support Adayı",
+    jobTitle: "E-Ticaret ve Dijital Operasyon Adayı",
     address: {
       city: "İstanbul",
       country: "Türkiye",
