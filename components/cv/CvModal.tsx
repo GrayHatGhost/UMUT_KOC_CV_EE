@@ -323,7 +323,7 @@ export default function CvModal({
                 </p>
 
                 <h3>
-                  İletişim seviyesi.
+                  Diller.
                 </h3>
               </div>
             </div>
