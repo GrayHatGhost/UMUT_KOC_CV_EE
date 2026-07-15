@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { FileText, Menu, X } from "lucide-react";
@@ -18,6 +19,7 @@ export default function SiteHeader({
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [profileImageFailed, setProfileImageFailed] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const lastScrollYRef = useRef(0);
@@ -110,7 +112,24 @@ export default function SiteHeader({
             }
             aria-label="Sayfanın başına git"
           >
-            <span className="site-header__brand-mark">UK</span>
+            <span className="site-header__brand-mark">
+              {profileImageFailed ? (
+                <span className="site-header__brand-fallback">
+                  UK
+                </span>
+              ) : (
+                <Image
+                  src="/images/profile/umut-koc.webp"
+                  alt="Umut Koç"
+                  fill
+                  sizes="36px"
+                  className="site-header__brand-image"
+                  onError={() =>
+                    setProfileImageFailed(true)
+                  }
+                />
+              )}
+            </span>
             <span>Umut Koç</span>
           </button>
 
@@ -260,17 +279,33 @@ export default function SiteHeader({
         }
 
         .site-header__brand-mark {
+          position: relative;
           width: 35px;
           height: 35px;
+          flex: 0 0 auto;
+          overflow: hidden;
           display: inline-flex;
           align-items: center;
           justify-content: center;
+          border: 1px solid rgba(17, 17, 20, 0.08);
           border-radius: 50%;
           background: var(--ink);
           color: white;
+          box-shadow: var(--shadow-xs);
           font-size: 0.64rem;
           font-weight: 800;
           letter-spacing: 0.04em;
+        }
+
+        .site-header__brand-image {
+          object-fit: cover;
+          object-position: center;
+        }
+
+        .site-header__brand-fallback {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .site-header__nav {
