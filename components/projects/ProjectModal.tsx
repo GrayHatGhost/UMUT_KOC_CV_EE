@@ -135,14 +135,14 @@ export default function ProjectModal({
     <Dialog
       isOpen={isOpen}
       onClose={onClose}
-      ariaLabel={`${project.title} proje detayları`}
+      ariaLabel={`${project.title} çalışma detayları`}
       size="wide"
     >
       <article className="project-modal">
         <header className="project-modal__header">
           <div>
             <p className="card-eyebrow">
-              PROJE {project.number} · {project.category}
+              ÇALIŞMA {project.number} · {project.category}
             </p>
 
             <h2 className="project-modal__title">
@@ -276,7 +276,7 @@ export default function ProjectModal({
                       onClick={() =>
                         setActiveImageIndex(index)
                       }
-                      aria-label={`${index + 1}. proje görselini göster`}
+                      aria-label={`${index + 1}. çalışma görselini göster`}
                       aria-current={
                         isActive ? "true" : undefined
                       }
@@ -309,7 +309,7 @@ export default function ProjectModal({
         <div className="project-modal__content-grid">
           <section className="apple-card project-modal__summary">
             <p className="card-eyebrow">
-              PROJE ÖZETİ
+              ÇALIŞMA ÖZETİ
             </p>
 
             <div className="project-modal__paragraphs">
@@ -339,7 +339,7 @@ export default function ProjectModal({
             </p>
 
             <h3>
-              Projenin bana kattığı pratikler
+              Bu çalışmanın kazandırdığı pratikler
             </h3>
 
             <ul>
