@@ -7,14 +7,14 @@ import {
   FileText,
   Globe2,
   GraduationCap,
-  Headphones,
+  ImageIcon,
   Mail,
   MapPin,
   MonitorCog,
-  Network,
+  Package,
   Phone,
   ShieldCheck,
-  Wrench,
+  ShoppingCart,
 } from "lucide-react";
 
 import Dialog from "@/components/dialog/Dialog";
@@ -26,9 +26,9 @@ type CvModalProps = {
 };
 
 const skillIcons = [
-  Wrench,
-  Network,
-  Headphones,
+  ShoppingCart,
+  Package,
+  ImageIcon,
   MonitorCog,
 ] as const;
 
@@ -47,7 +47,7 @@ export default function CvModal({
         <header className="cv-apple__header">
           <div>
             <p className="card-eyebrow">
-              ÖZ GEÇMİŞ · IT SUPPORT
+              ÖZ GEÇMİŞ · E-TİCARET VE DİJİTAL OPERASYON
             </p>
 
             <h2 className="cv-apple__name">
@@ -99,8 +99,8 @@ export default function CvModal({
               </p>
 
               <h3>
-                Uygulamalı teknik temel,
-                <span>uzun vadeli gelişim.</span>
+                Operasyon disiplini,
+                <span>dijital süreç deneyimi.</span>
               </h3>
             </div>
 
@@ -148,7 +148,7 @@ export default function CvModal({
                 icon={Globe2}
                 label="Portföy"
                 href={profile.portfolio}
-                value="umutkoc.vercel.app"
+                value="umutkoccv.vercel.app"
                 external
               />
 
@@ -264,15 +264,15 @@ export default function CvModal({
           <div className="cv-apple__section-heading">
             <div>
               <p className="card-eyebrow">
-                TEKNİK YETKİNLİKLER
+                OPERASYON VE DİJİTAL YETKİNLİKLER
               </p>
 
               <h3>
-                Teknik destek odağımı oluşturan alanlar.
+                E-ticaret odağımı oluşturan alanlar.
               </h3>
             </div>
 
-            <Wrench
+            <ShoppingCart
               size={24}
               strokeWidth={1.7}
               aria-hidden="true"
