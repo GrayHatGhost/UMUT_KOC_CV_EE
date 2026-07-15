@@ -226,9 +226,9 @@ export default function GrowthScene() {
           overflow: clip;
         }
 
-        .growth-apple__heading {
+        :global(.growth-apple__heading) {
           max-width: 940px;
-          margin-bottom: clamp(2.75rem, 4.8vw, 4rem);
+          margin-bottom: clamp(3.5rem, 5.5vw, 4.75rem);
         }
 
         .growth-apple__title {
