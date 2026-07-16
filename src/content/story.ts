@@ -46,7 +46,7 @@ export const storyChapters: StoryChapter[] = [
   },
   {
     number: "03",
-    period: "2024–2025",
+    period: "2023–2024",
     title: "Bir Shopify mağazasını sıfırdan kurmak",
     summary:
       "Dropshipping modeliyle çalışan kişisel Shopify mağazamı kurarak ürün, stok ve mağaza içeriği süreçlerini yaklaşık bir yıl boyunca yönettim.",
