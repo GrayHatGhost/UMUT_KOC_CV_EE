@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "designs:sync": "node scripts/generate-design-works.mjs",
+    "predev": "npm run designs:sync",
     "dev": "next dev",
+    "prebuild": "npm run designs:sync",
     "build": "next build",
     "start": "next start",
+    "prelint": "npm run designs:sync",
     "lint": "eslint"
   },
   "dependencies": {
