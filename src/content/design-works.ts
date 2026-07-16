@@ -2,6 +2,10 @@
 // Görsel listesi scripts/generate-design-works.mjs tarafından
 // public/images/designs klasöründen otomatik oluşturulur.
 
+import {
+  generatedDesignWorks,
+} from "./design-works.generated";
+
 export type DesignWork = {
   id: string;
   title: string;
@@ -14,7 +18,9 @@ export type DesignWork = {
   alt: string;
 };
 
-export {
-  designWorks,
-  featuredDesignIds,
-} from "./design-works.generated";
+export const designWorks:
+  readonly DesignWork[] = generatedDesignWorks;
+
+export const featuredDesignIds = designWorks
+  .slice(0, 6)
+  .map((work) => work.id);

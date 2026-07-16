@@ -2,7 +2,7 @@
 // public/images/designs klasöründeki görseller npm run dev/build öncesinde taranır.
 // Başlık ve açıklama özelleştirmeleri için design-metadata.json dosyasını düzenleyin.
 
-export const designWorks = [
+export const generatedDesignWorks = [
   {
     "id": "design-01",
     "title": "İstanbul Adalet Rotası",
@@ -88,7 +88,3 @@ export const designWorks = [
     "alt": "İstanbul Yelken Kulübü açık hava sineması etkinlik duyurusu"
   }
 ] as const;
-
-export const featuredDesignIds = designWorks
-  .slice(0, 6)
-  .map((work) => work.id);
