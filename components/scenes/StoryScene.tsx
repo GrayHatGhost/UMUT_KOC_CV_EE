@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import type { LucideIcon } from "lucide-react";
 import {
   Award,
@@ -316,7 +317,9 @@ export default function StoryScene() {
 
 
       {certificateViewerOpen &&
-        !certificateImageFailed && (
+        !certificateImageFailed &&
+        typeof document !== "undefined" &&
+        createPortal(
           <div
             className="story-apple__certificate-viewer"
             role="dialog"
@@ -328,6 +331,18 @@ export default function StoryScene() {
               }
             }}
           >
+            <div className="story-apple__certificate-viewer-media">
+              <Image
+                src={featuredCertificate.image}
+                alt={featuredCertificate.alt}
+                width={1600}
+                height={1200}
+                priority
+                sizes="(max-width: 900px) 94vw, 1200px"
+                className="story-apple__certificate-viewer-image"
+              />
+            </div>
+
             <button
               type="button"
               className="story-apple__certificate-viewer-close"
@@ -343,18 +358,8 @@ export default function StoryScene() {
                 aria-hidden="true"
               />
             </button>
-
-            <div className="story-apple__certificate-viewer-media">
-              <Image
-                src={featuredCertificate.image}
-                alt={featuredCertificate.alt}
-                fill
-                priority
-                sizes="100vw"
-                className="story-apple__certificate-viewer-image"
-              />
-            </div>
-          </div>
+          </div>,
+          document.body,
         )}
 
       <style jsx global>{`
@@ -387,7 +392,7 @@ export default function StoryScene() {
         .story-apple__certificate-media {
           position: relative;
           min-width: 0;
-          aspect-ratio: 16 / 9;
+          aspect-ratio: 4 / 3;
           align-self: center;
           overflow: hidden;
           margin: 0.7rem 0 0.7rem 0.7rem;
@@ -541,35 +546,47 @@ export default function StoryScene() {
         .story-apple__certificate-viewer {
           position: fixed;
           inset: 0;
-          z-index: 180;
+          z-index: 2147483000;
+          width: 100vw;
+          height: 100vh;
+          height: 100dvh;
           display: grid;
           place-items: center;
-          padding: clamp(1rem, 3vw, 2.5rem);
-          background: rgba(12, 12, 15, 0.88);
-          backdrop-filter: blur(18px);
+          padding: clamp(0.75rem, 2vw, 1.5rem);
+          overflow: hidden;
+          overscroll-behavior: contain;
+          isolation: isolate;
+          background: rgba(10, 10, 12, 0.94);
         }
 
         .story-apple__certificate-viewer-media {
           position: relative;
           width: min(
             94vw,
-            calc(88vh * 16 / 9)
+            calc(90dvh * 4 / 3)
           );
-          max-height: 88vh;
-          aspect-ratio: 16 / 9;
+          max-width: 1600px;
+          max-height: 90dvh;
+          aspect-ratio: 4 / 3;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           overflow: hidden;
           border: 1px solid
-            rgba(255, 255, 255, 0.18);
-          border-radius: 22px;
+            rgba(255, 255, 255, 0.14);
+          border-radius: 18px;
           background: #111114;
           box-shadow:
-            0 30px 90px
-              rgba(0, 0, 0, 0.48);
+            0 32px 100px
+              rgba(0, 0, 0, 0.58);
         }
 
         .story-apple__certificate-viewer-image {
           width: 100%;
           height: 100%;
+          max-width: 100%;
+          max-height: 100%;
+          display: block;
           object-fit: contain;
           object-position: center;
           background: #111114;
@@ -577,23 +594,25 @@ export default function StoryScene() {
 
         .story-apple__certificate-viewer-close {
           position: fixed;
-          top: max(1.25rem, env(safe-area-inset-top));
+          top: max(
+            1rem,
+            env(safe-area-inset-top)
+          );
           right: max(
-            1.25rem,
+            1rem,
             env(safe-area-inset-right)
           );
-          z-index: 2;
+          z-index: 2147483001;
           width: 46px;
           height: 46px;
           display: inline-flex;
           align-items: center;
           justify-content: center;
           border: 1px solid
-            rgba(255, 255, 255, 0.2);
+            rgba(255, 255, 255, 0.24);
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.12);
+          background: rgba(24, 24, 27, 0.88);
           color: white;
-          backdrop-filter: blur(12px);
           cursor: pointer;
           transition:
             transform 0.22s var(--ease),
@@ -602,17 +621,24 @@ export default function StoryScene() {
 
         .story-apple__certificate-viewer-close:hover {
           transform: translateY(-2px);
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(42, 42, 46, 0.96);
         }
 
         @media (max-width: 720px) {
           .story-apple__certificate-viewer {
-            padding: 0.75rem;
+            padding:
+              max(0.65rem, env(safe-area-inset-top))
+              0.65rem
+              max(0.65rem, env(safe-area-inset-bottom));
           }
 
           .story-apple__certificate-viewer-media {
-            width: 100%;
-            border-radius: 16px;
+            width: min(
+              96vw,
+              calc(86dvh * 4 / 3)
+            );
+            max-height: 86dvh;
+            border-radius: 14px;
           }
         }
 
