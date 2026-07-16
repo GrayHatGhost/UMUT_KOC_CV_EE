@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import {
   ArrowUpRight,
   ImageIcon,
@@ -15,7 +15,6 @@ import {
 
 import {
   designWorks,
-  featuredDesignIds,
 } from "@/src/content/design-works";
 
 const DesignCatalogModal = dynamic(
@@ -41,31 +40,10 @@ export default function DesignArchiveScene() {
 
   const shouldReduceMotion = useReducedMotion();
 
-  const featuredWorks = useMemo(() => {
-    const explicitlyFeatured = featuredDesignIds
-      .map((id) =>
-        designWorks.find((work) => work.id === id),
-      )
-      .filter(
-        (
-          work,
-        ): work is (typeof designWorks)[number] =>
-          Boolean(work),
-      );
-
-    const featuredIds = new Set(
-      explicitlyFeatured.map((work) => work.id),
-    );
-
-    const remainingWorks = designWorks.filter(
-      (work) => !featuredIds.has(work.id),
-    );
-
-    return [
-      ...explicitlyFeatured,
-      ...remainingWorks,
-    ].slice(0, PREVIEW_LIMIT);
-  }, []);
+  const featuredWorks = designWorks.slice(
+    0,
+    PREVIEW_LIMIT,
+  );
 
   const openCatalog = (workId?: string) => {
     setInitialWorkId(
