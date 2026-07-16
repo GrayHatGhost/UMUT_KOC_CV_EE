@@ -112,7 +112,21 @@ export default function SiteHeader({
             }
             aria-label="Sayfanın başına git"
           >
-            <span className="site-header__brand-mark">
+            <span
+              className="site-header__brand-mark"
+              style={{
+                position: "relative",
+                width: "35px",
+                height: "35px",
+                minWidth: "35px",
+                overflow: "hidden",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: "50%",
+                contain: "layout paint",
+              }}
+            >
               {profileImageFailed ? (
                 <span className="site-header__brand-fallback">
                   UK
@@ -121,9 +135,19 @@ export default function SiteHeader({
                 <Image
                   src="/images/profile/umut-koc.webp"
                   alt="Umut Koç"
-                  fill
-                  sizes="36px"
+                  width={35}
+                  height={35}
+                  priority
                   className="site-header__brand-image"
+                  style={{
+                    display: "block",
+                    width: "35px",
+                    height: "35px",
+                    maxWidth: "35px",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                    borderRadius: "50%",
+                  }}
                   onError={() =>
                     setProfileImageFailed(true)
                   }
@@ -298,6 +322,10 @@ export default function SiteHeader({
         }
 
         .site-header__brand-image {
+          width: 35px;
+          height: 35px;
+          max-width: 35px;
+          display: block;
           object-fit: cover;
           object-position: center;
         }
