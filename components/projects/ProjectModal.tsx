@@ -403,7 +403,8 @@ export default function ProjectModal({
 
         .project-modal__media {
           position: relative;
-          min-height: clamp(380px, 58vw, 690px);
+          min-height: 0;
+          aspect-ratio: 16 / 9;
           overflow: hidden;
           margin: 0.62rem;
           border-radius: 24px;
@@ -680,7 +681,8 @@ export default function ProjectModal({
           }
 
           .project-modal__media {
-            min-height: 52vh;
+            min-height: 0;
+            aspect-ratio: 16 / 9;
             margin: 0.45rem;
             border-radius: 20px;
           }
