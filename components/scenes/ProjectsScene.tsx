@@ -361,7 +361,7 @@ function ProjectCard({
         .project-card {
           width: 100%;
           min-width: 0;
-          min-height: 510px;
+          min-height: 430px;
           display: grid;
           grid-template-columns:
             minmax(0, 1.12fr)
@@ -377,6 +377,8 @@ function ProjectCard({
           position: relative;
           min-width: 0;
           min-height: 0;
+          aspect-ratio: 16 / 9;
+          align-self: center;
           overflow: hidden;
           margin: 0.7rem 0 0.7rem 0.7rem;
           border-radius: calc(var(--radius-lg) - 9px);
@@ -388,8 +390,9 @@ function ProjectCard({
         }
 
         .project-card__image {
-          object-fit: cover;
-          object-position: top center;
+          object-fit: contain;
+          object-position: center;
+          background: #e9e9ed;
           transition: transform 0.7s var(--ease);
         }
 
@@ -517,11 +520,12 @@ function ProjectCard({
           .project-card {
             min-height: auto;
             grid-template-columns: minmax(0, 1fr);
-            grid-template-rows: minmax(300px, 58vw) auto;
+            grid-template-rows: auto auto;
           }
 
           .project-card__media {
-            min-height: 300px;
+            min-height: 0;
+            aspect-ratio: 16 / 9;
             margin: 0.55rem 0.55rem 0;
           }
 
@@ -536,11 +540,12 @@ function ProjectCard({
 
         @media (max-width: 720px) {
           .project-card {
-            grid-template-rows: minmax(250px, 68vw) auto;
+            grid-template-rows: auto auto;
           }
 
           .project-card__media {
-            min-height: 250px;
+            min-height: 0;
+            aspect-ratio: 16 / 9;
           }
 
           .project-card__content {

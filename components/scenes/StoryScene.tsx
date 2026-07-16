@@ -400,8 +400,9 @@ export default function StoryScene() {
         }
 
         .story-apple__certificate-image {
-          object-fit: cover;
+          object-fit: contain;
           object-position: center;
+          background: #e9e9ed;
         }
 
         .story-apple__certificate-fallback {
@@ -567,8 +568,11 @@ export default function StoryScene() {
         }
 
         .story-apple__certificate-viewer-image {
+          width: 100%;
+          height: 100%;
           object-fit: contain;
           object-position: center;
+          background: #111114;
         }
 
         .story-apple__certificate-viewer-close {
