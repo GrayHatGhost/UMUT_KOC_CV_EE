@@ -78,7 +78,8 @@ function createFallbackTitle(filename) {
 
   return readable.replace(
     /\b\p{L}/gu,
-    (letter) => letter.toLocaleUpperCase("tr-TR"),
+    (letter) =>
+      letter.toLocaleUpperCase("tr-TR"),
   );
 }
 
@@ -104,18 +105,37 @@ async function readMetadata() {
   }
 }
 
+async function readDesignEntries() {
+  try {
+    return await readdir(designsDirectory, {
+      withFileTypes: true,
+    });
+  } catch (error) {
+    if (
+      error &&
+      typeof error === "object" &&
+      "code" in error &&
+      error.code === "ENOENT"
+    ) {
+      return [];
+    }
+
+    throw error;
+  }
+}
+
 async function main() {
   const [entries, metadata] = await Promise.all([
-    readdir(designsDirectory, {
-      withFileTypes: true,
-    }),
+    readDesignEntries(),
     readMetadata(),
   ]);
 
   const filenames = entries
     .filter((entry) => {
       if (!entry.isFile()) return false;
-      if (entry.name.startsWith(".")) return false;
+      if (entry.name.startsWith(".")) {
+        return false;
+      }
 
       return supportedExtensions.has(
         path.extname(entry.name).toLowerCase(),
@@ -126,9 +146,10 @@ async function main() {
       collator.compare(first, second),
     );
 
-  const designWorks = filenames.map(
+  const generatedDesignWorks = filenames.map(
     (filename) => {
       const configured = metadata[filename] ?? {};
+
       const id =
         configured.id ?? createId(filename);
 
@@ -166,15 +187,11 @@ async function main() {
 // public/images/designs klasöründeki görseller npm run dev/build öncesinde taranır.
 // Başlık ve açıklama özelleştirmeleri için design-metadata.json dosyasını düzenleyin.
 
-export const designWorks = ${JSON.stringify(
-    designWorks,
+export const generatedDesignWorks = ${JSON.stringify(
+    generatedDesignWorks,
     null,
     2,
   )} as const;
-
-export const featuredDesignIds = designWorks
-  .slice(0, 6)
-  .map((work) => work.id);
 `;
 
   await writeFile(
@@ -184,7 +201,7 @@ export const featuredDesignIds = designWorks
   );
 
   console.log(
-    `[designs:sync] ${designWorks.length} tasarım senkronize edildi.`,
+    `[designs:sync] ${generatedDesignWorks.length} tasarım senkronize edildi.`,
   );
 }
 
