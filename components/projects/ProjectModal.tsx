@@ -556,6 +556,8 @@ export default function ProjectModal({
         }
 
         .project-modal__content-grid {
+          width: 100%;
+          min-width: 0;
           display: grid;
           grid-template-columns: repeat(
             12,
@@ -566,6 +568,7 @@ export default function ProjectModal({
         }
 
         .project-modal__summary {
+          min-width: 0;
           grid-column: span 7;
           min-height: 400px;
         }
@@ -594,6 +597,7 @@ export default function ProjectModal({
         }
 
         .project-modal__learnings {
+          min-width: 0;
           grid-column: span 7;
           min-height: 440px;
           display: grid;
@@ -712,6 +716,41 @@ export default function ProjectModal({
           .project-modal__gallery-controls button:hover,
           .project-modal__thumbnails button:hover {
             transform: none;
+          }
+        }
+      `}</style>
+
+      <style jsx global>{`
+        .project-modal__content-grid >
+          .project-modal__role {
+          grid-column: span 5;
+          min-width: 0;
+          min-height: 400px;
+        }
+
+        .project-modal__content-grid >
+          .project-modal__features {
+          grid-column: span 5;
+          min-width: 0;
+          min-height: 440px;
+        }
+
+        @media (max-width: 900px) {
+          .project-modal__content-grid >
+            .project-modal__role,
+          .project-modal__content-grid >
+            .project-modal__features {
+            grid-column: 1 / -1;
+            min-height: auto;
+          }
+        }
+
+        @media (max-width: 767px) {
+          .project-modal__content-grid >
+            .project-modal__role,
+          .project-modal__content-grid >
+            .project-modal__features {
+            grid-column: 1;
           }
         }
       `}</style>
