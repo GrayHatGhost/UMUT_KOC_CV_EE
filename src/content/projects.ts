@@ -58,24 +58,20 @@ export const projects: Project[] = [
     ],
     images: [
       {
-        src: "/images/projects/genc-savunma/cover.webp",
-        alt: "Genç Savunma ana sayfa",
+        src: "/images/projects/genc-savunma/GSG1.webp",
+        alt: "Genç Savunma dijital operasyon görünümü",
       },
       {
-        src: "/images/projects/genc-savunma/home.webp",
-        alt: "Genç Savunma giriş",
+        src: "/images/projects/genc-savunma/GSG2.webp",
+        alt: "Genç Savunma dijital operasyon görünümü",
       },
       {
-        src: "/images/projects/genc-savunma/admin-dashboard.webp",
-        alt: "Genç Savunma yönetim paneli",
+        src: "/images/projects/genc-savunma/GSG3.webp",
+        alt: "Genç Savunma dijital operasyon görünümü",
       },
       {
-        src: "/images/projects/genc-savunma/content-management.webp",
-        alt: "Genç Savunma içerik yönetimi",
-      },
-      {
-        src: "/images/projects/genc-savunma/qr-system.webp",
-        alt: "Genç Savunma dijital araçlar alanı",
+        src: "/images/projects/genc-savunma/GSG4.webp",
+        alt: "Genç Savunma dijital operasyon görünümü",
       },
     ],
     liveUrl: "https://www.gencsavunma.org",
